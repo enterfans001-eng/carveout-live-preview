@@ -67,6 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     let lastSparkleAt = 0;
+    let lastTouchPoint = null;
 
     const createSparkle = (x, y) => {
       const sparkle = document.createElement('span');
@@ -89,7 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
       sparkle.addEventListener('animationend', () => sparkle.remove(), { once: true });
     };
 
-    const emitSparkles = (event, interval = 38) => {
+    const emitSparklesAt = (x, y, interval = 38) => {
       const now = performance.now();
 
       if (now - lastSparkleAt < interval) {
@@ -97,14 +98,31 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       lastSparkleAt = now;
-      createSparkle(event.clientX, event.clientY);
+      createSparkle(x, y);
 
       if (Math.random() > 0.58) {
         createSparkle(
-          event.clientX + (Math.random() - 0.5) * 22,
-          event.clientY + (Math.random() - 0.5) * 22
+          x + (Math.random() - 0.5) * 22,
+          y + (Math.random() - 0.5) * 22
         );
       }
+    };
+
+    const emitSparkles = (event, interval = 38) => {
+      emitSparklesAt(event.clientX, event.clientY, interval);
+    };
+
+    const updateTouchPoint = (event) => {
+      const touch = event.touches && event.touches[0];
+
+      if (!touch) {
+        return;
+      }
+
+      lastTouchPoint = {
+        x: touch.clientX,
+        y: touch.clientY
+      };
     };
 
     if (isFinePointer) {
@@ -121,6 +139,34 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.pointerType === 'touch' || event.pointerType === 'pen') {
           emitSparkles(event, 82);
         }
+      }, { passive: true });
+
+      window.addEventListener('touchstart', (event) => {
+        updateTouchPoint(event);
+
+        if (lastTouchPoint) {
+          emitSparklesAt(lastTouchPoint.x, lastTouchPoint.y, 0);
+        }
+      }, { passive: true });
+
+      window.addEventListener('touchmove', (event) => {
+        updateTouchPoint(event);
+
+        if (lastTouchPoint) {
+          emitSparklesAt(lastTouchPoint.x, lastTouchPoint.y, 76);
+        }
+      }, { passive: true });
+
+      window.addEventListener('scroll', () => {
+        if (!lastTouchPoint) {
+          return;
+        }
+
+        emitSparklesAt(
+          lastTouchPoint.x + (Math.random() - 0.5) * 18,
+          lastTouchPoint.y + (Math.random() - 0.5) * 18,
+          120
+        );
       }, { passive: true });
     }
   };
