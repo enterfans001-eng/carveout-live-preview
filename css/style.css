@@ -3916,3 +3916,79 @@ body::after {
     width: 3px !important;
   }
 }
+
+/* Performance tuning */
+body {
+  background-attachment: scroll;
+}
+
+body::before {
+  display: none;
+}
+
+body::after {
+  opacity: 0.28;
+}
+
+.section::after,
+.page-header::after {
+  display: none;
+}
+
+.news-card,
+.application-item,
+.ranking-card,
+.featured-liver-card,
+.interview-list-card,
+.benefit-card,
+.service-item,
+.flow-list li,
+.liver-card,
+.entry-card,
+.audition-card,
+.audition-flow-list li,
+.audition-faq-item,
+.audition-intro-card,
+.audition-panel,
+.audition-final-cta > div,
+.legal-panel,
+.detail-panel,
+.message-card,
+.contact-form {
+  box-shadow:
+    0 14px 34px rgba(37, 37, 139, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+}
+
+.news-card:hover,
+.featured-liver-card:hover,
+.interview-list-card:hover,
+.application-item:hover,
+.ranking-card:hover {
+  box-shadow:
+    0 18px 42px rgba(37, 37, 139, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  transform: translateY(-3px);
+}
+
+.cursor-sparkle {
+  box-shadow: none;
+}
+
+.hero-blend-video {
+  display: none !important;
+}
+
+@media (min-width: 901px) {
+  .news-card,
+  .application-item,
+  .ranking-card,
+  .featured-liver-card,
+  .interview-list-card,
+  .entry-card,
+  .audition-card,
+  .audition-flow-list li,
+  .audition-faq-item {
+    backdrop-filter: none;
+  }
+}

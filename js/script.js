@@ -68,12 +68,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     let lastSparkleAt = 0;
     let lastTouchPoint = null;
+    let activeSparkles = 0;
+    const maxSparkles = isFinePointer ? 18 : 10;
 
     const createSparkle = (x, y) => {
+      if (activeSparkles >= maxSparkles) {
+        return;
+      }
+
+      activeSparkles += 1;
       const sparkle = document.createElement('span');
-      const size = Math.round(5 + Math.random() * 8);
-      const driftX = Math.round((Math.random() - 0.5) * 44);
-      const driftY = Math.round(-18 - Math.random() * 32);
+      const size = Math.round(4 + Math.random() * 6);
+      const driftX = Math.round((Math.random() - 0.5) * 34);
+      const driftY = Math.round(-14 - Math.random() * 24);
       const color = '#ffffff';
 
       sparkle.className = 'cursor-sparkle';
@@ -87,7 +94,10 @@ document.addEventListener('DOMContentLoaded', () => {
       sparkle.style.setProperty('--sparkle-y', `${driftY}px`);
 
       document.body.appendChild(sparkle);
-      sparkle.addEventListener('animationend', () => sparkle.remove(), { once: true });
+      sparkle.addEventListener('animationend', () => {
+        activeSparkles = Math.max(0, activeSparkles - 1);
+        sparkle.remove();
+      }, { once: true });
     };
 
     const emitSparklesAt = (x, y, interval = 38) => {
@@ -99,13 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       lastSparkleAt = now;
       createSparkle(x, y);
-
-      if (Math.random() > 0.58) {
-        createSparkle(
-          x + (Math.random() - 0.5) * 22,
-          y + (Math.random() - 0.5) * 22
-        );
-      }
     };
 
     const emitSparkles = (event, interval = 38) => {
@@ -127,17 +130,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (isFinePointer) {
       window.addEventListener('pointermove', (event) => {
-        emitSparkles(event, 38);
+        emitSparkles(event, 84);
       }, { passive: true });
     } else {
       window.addEventListener('pointerdown', (event) => {
         createSparkle(event.clientX, event.clientY);
-        createSparkle(event.clientX + 12, event.clientY - 8);
       }, { passive: true });
 
       window.addEventListener('pointermove', (event) => {
         if (event.pointerType === 'touch' || event.pointerType === 'pen') {
-          emitSparkles(event, 82);
+          emitSparkles(event, 180);
         }
       }, { passive: true });
 
@@ -153,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTouchPoint(event);
 
         if (lastTouchPoint) {
-          emitSparklesAt(lastTouchPoint.x, lastTouchPoint.y, 76);
+          emitSparklesAt(lastTouchPoint.x, lastTouchPoint.y, 180);
         }
       }, { passive: true });
 
@@ -165,7 +167,7 @@ document.addEventListener('DOMContentLoaded', () => {
         emitSparklesAt(
           lastTouchPoint.x + (Math.random() - 0.5) * 18,
           lastTouchPoint.y + (Math.random() - 0.5) * 18,
-          120
+          280
         );
       }, { passive: true });
     }
