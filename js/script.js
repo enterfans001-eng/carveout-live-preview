@@ -171,9 +171,60 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  const initHeadingReveal = () => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const headings = document.querySelectorAll('.section-heading, .about-copy.heading-inverted, .page-header');
+
+    if (!headings.length) {
+      return;
+    }
+
+    headings.forEach((heading) => heading.classList.add('reveal-heading'));
+
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      headings.forEach((heading) => heading.classList.add('is-visible'));
+      return;
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) {
+          return;
+        }
+
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      });
+    }, {
+      rootMargin: '0px 0px -18% 0px',
+      threshold: 0.24
+    });
+
+    headings.forEach((heading) => observer.observe(heading));
+  };
+
+  const initAuditionFaq = () => {
+    const faqButtons = document.querySelectorAll('.audition-faq-question');
+
+    faqButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const item = button.closest('.audition-faq-item');
+
+        if (!item) {
+          return;
+        }
+
+        const isOpen = item.classList.toggle('is-open');
+        button.setAttribute('aria-expanded', String(isOpen));
+      });
+    });
+  };
+
   initSiteMenu();
   initIdleCursor();
   initCursorSparkles();
+  initHeadingReveal();
+  initAuditionFaq();
 
   const rankingPlatformTabs = document.querySelectorAll('[data-ranking-platform]');
   const rankingPlatformPanels = document.querySelectorAll('[data-ranking-platform-panel]');
