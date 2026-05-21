@@ -1173,8 +1173,10 @@ textarea {
 }
 
 .featured-liver-card > img {
+  display: block;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
   width: 100%;
 }
 
@@ -2471,16 +2473,18 @@ textarea {
   }
 
   .featured-liver-carousel .featured-liver-card {
-    flex-basis: min(86vw, 420px);
+    flex-basis: calc(100vw - 44px);
   }
 
   .featured-liver-card {
-    height: 220px;
+    grid-template-columns: 42% minmax(0, 1fr);
+    height: 188px;
   }
 
   .featured-liver-card > img {
     aspect-ratio: auto;
     height: 100%;
+    min-width: 0;
   }
 
   .featured-liver-body {
@@ -2496,12 +2500,17 @@ textarea {
   }
 
   .liver-name {
-    font-size: 0.9rem;
+    font-size: 0.92rem;
+    left: 14px !important;
+    right: 14px !important;
+    top: 62px !important;
   }
 
   .liver-social-links {
     gap: 8px;
     height: 30px;
+    left: 14px !important;
+    top: 128px !important;
   }
 
   .liver-social-links a {
@@ -2512,6 +2521,31 @@ textarea {
   .liver-social-links img {
     height: 18px;
     width: 18px;
+  }
+
+  .liver-list-page .featured-liver-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .liver-list-page .featured-liver-card {
+    height: 176px;
+    grid-template-columns: 40% minmax(0, 1fr);
+  }
+
+  .liver-list-page .featured-liver-body {
+    padding: 14px 16px;
+  }
+
+  .liver-list-page .liver-name {
+    font-size: 1rem;
+    left: 16px !important;
+    right: 16px !important;
+    top: 62px !important;
+  }
+
+  .liver-list-page .liver-social-links {
+    left: 16px !important;
+    top: 124px !important;
   }
 
   .news-grid-all {
