@@ -283,7 +283,7 @@ document.addEventListener('DOMContentLoaded', () => {
     return card;
   };
 
-  const createDetailMarkup = (item, backHref, backText) => {
+  const createDetailMarkup = (item, backHref, backText, detailHtml = '') => {
     const fragment = document.createDocumentFragment();
 
     if (!item) {
@@ -321,18 +321,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const body = document.createElement('div');
     body.className = 'detail-body';
 
-    const paragraphs = item.body && item.body.length
-      ? item.body
-      : [
-          'CARVEOUT所属ライバー・クリエイターの活動情報をお知らせします。',
-          item.title
-        ];
+    if (detailHtml) {
+      body.innerHTML = detailHtml;
+      body.querySelectorAll('a[href^="http"]').forEach((link) => {
+        link.target = '_blank';
+        link.rel = 'noopener';
+      });
+    } else {
+      const paragraphs = item.body && item.body.length
+        ? item.body
+        : [
+            'CARVEOUT所属ライバー・クリエイターの活動情報をお知らせします。',
+            item.title
+          ];
 
-    paragraphs.forEach((paragraph) => {
-      const text = document.createElement('p');
-      text.textContent = paragraph;
-      body.appendChild(text);
-    });
+      paragraphs.forEach((paragraph) => {
+        const text = document.createElement('p');
+        text.textContent = paragraph;
+        body.appendChild(text);
+      });
+    }
 
     const back = document.createElement('a');
     back.className = 'btn btn-secondary detail-back-link';
@@ -467,7 +475,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (newsDetail) {
     const id = new URLSearchParams(window.location.search).get('id');
     const item = newsItems.find((newsItem) => getContentId(newsItem.url) === id);
-    newsDetail.appendChild(createDetailMarkup(item, 'news.html', 'ニュース一覧へ戻る'));
+    const detailHtml = (window.carveoutNewsDetails || {})[id] || '';
+    newsDetail.appendChild(createDetailMarkup(item, 'news.html', 'ニュース一覧へ戻る', detailHtml));
   }
 
   const interviewArchiveList = document.getElementById('interviewArchiveList');
@@ -487,7 +496,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (interviewDetail) {
     const id = new URLSearchParams(window.location.search).get('id');
     const item = interviewItems.find((interviewItem) => interviewItem.id === id);
-    interviewDetail.appendChild(createDetailMarkup(item, 'interview.html', 'インタビュー一覧へ戻る'));
+    const detailHtml = (window.carveoutInterviewDetails || {})[id] || '';
+    interviewDetail.appendChild(createDetailMarkup(item, 'interview.html', 'インタビュー一覧へ戻る', detailHtml));
   }
 
   const createLiverCard = (item) => {

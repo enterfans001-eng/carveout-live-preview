@@ -1844,6 +1844,30 @@ textarea {
   line-height: 2;
 }
 
+.detail-body figure {
+  margin: 10px 0;
+}
+
+.detail-body img {
+  border-radius: 8px;
+  display: block;
+  height: auto;
+  margin: 0 auto;
+  max-width: 100%;
+}
+
+.detail-body strong {
+  color: var(--ink);
+}
+
+.detail-body a {
+  color: var(--blue);
+  font-weight: 800;
+  overflow-wrap: anywhere;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .detail-back-link {
   margin-top: 30px;
   min-width: min(100%, 320px);
