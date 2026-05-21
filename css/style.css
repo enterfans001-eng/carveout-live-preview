@@ -1144,7 +1144,7 @@ textarea {
 }
 
 .featured-liver-track {
-  animation: liverSlide 34s linear infinite;
+  animation: liverSlide 110s linear infinite;
   display: flex;
   gap: 20px;
   width: max-content;
@@ -2211,7 +2211,7 @@ textarea {
   }
 
   .featured-liver-track {
-    animation-duration: 52s;
+    animation-duration: 130s;
   }
 }
 
