@@ -1,0 +1,453 @@
+// ========================================
+// お問い合わせフォーム送信処理
+// ========================================
+document.addEventListener('DOMContentLoaded', () => {
+  const initSiteMenu = () => {
+    const toggle = document.querySelector('.menu-toggle');
+    const menu = document.getElementById('siteMenu');
+    const closeTargets = document.querySelectorAll('[data-menu-close], .site-menu a');
+
+    if (!toggle || !menu) {
+      return;
+    }
+
+    const setMenu = (isOpen) => {
+      document.documentElement.classList.toggle('is-menu-open', isOpen);
+      toggle.setAttribute('aria-expanded', String(isOpen));
+      toggle.setAttribute('aria-label', isOpen ? 'メニューを閉じる' : 'メニューを開く');
+    };
+
+    toggle.addEventListener('click', () => {
+      setMenu(!document.documentElement.classList.contains('is-menu-open'));
+    });
+
+    closeTargets.forEach((target) => {
+      target.addEventListener('click', () => setMenu(false));
+    });
+
+    window.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        setMenu(false);
+      }
+    });
+  };
+
+  const initIdleCursor = () => {
+    const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+    if (!isFinePointer) {
+      return;
+    }
+
+    let idleTimer;
+    const showCursor = () => {
+      document.documentElement.classList.remove('is-cursor-idle');
+      window.clearTimeout(idleTimer);
+      idleTimer = window.setTimeout(() => {
+        document.documentElement.classList.add('is-cursor-idle');
+      }, 900);
+    };
+
+    window.addEventListener('pointermove', showCursor, { passive: true });
+    window.addEventListener('pointerdown', showCursor, { passive: true });
+    window.addEventListener('blur', () => {
+      document.documentElement.classList.remove('is-cursor-idle');
+      window.clearTimeout(idleTimer);
+    });
+
+    showCursor();
+  };
+
+  const initCursorSparkles = () => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduceMotion) {
+      return;
+    }
+
+    const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    let lastSparkleAt = 0;
+
+    const createSparkle = (x, y) => {
+      const sparkle = document.createElement('span');
+      const size = Math.round(5 + Math.random() * 8);
+      const driftX = Math.round((Math.random() - 0.5) * 44);
+      const driftY = Math.round(-18 - Math.random() * 32);
+      const color = '#ffffff';
+
+      sparkle.className = 'cursor-sparkle';
+      sparkle.style.left = `${x}px`;
+      sparkle.style.top = `${y}px`;
+      sparkle.style.width = `${size}px`;
+      sparkle.style.height = `${size}px`;
+      sparkle.style.background = color;
+      sparkle.style.color = color;
+      sparkle.style.setProperty('--sparkle-x', `${driftX}px`);
+      sparkle.style.setProperty('--sparkle-y', `${driftY}px`);
+
+      document.body.appendChild(sparkle);
+      sparkle.addEventListener('animationend', () => sparkle.remove(), { once: true });
+    };
+
+    const emitSparkles = (event, interval = 38) => {
+      const now = performance.now();
+
+      if (now - lastSparkleAt < interval) {
+        return;
+      }
+
+      lastSparkleAt = now;
+      createSparkle(event.clientX, event.clientY);
+
+      if (Math.random() > 0.58) {
+        createSparkle(
+          event.clientX + (Math.random() - 0.5) * 22,
+          event.clientY + (Math.random() - 0.5) * 22
+        );
+      }
+    };
+
+    if (isFinePointer) {
+      window.addEventListener('pointermove', (event) => {
+        emitSparkles(event, 38);
+      }, { passive: true });
+    } else {
+      window.addEventListener('pointerdown', (event) => {
+        createSparkle(event.clientX, event.clientY);
+        createSparkle(event.clientX + 12, event.clientY - 8);
+      }, { passive: true });
+
+      window.addEventListener('pointermove', (event) => {
+        if (event.pointerType === 'touch' || event.pointerType === 'pen') {
+          emitSparkles(event, 82);
+        }
+      }, { passive: true });
+    }
+  };
+
+  initSiteMenu();
+  initIdleCursor();
+  initCursorSparkles();
+
+  const rankingPlatformTabs = document.querySelectorAll('[data-ranking-platform]');
+  const rankingPlatformPanels = document.querySelectorAll('[data-ranking-platform-panel]');
+  const rankingListTabs = document.querySelectorAll('[data-ranking-list]');
+
+  rankingPlatformTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.rankingPlatform;
+
+      rankingPlatformTabs.forEach((item) => {
+        item.classList.toggle('is-active', item === tab);
+      });
+
+      rankingPlatformPanels.forEach((panel) => {
+        panel.classList.toggle('is-active', panel.dataset.rankingPlatformPanel === target);
+      });
+    });
+  });
+
+  rankingListTabs.forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const target = tab.dataset.rankingList;
+      const platformPanel = tab.closest('[data-ranking-platform-panel]');
+
+      if (!platformPanel) {
+        return;
+      }
+
+      platformPanel.querySelectorAll('[data-ranking-list]').forEach((item) => {
+        item.classList.toggle('is-active', item === tab);
+      });
+
+      platformPanel.querySelectorAll('[data-ranking-list-panel]').forEach((panel) => {
+        panel.classList.toggle('is-active', panel.dataset.rankingListPanel === target);
+      });
+    });
+  });
+
+  const newsItems = window.carveout17LiveNews || [];
+
+  const createNewsCard = (item) => {
+    const card = document.createElement('a');
+    card.className = 'news-card';
+    card.href = item.url;
+    card.rel = 'noopener';
+
+    if (item.image) {
+      const image = document.createElement('img');
+      image.src = item.image;
+      image.alt = item.title;
+      image.loading = 'lazy';
+      card.appendChild(image);
+    } else {
+      const placeholder = document.createElement('div');
+      placeholder.className = 'news-card-placeholder';
+      placeholder.textContent = 'CARVEOUT';
+      card.appendChild(placeholder);
+    }
+
+    const body = document.createElement('div');
+    const time = document.createElement('time');
+    time.dateTime = item.datetime;
+    time.textContent = item.date;
+
+    const title = document.createElement('h3');
+    title.textContent = item.title;
+
+    const detail = document.createElement('span');
+    detail.className = 'news-card-detail';
+    detail.textContent = '詳しく見る';
+
+    body.append(time, title, detail);
+    card.appendChild(body);
+
+    return card;
+  };
+
+  const allNewsGrid = document.getElementById('allNewsGrid');
+  const newsYearTabs = document.getElementById('newsYearTabs');
+  const officeEventGrid = document.getElementById('officeEventGrid');
+  const allEventGrid = document.getElementById('allEventGrid');
+  const eventYearTabs = document.getElementById('eventYearTabs');
+  const getNewsYear = (dateText) => Number(dateText.slice(0, 4));
+
+  if (allNewsGrid && Array.isArray(newsItems)) {
+    const years = [...new Set(newsItems.map((item) => getNewsYear(item.datetime)))];
+    let activeYear = years[0];
+
+    const renderNews = (year) => {
+      allNewsGrid.innerHTML = '';
+      const fragment = document.createDocumentFragment();
+
+      newsItems
+        .filter((item) => getNewsYear(item.datetime) === year)
+        .forEach((item) => {
+          fragment.appendChild(createNewsCard(item));
+        });
+
+      allNewsGrid.appendChild(fragment);
+    };
+
+    if (newsYearTabs) {
+      years.forEach((year) => {
+        const count = newsItems.filter((item) => getNewsYear(item.datetime) === year).length;
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = year === activeYear ? 'news-tab is-active' : 'news-tab';
+        button.textContent = `${year}年 (${count})`;
+        button.setAttribute('aria-pressed', String(year === activeYear));
+
+        button.addEventListener('click', () => {
+          activeYear = year;
+          newsYearTabs.querySelectorAll('.news-tab').forEach((tab) => {
+            const isActive = tab === button;
+            tab.classList.toggle('is-active', isActive);
+            tab.setAttribute('aria-pressed', String(isActive));
+          });
+          renderNews(activeYear);
+        });
+
+        newsYearTabs.appendChild(button);
+      });
+    }
+
+    renderNews(activeYear);
+  }
+
+  if (officeEventGrid) {
+    const eventItems = window.carveoutOfficeEventNews || newsItems.filter((item) => /事務所(?:内)?イベント/.test(item.title));
+    const fragment = document.createDocumentFragment();
+
+    eventItems.slice(0, 5).forEach((item) => {
+      fragment.appendChild(createNewsCard(item));
+    });
+
+    officeEventGrid.appendChild(fragment);
+  }
+
+  if (allEventGrid) {
+    const eventItems = window.carveoutOfficeEventNews || [];
+    const years = [...new Set(eventItems.map((item) => getNewsYear(item.datetime)))];
+    let activeYear = years[0];
+
+    const renderEvents = (year) => {
+      allEventGrid.innerHTML = '';
+      const fragment = document.createDocumentFragment();
+
+      eventItems
+        .filter((item) => getNewsYear(item.datetime) === year)
+        .forEach((item) => {
+          fragment.appendChild(createNewsCard(item));
+        });
+
+      allEventGrid.appendChild(fragment);
+    };
+
+    if (eventYearTabs) {
+      years.forEach((year) => {
+        const count = eventItems.filter((item) => getNewsYear(item.datetime) === year).length;
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = year === activeYear ? 'news-tab is-active' : 'news-tab';
+        button.textContent = `${year}年 (${count})`;
+        button.setAttribute('aria-pressed', String(year === activeYear));
+
+        button.addEventListener('click', () => {
+          activeYear = year;
+          eventYearTabs.querySelectorAll('.news-tab').forEach((tab) => {
+            const isActive = tab === button;
+            tab.classList.toggle('is-active', isActive);
+            tab.setAttribute('aria-pressed', String(isActive));
+          });
+          renderEvents(activeYear);
+        });
+
+        eventYearTabs.appendChild(button);
+      });
+    }
+
+    renderEvents(activeYear);
+  }
+
+  const latestNewsTrack = document.getElementById('latestNewsTrack');
+
+  if (latestNewsTrack && Array.isArray(newsItems)) {
+    const latestItems = newsItems.slice(0, 5);
+    const loopItems = [...latestItems, ...latestItems, ...latestItems, ...latestItems];
+    const fragment = document.createDocumentFragment();
+
+    loopItems.forEach((item) => {
+      fragment.appendChild(createNewsCard(item));
+    });
+
+    latestNewsTrack.appendChild(fragment);
+  }
+
+  const createLiverCard = (item) => {
+    const card = document.createElement('article');
+    card.className = 'featured-liver-card';
+
+    const image = document.createElement('img');
+    image.src = item.image;
+    image.alt = item.name;
+    image.loading = 'lazy';
+
+    const body = document.createElement('div');
+    body.className = 'featured-liver-body';
+    body.style.height = '100%';
+    body.style.boxSizing = 'border-box';
+    body.style.position = 'relative';
+
+    const category = document.createElement('span');
+    category.className = 'liver-category';
+    if (item.category === 'BIGOLIVE') {
+      category.classList.add('is-bigo');
+    }
+    category.textContent = item.category;
+    category.style.alignSelf = 'start';
+    category.style.justifySelf = 'start';
+    category.style.position = 'static';
+    category.style.width = 'auto';
+
+    const name = document.createElement('h3');
+    name.className = 'liver-name';
+    name.textContent = item.name;
+    name.style.position = 'absolute';
+    name.style.left = '20px';
+    name.style.right = '20px';
+    name.style.top = '88px';
+    name.style.transform = 'none';
+    name.style.margin = '0';
+
+    const actions = document.createElement('div');
+    actions.className = 'liver-social-links';
+    actions.style.position = 'absolute';
+    actions.style.left = '20px';
+    actions.style.bottom = 'auto';
+    actions.style.top = '166px';
+    actions.style.display = 'flex';
+    actions.style.flexDirection = 'row';
+
+    const platformIcon = item.category === 'BIGOLIVE'
+      ? 'https://ccarveout.jp/wp-content/themes/carveout_2/images/v2/icon_big_bigo.png'
+      : 'https://ccarveout.jp/wp-content/themes/carveout_2/images/v2/icon_big_17.png';
+    const platformLabel = item.category === 'BIGOLIVE' ? 'BIGOLIVE' : '17LIVE';
+
+    const liveLink = document.createElement('a');
+    liveLink.href = item.url;
+    liveLink.target = '_blank';
+    liveLink.rel = 'noopener';
+    liveLink.setAttribute('aria-label', `${item.name}の${platformLabel}プロフィール`);
+
+    const liveIcon = document.createElement('img');
+    liveIcon.src = platformIcon;
+    liveIcon.alt = platformLabel;
+    liveIcon.loading = 'lazy';
+    liveLink.appendChild(liveIcon);
+
+    const instagramLink = document.createElement('a');
+    instagramLink.href = item.instagramUrl || 'https://www.instagram.com/carveout.official';
+    instagramLink.target = '_blank';
+    instagramLink.rel = 'noopener';
+    instagramLink.setAttribute('aria-label', `${item.name}のInstagram`);
+
+    const instagramIcon = document.createElement('img');
+    instagramIcon.src = 'https://ccarveout.jp/wp-content/themes/carveout_2/images/insta_black.png';
+    instagramIcon.alt = 'Instagram';
+    instagramIcon.loading = 'lazy';
+    instagramLink.appendChild(instagramIcon);
+
+    actions.append(liveLink, instagramLink);
+    body.append(category, name, actions);
+    card.append(image, body);
+
+    return card;
+  };
+
+  const liverTrack = document.getElementById('featuredLiverTrack');
+  const liverGrid = document.getElementById('allLiverGrid');
+  const liverItems = window.carveout17LiveLivers || [];
+
+  if (liverTrack && Array.isArray(liverItems)) {
+    const featuredItems = liverItems.slice(0, 6);
+    const loopItems = [...featuredItems, ...featuredItems, ...featuredItems, ...featuredItems];
+    const fragment = document.createDocumentFragment();
+
+    loopItems.forEach((item) => {
+      fragment.appendChild(createLiverCard(item));
+    });
+
+    liverTrack.appendChild(fragment);
+  }
+
+  if (liverGrid && Array.isArray(liverItems)) {
+    const fragment = document.createDocumentFragment();
+
+    liverItems.forEach((item) => {
+      fragment.appendChild(createLiverCard(item));
+    });
+
+    liverGrid.appendChild(fragment);
+  }
+
+  const contactForm = document.getElementById('contactForm');
+
+  if (contactForm) {
+    contactForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const message = document.getElementById('message').value;
+
+      if (!name || !email || !message) {
+        alert('必須項目を入力してください。');
+        return;
+      }
+
+      alert('お問い合わせを送信しました。ありがとうございました。');
+      contactForm.reset();
+    });
+  }
+});
