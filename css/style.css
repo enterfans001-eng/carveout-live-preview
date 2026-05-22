@@ -247,13 +247,16 @@ textarea {
 
 .site-menu a {
   border-bottom: 1px solid #ececf5;
-  color: var(--ink);
+  color: var(--blue);
+  font-family: var(--font-heading-en);
   font-size: clamp(1.05rem, 2vw, 1.28rem);
-  font-weight: 800;
+  font-weight: 500;
+  letter-spacing: 0;
   padding: 18px 0;
 }
 
 .site-menu-cta {
+  font-weight: 600;
   color: var(--blue) !important;
 }
 
