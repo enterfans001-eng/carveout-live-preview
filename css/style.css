@@ -4550,3 +4550,107 @@ body::after {
 .about-visual img {
   visibility: visible;
 }
+
+/* Homepage section rhythm: alternate solid light and brand backgrounds. */
+.about-section,
+.news-section,
+.ranking-section,
+.interview-section {
+  background: #f7fbff !important;
+}
+
+.event-section,
+.application-section,
+.featured-liver-section,
+.cta-section {
+  background: #25258b !important;
+}
+
+.about-section,
+.event-section,
+.news-section,
+.application-section,
+.ranking-section,
+.featured-liver-section,
+.interview-section,
+.cta-section {
+  backdrop-filter: none !important;
+}
+
+.event-section .section-heading .eyebrow,
+.event-section .section-heading h2,
+.application-section .section-heading .eyebrow,
+.application-section .section-heading h2,
+.featured-liver-section .section-heading .eyebrow,
+.featured-liver-section .section-heading h2,
+.cta-section .section-heading .eyebrow,
+.cta-section .section-heading h2 {
+  color: #fff !important;
+}
+
+.event-section .section-heading h2,
+.application-section .section-heading h2,
+.featured-liver-section .section-heading h2,
+.cta-section .section-heading h2 {
+  text-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
+}
+
+.about-section .about-copy.heading-inverted h2,
+.about-section .about-copy .eyebrow,
+.news-section .section-heading .eyebrow,
+.news-section .section-heading h2,
+.ranking-section .section-heading .eyebrow,
+.ranking-section .section-heading h2,
+.interview-section .section-heading .eyebrow,
+.interview-section .section-heading h2 {
+  color: var(--blue) !important;
+}
+
+.about-section .about-copy p:not(.eyebrow) {
+  color: rgba(23, 23, 42, 0.72);
+}
+
+.about-section .about-inner {
+  grid-template-columns: minmax(0, 0.98fr) minmax(280px, 470px);
+}
+
+.about-visual {
+  aspect-ratio: 4 / 5;
+  border-radius: 42% 58% 46% 54% / 40% 42% 58% 60%;
+  box-shadow: none;
+  overflow: visible;
+  transform: rotate(1.4deg);
+}
+
+.about-visual::before {
+  background:
+    radial-gradient(ellipse at 50% 42%, rgba(223, 248, 255, 0.78), transparent 68%),
+    radial-gradient(ellipse at 54% 52%, rgba(255, 255, 255, 0.92), transparent 62%);
+  border: 0;
+  filter: blur(18px);
+  inset: -8%;
+  z-index: -1;
+}
+
+.about-visual::after {
+  background:
+    radial-gradient(ellipse at 50% 48%, transparent 54%, rgba(247, 251, 255, 0.72) 76%, #f7fbff 100%);
+  filter: blur(8px);
+  inset: -10px;
+  z-index: 2;
+}
+
+.about-visual img {
+  border-radius: inherit;
+  box-shadow:
+    0 22px 60px rgba(37, 37, 139, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.72);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 48%, #000 0 66%, rgba(0, 0, 0, 0.72) 78%, transparent 96%);
+  mask-image: radial-gradient(ellipse at 50% 48%, #000 0 66%, rgba(0, 0, 0, 0.72) 78%, transparent 96%);
+}
+
+@media (max-width: 900px) {
+  .about-visual {
+    transform: none;
+  }
+}
