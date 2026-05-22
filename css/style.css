@@ -92,6 +92,47 @@ body::before {
   }
 }
 
+.card-sparkle {
+  animation: cardSparkle 720ms ease-out forwards;
+  background: currentColor;
+  border-radius: 999px;
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.9),
+    0 0 18px rgba(125, 194, 218, 0.45);
+  color: rgba(255, 255, 255, 0.96);
+  display: block;
+  height: var(--card-sparkle-size, 7px);
+  left: var(--card-sparkle-left, 50%);
+  pointer-events: none;
+  position: absolute;
+  top: var(--card-sparkle-top, 50%);
+  transform: translate(-50%, -50%) scale(0.4);
+  width: var(--card-sparkle-size, 7px);
+  z-index: 5;
+}
+
+@keyframes cardSparkle {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.3);
+  }
+
+  18% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+
+  100% {
+    opacity: 0;
+    transform:
+      translate(
+        calc(-50% + var(--card-sparkle-x, 10px)),
+        calc(-50% + var(--card-sparkle-y, -18px))
+      )
+      scale(0.08);
+  }
+}
+
 a {
   color: inherit;
   text-decoration: none;
@@ -3400,6 +3441,11 @@ body {
   position: relative;
 }
 
+.news-card,
+.featured-liver-card {
+  isolation: isolate;
+}
+
 .news-card::before,
 .application-item::before,
 .ranking-card::before,
@@ -3450,6 +3496,32 @@ body {
     0 34px 82px rgba(4, 7, 55, 0.28),
     inset 0 1px 0 rgba(255, 255, 255, 0.95);
   transform: translateY(-5px);
+}
+
+.news-card::after,
+.featured-liver-card::after {
+  background:
+    radial-gradient(circle at var(--card-glow-x, 50%) var(--card-glow-y, 50%),
+      rgba(255, 255, 255, 0.86) 0 1px,
+      rgba(223, 248, 255, 0.36) 2px 8px,
+      transparent 22px),
+    radial-gradient(circle at var(--card-glow-x, 50%) var(--card-glow-y, 50%),
+      rgba(125, 194, 218, 0.22),
+      transparent 42%);
+  content: "";
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  position: absolute;
+  transition: opacity 0.24s ease;
+  z-index: 4;
+}
+
+.news-card:hover::after,
+.news-card.is-card-sparkling::after,
+.featured-liver-card:hover::after,
+.featured-liver-card.is-card-sparkling::after {
+  opacity: 1;
 }
 
 .btn-primary,

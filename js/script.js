@@ -173,6 +173,98 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  const initCardSparkles = () => {
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    if (reduceMotion) {
+      return;
+    }
+
+    const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const cardSelector = '.news-card, .featured-liver-card';
+    const lastSparkleByCard = new WeakMap();
+    let activeSparkles = 0;
+    const maxSparkles = isFinePointer ? 28 : 14;
+
+    const createCardSparkle = (card, clientX, clientY, interval = 110) => {
+      if (!card || activeSparkles >= maxSparkles) {
+        return;
+      }
+
+      const now = performance.now();
+      const lastSparkleAt = lastSparkleByCard.get(card) || 0;
+
+      if (now - lastSparkleAt < interval) {
+        return;
+      }
+
+      lastSparkleByCard.set(card, now);
+
+      const rect = card.getBoundingClientRect();
+      const localX = clientX - rect.left;
+      const localY = clientY - rect.top;
+
+      if (localX < 0 || localY < 0 || localX > rect.width || localY > rect.height) {
+        return;
+      }
+
+      activeSparkles += 1;
+      card.classList.add('is-card-sparkling');
+      card.style.setProperty('--card-glow-x', `${localX}px`);
+      card.style.setProperty('--card-glow-y', `${localY}px`);
+
+      const sparkle = document.createElement('span');
+      const size = Math.round(5 + Math.random() * 6);
+      const driftX = Math.round((Math.random() - 0.5) * 26);
+      const driftY = Math.round(-12 - Math.random() * 22);
+
+      sparkle.className = 'card-sparkle';
+      sparkle.style.setProperty('--card-sparkle-left', `${localX}px`);
+      sparkle.style.setProperty('--card-sparkle-top', `${localY}px`);
+      sparkle.style.setProperty('--card-sparkle-size', `${size}px`);
+      sparkle.style.setProperty('--card-sparkle-x', `${driftX}px`);
+      sparkle.style.setProperty('--card-sparkle-y', `${driftY}px`);
+      card.appendChild(sparkle);
+
+      sparkle.addEventListener('animationend', () => {
+        activeSparkles = Math.max(0, activeSparkles - 1);
+        sparkle.remove();
+      }, { once: true });
+
+      window.setTimeout(() => {
+        card.classList.remove('is-card-sparkling');
+      }, 260);
+    };
+
+    const findSparkleCard = (target) => {
+      if (!(target instanceof Element)) {
+        return null;
+      }
+
+      return target.closest(cardSelector);
+    };
+
+    document.addEventListener('pointermove', (event) => {
+      const card = findSparkleCard(event.target);
+
+      if (!card) {
+        return;
+      }
+
+      createCardSparkle(card, event.clientX, event.clientY, isFinePointer ? 130 : 220);
+    }, { passive: true });
+
+    document.addEventListener('pointerdown', (event) => {
+      const card = findSparkleCard(event.target);
+
+      if (!card) {
+        return;
+      }
+
+      createCardSparkle(card, event.clientX, event.clientY, 0);
+    }, { passive: true });
+  };
+
   const initHeadingReveal = () => {
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     const headings = document.querySelectorAll('.section-heading, .about-copy.heading-inverted, .page-header');
@@ -225,6 +317,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initSiteMenu();
   initIdleCursor();
   initCursorSparkles();
+  initCardSparkles();
   initHeadingReveal();
   initAuditionFaq();
 
