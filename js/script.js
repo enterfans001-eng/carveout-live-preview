@@ -713,9 +713,35 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const liverPlatformMeta = {
+    '17LIVE': {
+      icon: 'https://ccarveout.jp/wp-content/themes/carveout_2/images/v2/icon_big_17.png',
+      label: '17LIVE',
+      className: 'is-17live'
+    },
+    BIGOLIVE: {
+      icon: 'https://ccarveout.jp/wp-content/themes/carveout_2/images/v2/icon_big_bigo.png',
+      label: 'BIGOLIVE',
+      className: 'is-bigo'
+    },
+    TikTokLIVE: {
+      icon: 'https://ccarveout.jp/wp-content/themes/carveout_2/images/v2/icon_big_t.png',
+      label: 'TikTokLIVE',
+      className: 'is-tiktok'
+    },
+    Pococha: {
+      icon: 'https://ccarveout.jp/wp-content/themes/carveout_2/images/v2/icon_big_p.png',
+      label: 'Pococha',
+      className: 'is-pococha'
+    }
+  };
+
+  const getLiverPlatform = (category) => liverPlatformMeta[category] || liverPlatformMeta['17LIVE'];
+
   const createLiverCard = (item) => {
+    const platform = getLiverPlatform(item.category);
     const card = document.createElement('article');
-    card.className = 'featured-liver-card';
+    card.className = `featured-liver-card ${platform.className}`;
 
     const image = document.createElement('img');
     image.src = item.image;
@@ -727,10 +753,7 @@ document.addEventListener('DOMContentLoaded', () => {
     body.className = 'featured-liver-body';
 
     const category = document.createElement('span');
-    category.className = 'liver-category';
-    if (item.category === 'BIGOLIVE') {
-      category.classList.add('is-bigo');
-    }
+    category.className = `liver-category ${platform.className}`;
     category.textContent = item.category;
 
     const name = document.createElement('h3');
@@ -740,20 +763,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const actions = document.createElement('div');
     actions.className = 'liver-social-links';
 
-    const platformIcon = item.category === 'BIGOLIVE'
-      ? 'https://ccarveout.jp/wp-content/themes/carveout_2/images/v2/icon_big_bigo.png'
-      : 'https://ccarveout.jp/wp-content/themes/carveout_2/images/v2/icon_big_17.png';
-    const platformLabel = item.category === 'BIGOLIVE' ? 'BIGOLIVE' : '17LIVE';
-
     const liveLink = document.createElement('a');
     liveLink.href = item.url;
     liveLink.target = '_blank';
     liveLink.rel = 'noopener';
-    liveLink.setAttribute('aria-label', `${item.name}の${platformLabel}プロフィール`);
+    liveLink.setAttribute('aria-label', `${item.name}の${platform.label}プロフィール`);
 
     const liveIcon = document.createElement('img');
-    liveIcon.src = platformIcon;
-    liveIcon.alt = platformLabel;
+    liveIcon.src = platform.icon;
+    liveIcon.alt = platform.label;
     liveIcon.loading = 'lazy';
     liveIcon.decoding = 'async';
     liveLink.appendChild(liveIcon);
@@ -780,6 +798,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const liverTrack = document.getElementById('featuredLiverTrack');
   const liverGrid = document.getElementById('allLiverGrid');
+  const liverCategoryTabs = document.getElementById('liverCategoryTabs');
   const liverItems = window.carveout17LiveLivers || [];
 
   if (liverTrack && Array.isArray(liverItems)) {
@@ -790,17 +809,51 @@ document.addEventListener('DOMContentLoaded', () => {
       fragment.appendChild(createLiverCard(item));
     });
 
-    liverTrack.appendChild(fragment);
+    liverTrack.replaceChildren(fragment);
   }
 
   if (liverGrid && Array.isArray(liverItems)) {
-    const fragment = document.createDocumentFragment();
+    const renderLiverGrid = (category = 'ALL') => {
+      const fragment = document.createDocumentFragment();
+      const filteredItems = category === 'ALL'
+        ? liverItems
+        : liverItems.filter((item) => item.category === category);
 
-    liverItems.forEach((item) => {
-      fragment.appendChild(createLiverCard(item));
-    });
+      filteredItems.forEach((item) => {
+        fragment.appendChild(createLiverCard(item));
+      });
 
-    liverGrid.appendChild(fragment);
+      liverGrid.replaceChildren(fragment);
+    };
+
+    if (liverCategoryTabs) {
+      const categories = ['ALL', ...new Set(liverItems.map((item) => item.category).filter(Boolean))];
+      const tabsFragment = document.createDocumentFragment();
+
+      categories.forEach((category, index) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = `news-tab liver-tab${index === 0 ? ' is-active' : ''}`;
+        button.textContent = category;
+        button.setAttribute('aria-pressed', index === 0 ? 'true' : 'false');
+
+        button.addEventListener('click', () => {
+          liverCategoryTabs.querySelectorAll('.liver-tab').forEach((tab) => {
+            tab.classList.remove('is-active');
+            tab.setAttribute('aria-pressed', 'false');
+          });
+          button.classList.add('is-active');
+          button.setAttribute('aria-pressed', 'true');
+          renderLiverGrid(category);
+        });
+
+        tabsFragment.appendChild(button);
+      });
+
+      liverCategoryTabs.replaceChildren(tabsFragment);
+    }
+
+    renderLiverGrid();
   }
 
   const contactForm = document.getElementById('contactForm');
