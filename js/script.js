@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     const isFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
-    const cardSelector = '.news-card, .featured-liver-card';
+    const cardSelector = '.news-card, .featured-liver-card, .ranking-card';
     const lastSparkleByCard = new WeakMap();
     let activeSparkles = 0;
     const maxSparkles = isFinePointer ? 18 : 9;
