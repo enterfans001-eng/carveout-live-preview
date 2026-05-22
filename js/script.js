@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let lastSparkleAt = 0;
     let lastTouchPoint = null;
     let activeSparkles = 0;
-    const maxSparkles = isFinePointer ? 18 : 10;
+    const maxSparkles = isFinePointer ? 12 : 7;
 
     const createSparkle = (x, y) => {
       if (activeSparkles >= maxSparkles) {
@@ -78,12 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
       activeSparkles += 1;
       const sparkle = document.createElement('span');
-      const size = Math.round(4 + Math.random() * 6);
-      const driftX = Math.round((Math.random() - 0.5) * 34);
-      const driftY = Math.round(-14 - Math.random() * 24);
-      const color = '#ffffff';
+      const useBrandColor = Math.random() < 0.28;
+      const size = Math.round((useBrandColor ? 3 : 4) + Math.random() * (useBrandColor ? 3 : 5));
+      const driftX = Math.round((Math.random() - 0.5) * 28);
+      const driftY = Math.round(-12 - Math.random() * 20);
+      const color = useBrandColor ? 'rgba(37, 37, 139, 0.78)' : '#ffffff';
 
-      sparkle.className = 'cursor-sparkle';
+      sparkle.className = useBrandColor ? 'cursor-sparkle is-brand-sparkle' : 'cursor-sparkle';
       sparkle.style.left = `${x}px`;
       sparkle.style.top = `${y}px`;
       sparkle.style.width = `${size}px`;
@@ -130,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (isFinePointer) {
       window.addEventListener('pointermove', (event) => {
-        emitSparkles(event, 84);
+        emitSparkles(event, 120);
       }, { passive: true });
     } else {
       window.addEventListener('pointerdown', (event) => {
@@ -139,7 +140,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       window.addEventListener('pointermove', (event) => {
         if (event.pointerType === 'touch' || event.pointerType === 'pen') {
-          emitSparkles(event, 180);
+          emitSparkles(event, 240);
         }
       }, { passive: true });
 
@@ -155,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateTouchPoint(event);
 
         if (lastTouchPoint) {
-          emitSparklesAt(lastTouchPoint.x, lastTouchPoint.y, 180);
+          emitSparklesAt(lastTouchPoint.x, lastTouchPoint.y, 240);
         }
       }, { passive: true });
 
@@ -167,7 +168,7 @@ document.addEventListener('DOMContentLoaded', () => {
         emitSparklesAt(
           lastTouchPoint.x + (Math.random() - 0.5) * 18,
           lastTouchPoint.y + (Math.random() - 0.5) * 18,
-          280
+          360
         );
       }, { passive: true });
     }
@@ -184,7 +185,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cardSelector = '.news-card, .featured-liver-card';
     const lastSparkleByCard = new WeakMap();
     let activeSparkles = 0;
-    const maxSparkles = isFinePointer ? 28 : 14;
+    const maxSparkles = isFinePointer ? 18 : 9;
 
     const createCardSparkle = (card, clientX, clientY, interval = 110) => {
       if (!card || activeSparkles >= maxSparkles) {
@@ -210,13 +211,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
       activeSparkles += 1;
       card.classList.add('is-card-sparkling');
-      card.style.setProperty('--card-glow-x', `${localX}px`);
-      card.style.setProperty('--card-glow-y', `${localY}px`);
 
       const sparkle = document.createElement('span');
-      const size = Math.round(5 + Math.random() * 6);
-      const driftX = Math.round((Math.random() - 0.5) * 26);
-      const driftY = Math.round(-12 - Math.random() * 22);
+      const size = Math.round(4 + Math.random() * 5);
+      const driftX = Math.round((Math.random() - 0.5) * 22);
+      const driftY = Math.round(-10 - Math.random() * 18);
 
       sparkle.className = 'card-sparkle';
       sparkle.style.setProperty('--card-sparkle-left', `${localX}px`);
@@ -251,7 +250,7 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
       }
 
-      createCardSparkle(card, event.clientX, event.clientY, isFinePointer ? 130 : 220);
+      createCardSparkle(card, event.clientX, event.clientY, isFinePointer ? 180 : 260);
     }, { passive: true });
 
     document.addEventListener('pointerdown', (event) => {
@@ -393,6 +392,7 @@ document.addEventListener('DOMContentLoaded', () => {
       image.src = item.image;
       image.alt = item.title;
       image.loading = 'lazy';
+      image.decoding = 'async';
       card.appendChild(image);
     } else {
       const placeholder = document.createElement('div');
@@ -428,6 +428,7 @@ document.addEventListener('DOMContentLoaded', () => {
     image.src = item.image;
     image.alt = item.title;
     image.loading = 'lazy';
+    image.decoding = 'async';
 
     const body = document.createElement('div');
     const time = document.createElement('time');
@@ -674,6 +675,7 @@ document.addEventListener('DOMContentLoaded', () => {
     image.src = item.image;
     image.alt = item.name;
     image.loading = 'lazy';
+    image.decoding = 'async';
 
     const body = document.createElement('div');
     body.className = 'featured-liver-body';
@@ -726,6 +728,7 @@ document.addEventListener('DOMContentLoaded', () => {
     liveIcon.src = platformIcon;
     liveIcon.alt = platformLabel;
     liveIcon.loading = 'lazy';
+    liveIcon.decoding = 'async';
     liveLink.appendChild(liveIcon);
 
     const instagramLink = document.createElement('a');
@@ -738,6 +741,7 @@ document.addEventListener('DOMContentLoaded', () => {
     instagramIcon.src = 'https://ccarveout.jp/wp-content/themes/carveout_2/images/insta_black.png';
     instagramIcon.alt = 'Instagram';
     instagramIcon.loading = 'lazy';
+    instagramIcon.decoding = 'async';
     instagramLink.appendChild(instagramIcon);
 
     actions.append(liveLink, instagramLink);
