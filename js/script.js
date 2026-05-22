@@ -342,9 +342,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     document.body.appendChild(cta);
 
-    const hiddenTargets = Array.from(document.querySelectorAll('.hero, .footer'));
+    const hero = document.querySelector('.hero');
+    const footer = document.querySelector('.footer');
 
-    if (!hiddenTargets.length) {
+    if (!hero && !footer) {
       return;
     }
 
@@ -352,10 +353,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const updateVisibility = () => {
       const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-      const shouldHide = hiddenTargets.some((target) => {
-        const rect = target.getBoundingClientRect();
-        return rect.top < viewportHeight && rect.bottom > 0;
-      });
+      const heroRevealOffset = Math.min(180, Math.max(96, viewportHeight * 0.16));
+      const heroRect = hero ? hero.getBoundingClientRect() : null;
+      const footerRect = footer ? footer.getBoundingClientRect() : null;
+      const isOverHero = heroRect ? heroRect.bottom > viewportHeight - heroRevealOffset : false;
+      const isOverFooter = footerRect ? footerRect.top < viewportHeight && footerRect.bottom > 0 : false;
+      const shouldHide = isOverHero || isOverFooter;
 
       cta.classList.toggle('is-floating-entry-hidden', shouldHide);
       ticking = false;
