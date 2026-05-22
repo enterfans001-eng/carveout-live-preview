@@ -216,7 +216,7 @@ textarea {
 }
 
 .menu-backdrop {
-  background: rgba(9, 9, 54, 0.42);
+  background: transparent;
   inset: 0;
   opacity: 0;
   pointer-events: none;
@@ -277,16 +277,12 @@ textarea {
 }
 
 .is-menu-open .menu-backdrop {
-  opacity: 1;
-  pointer-events: auto;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .is-menu-open .site-menu {
   transform: translateX(0);
-}
-
-.is-menu-open body {
-  overflow: hidden;
 }
 
 .header-cta,
