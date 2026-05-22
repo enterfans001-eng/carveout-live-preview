@@ -526,10 +526,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (latestNewsTrack && Array.isArray(newsItems)) {
     const latestItems = newsItems.slice(0, 5);
-    const loopItems = [...latestItems, ...latestItems, ...latestItems, ...latestItems];
     const fragment = document.createDocumentFragment();
 
-    loopItems.forEach((item) => {
+    latestItems.forEach((item) => {
       fragment.appendChild(createNewsCard(item));
     });
 
@@ -661,10 +660,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (liverTrack && Array.isArray(liverItems)) {
     const featuredItems = liverItems.slice(0, 6);
-    const loopItems = [...featuredItems, ...featuredItems, ...featuredItems, ...featuredItems];
     const fragment = document.createDocumentFragment();
 
-    loopItems.forEach((item) => {
+    featuredItems.forEach((item) => {
       fragment.appendChild(createLiverCard(item));
     });
 

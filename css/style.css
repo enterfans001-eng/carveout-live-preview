@@ -584,16 +584,18 @@ textarea {
 .news-carousel {
   margin: 0 auto;
   max-width: 1120px;
-  overflow: hidden;
-  padding: 8px 0 18px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 8px 0 16px;
+  scrollbar-color: rgba(37, 37, 139, 0.62) rgba(255, 255, 255, 0.42);
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
 }
 
 .news-carousel-track {
-  animation: newsSlide 72s linear infinite;
   display: flex;
   gap: 20px;
   width: max-content;
-  will-change: transform;
 }
 
 .news-card {
@@ -843,23 +845,31 @@ textarea {
   scrollbar-width: thin;
 }
 
-.event-feature-wrap::-webkit-scrollbar {
+.event-feature-wrap::-webkit-scrollbar,
+.news-carousel::-webkit-scrollbar,
+.featured-liver-carousel::-webkit-scrollbar {
   height: 8px;
 }
 
-.event-feature-wrap::-webkit-scrollbar-track {
+.event-feature-wrap::-webkit-scrollbar-track,
+.news-carousel::-webkit-scrollbar-track,
+.featured-liver-carousel::-webkit-scrollbar-track {
   background: rgba(255, 255, 255, 0.42);
   border-radius: 999px;
 }
 
-.event-feature-wrap::-webkit-scrollbar-thumb {
+.event-feature-wrap::-webkit-scrollbar-thumb,
+.news-carousel::-webkit-scrollbar-thumb,
+.featured-liver-carousel::-webkit-scrollbar-thumb {
   background:
     linear-gradient(90deg, rgba(37, 37, 139, 0.88), rgba(125, 194, 218, 0.82));
   border: 2px solid rgba(255, 255, 255, 0.72);
   border-radius: 999px;
 }
 
-.event-feature-wrap::-webkit-scrollbar-thumb:hover {
+.event-feature-wrap::-webkit-scrollbar-thumb:hover,
+.news-carousel::-webkit-scrollbar-thumb:hover,
+.featured-liver-carousel::-webkit-scrollbar-thumb:hover {
   background:
     linear-gradient(90deg, rgba(37, 37, 139, 1), rgba(75, 114, 255, 0.92));
 }
@@ -1312,16 +1322,18 @@ textarea {
 .featured-liver-carousel {
   margin: 0 auto;
   max-width: 1120px;
-  overflow: hidden;
-  padding: 8px 0 18px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 8px 0 16px;
+  scrollbar-color: rgba(37, 37, 139, 0.62) rgba(255, 255, 255, 0.42);
+  scrollbar-width: thin;
+  -webkit-overflow-scrolling: touch;
 }
 
 .featured-liver-track {
-  animation: liverSlide 110s linear infinite;
   display: flex;
   gap: 20px;
   width: max-content;
-  will-change: transform;
 }
 
 .featured-liver-card {
@@ -2835,12 +2847,10 @@ textarea {
     max-width: 920px;
   }
 
-  .news-carousel-track {
-    animation-duration: 88s;
-  }
-
+  .news-carousel-track,
   .featured-liver-track {
-    animation-duration: 130s;
+    animation: none;
+    transform: none;
   }
 }
 
