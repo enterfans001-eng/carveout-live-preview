@@ -233,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
       window.setTimeout(() => {
         card.classList.remove('is-card-sparkling');
-      }, 260);
+      }, 820);
     };
 
     const findSparkleCard = (target) => {

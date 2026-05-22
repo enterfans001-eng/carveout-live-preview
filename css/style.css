@@ -135,11 +135,11 @@ body::before {
 
 @keyframes cardGlossSweep {
   0% {
-    background-position: -170% 0, 0 0, 0 0;
+    background-position: -130% 0, 0 0, 0 0;
   }
 
   100% {
-    background-position: 170% 0, 0 0, 0 0;
+    background-position: 130% 0, 0 0, 0 0;
   }
 }
 
@@ -3513,28 +3513,29 @@ body {
   background:
     linear-gradient(105deg,
       transparent 0%,
-      transparent 34%,
-      rgba(255, 255, 255, 0.02) 41%,
-      rgba(255, 255, 255, 0.58) 47%,
-      rgba(223, 248, 255, 0.2) 50%,
-      rgba(255, 255, 255, 0.36) 54%,
-      transparent 64%,
+      transparent 43%,
+      rgba(255, 255, 255, 0.02) 46%,
+      rgba(255, 255, 255, 0.3) 49%,
+      rgba(223, 248, 255, 0.12) 50%,
+      rgba(255, 255, 255, 0.18) 52%,
+      transparent 58%,
       transparent 100%),
     radial-gradient(circle at var(--card-glow-x, 50%) var(--card-glow-y, 50%),
-      rgba(255, 255, 255, 0.86) 0 1px,
-      rgba(223, 248, 255, 0.2) 2px 5px,
-      transparent 14px),
+      rgba(255, 255, 255, 0.78) 0 1px,
+      rgba(223, 248, 255, 0.14) 2px 4px,
+      transparent 10px),
     radial-gradient(circle at var(--card-glow-x, 50%) var(--card-glow-y, 50%),
-      rgba(125, 194, 218, 0.1),
-      transparent 24px);
-  background-position: -170% 0, 0 0, 0 0;
-  background-size: 240% 100%, auto, auto;
+      rgba(125, 194, 218, 0.055),
+      transparent 18px);
+  background-position: -130% 0, 0 0, 0 0;
+  background-size: 190% 100%, auto, auto;
   content: "";
   inset: 0;
+  mix-blend-mode: screen;
   opacity: 0;
   pointer-events: none;
   position: absolute;
-  transition: opacity 0.24s ease;
+  transition: opacity 0.18s ease;
   z-index: 4;
 }
 
@@ -3542,7 +3543,7 @@ body {
 .news-card.is-card-sparkling::after,
 .featured-liver-card:hover::after,
 .featured-liver-card.is-card-sparkling::after {
-  animation: cardGlossSweep 920ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
+  animation: cardGlossSweep 760ms cubic-bezier(0.2, 0.75, 0.2, 1) both;
   opacity: 1;
 }
 
