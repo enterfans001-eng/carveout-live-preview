@@ -4551,7 +4551,7 @@ body::after {
   visibility: visible;
 }
 
-/* Homepage section rhythm: alternate solid light and brand backgrounds. */
+/* Homepage section rhythm: alternate solid tones from the former pale gradient. */
 .about-section,
 .news-section,
 .ranking-section,
@@ -4563,7 +4563,7 @@ body::after {
 .application-section,
 .featured-liver-section,
 .cta-section {
-  background: #25258b !important;
+  background: #e7f3fb !important;
 }
 
 .about-section,
@@ -4585,14 +4585,14 @@ body::after {
 .featured-liver-section .section-heading h2,
 .cta-section .section-heading .eyebrow,
 .cta-section .section-heading h2 {
-  color: #fff !important;
+  color: var(--blue) !important;
 }
 
 .event-section .section-heading h2,
 .application-section .section-heading h2,
 .featured-liver-section .section-heading h2,
 .cta-section .section-heading h2 {
-  text-shadow: 0 18px 42px rgba(0, 0, 0, 0.16);
+  text-shadow: none;
 }
 
 .about-section .about-copy.heading-inverted h2,
@@ -4616,41 +4616,50 @@ body::after {
 
 .about-visual {
   aspect-ratio: 4 / 5;
-  border-radius: 42% 58% 46% 54% / 40% 42% 58% 60%;
-  box-shadow: none;
+  border-radius: 30px;
+  box-shadow:
+    0 22px 58px rgba(37, 37, 139, 0.13),
+    0 0 0 1px rgba(255, 255, 255, 0.76);
   overflow: visible;
-  transform: rotate(1.4deg);
+  transform: none;
 }
 
 .about-visual::before {
   background:
-    radial-gradient(ellipse at 50% 42%, rgba(223, 248, 255, 0.78), transparent 68%),
-    radial-gradient(ellipse at 54% 52%, rgba(255, 255, 255, 0.92), transparent 62%);
+    radial-gradient(ellipse at 50% 50%, rgba(223, 248, 255, 0.82), transparent 68%),
+    radial-gradient(ellipse at 50% 48%, rgba(255, 255, 255, 0.9), transparent 62%);
   border: 0;
-  filter: blur(18px);
-  inset: -8%;
+  filter: blur(20px);
+  inset: -7%;
   z-index: -1;
 }
 
 .about-visual::after {
   background:
-    radial-gradient(ellipse at 50% 48%, transparent 54%, rgba(247, 251, 255, 0.72) 76%, #f7fbff 100%);
-  filter: blur(8px);
-  inset: -10px;
+    linear-gradient(90deg, #f7fbff 0%, rgba(247, 251, 255, 0) 12%, rgba(247, 251, 255, 0) 88%, #f7fbff 100%),
+    linear-gradient(180deg, #f7fbff 0%, rgba(247, 251, 255, 0) 10%, rgba(247, 251, 255, 0) 88%, #f7fbff 100%);
+  filter: blur(7px);
+  inset: -12px;
   z-index: 2;
 }
 
 .about-visual img {
-  border-radius: inherit;
+  border-radius: 30px;
   box-shadow:
-    0 22px 60px rgba(37, 37, 139, 0.12),
-    0 0 0 1px rgba(255, 255, 255, 0.72);
-  -webkit-mask-image: radial-gradient(ellipse at 50% 48%, #000 0 66%, rgba(0, 0, 0, 0.72) 78%, transparent 96%);
-  mask-image: radial-gradient(ellipse at 50% 48%, #000 0 66%, rgba(0, 0, 0, 0.72) 78%, transparent 96%);
+    0 22px 58px rgba(37, 37, 139, 0.11),
+    0 0 0 1px rgba(255, 255, 255, 0.78);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%), linear-gradient(180deg, transparent 0%, #000 7%, #000 92%, transparent 100%);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent 0%, #000 8%, #000 92%, transparent 100%), linear-gradient(180deg, transparent 0%, #000 7%, #000 92%, transparent 100%);
+  mask-composite: intersect;
 }
 
 @media (max-width: 900px) {
   .about-visual {
-    transform: none;
+    border-radius: 24px;
+  }
+
+  .about-visual img {
+    border-radius: 24px;
   }
 }
