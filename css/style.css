@@ -1283,7 +1283,7 @@ textarea {
   position: relative;
 }
 
-.ranking-card span {
+.ranking-card > span:not(.card-sparkle) {
   align-items: center;
   background:
     linear-gradient(125deg, rgba(255, 255, 255, 0.38) 0 18%, transparent 19% 100%),
@@ -1309,15 +1309,15 @@ textarea {
   z-index: 2;
 }
 
-.ranking-card span::before {
+.ranking-card > span:not(.card-sparkle)::before {
   content: none;
 }
 
-.ranking-card span::after {
+.ranking-card > span:not(.card-sparkle)::after {
   content: none;
 }
 
-.ranking-card:nth-child(1) span {
+.ranking-card:nth-child(1) > span:not(.card-sparkle) {
   background:
     linear-gradient(125deg, rgba(255, 255, 255, 0.66) 0 17%, transparent 18% 100%),
     linear-gradient(145deg, #fff0a8 0%, #ffd84f 34%, #e8b100 68%, #b98200 100%);
@@ -1336,7 +1336,7 @@ textarea {
   width: 72px;
 }
 
-.ranking-card:nth-child(2) span {
+.ranking-card:nth-child(2) > span:not(.card-sparkle) {
   background:
     linear-gradient(125deg, rgba(255, 255, 255, 0.72) 0 18%, transparent 19% 100%),
     linear-gradient(145deg, #ffffff 0%, #e2e8f2 38%, #aeb8c7 72%, #7f8999 100%);
@@ -1355,7 +1355,7 @@ textarea {
   width: 68px;
 }
 
-.ranking-card:nth-child(3) span {
+.ranking-card:nth-child(3) > span:not(.card-sparkle) {
   background:
     linear-gradient(125deg, rgba(255, 255, 255, 0.46) 0 18%, transparent 19% 100%),
     linear-gradient(145deg, #ffd0a1 0%, #c7823d 44%, #9a5524 74%, #6e3717 100%);
@@ -4809,7 +4809,7 @@ body::after {
   font-size: clamp(0.94rem, 1.65vw, 1.08rem);
 }
 
-.ranking-card span {
+.ranking-card > span:not(.card-sparkle) {
   align-items: flex-end;
   border-radius: 0;
   box-shadow:
@@ -4830,7 +4830,7 @@ body::after {
   width: 60px;
 }
 
-.ranking-card:nth-child(1) span {
+.ranking-card:nth-child(1) > span:not(.card-sparkle) {
   color: #fff8dc;
   font-size: 1.3rem;
   height: 66px;
@@ -4841,15 +4841,15 @@ body::after {
   width: 78px;
 }
 
-.ranking-card:nth-child(2) span,
-.ranking-card:nth-child(3) span {
+.ranking-card:nth-child(2) > span:not(.card-sparkle),
+.ranking-card:nth-child(3) > span:not(.card-sparkle) {
   font-size: 1.16rem;
   height: 54px;
   width: 64px;
 }
 
-.ranking-card:nth-child(4) span,
-.ranking-card:nth-child(5) span {
+.ranking-card:nth-child(4) > span:not(.card-sparkle),
+.ranking-card:nth-child(5) > span:not(.card-sparkle) {
   background:
     linear-gradient(125deg, rgba(255, 255, 255, 0.42) 0 18%, transparent 19% 100%),
     linear-gradient(145deg, #4b4bb8 0%, #25258b 48%, #17176d 100%);
@@ -4931,7 +4931,7 @@ body::after {
     font-size: 0.84rem;
   }
 
-  .ranking-card span {
+  .ranking-card > span:not(.card-sparkle) {
     font-size: 0.9rem;
     height: 42px;
     left: 8px;
@@ -4940,7 +4940,7 @@ body::after {
     width: 50px;
   }
 
-  .ranking-card:nth-child(1) span {
+  .ranking-card:nth-child(1) > span:not(.card-sparkle) {
     font-size: 1.06rem;
     height: 54px;
     left: 12px;
@@ -5032,5 +5032,55 @@ body::after {
 @media (max-width: 620px) {
   .application-list {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.featured-liver-card:hover::after,
+.featured-liver-card.is-card-sparkling::after {
+  animation-duration: 1250ms;
+}
+
+.ranking-card > span:not(.card-sparkle) {
+  animation: none !important;
+  pointer-events: none;
+  transition: none !important;
+  z-index: 6;
+}
+
+.ranking-card::after {
+  z-index: 3;
+}
+
+@media (min-width: 901px) {
+  .ranking-list,
+  .ranking-list-small {
+    gap: 18px;
+    max-width: 760px;
+  }
+
+  .ranking-card:nth-child(2),
+  .ranking-card:nth-child(3) {
+    grid-template-columns: 112px minmax(0, 1fr);
+    min-height: 164px;
+    padding: 18px;
+  }
+
+  .ranking-card:nth-child(2) p,
+  .ranking-card:nth-child(3) p {
+    font-size: clamp(1rem, 1.75vw, 1.18rem);
+  }
+}
+
+@media (max-width: 900px) {
+  .featured-liver-section .featured-liver-carousel {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: none !important;
+    width: calc(100vw - 44px) !important;
+  }
+
+  .featured-liver-section .featured-liver-track {
+    gap: 12px;
+    width: max-content !important;
   }
 }
