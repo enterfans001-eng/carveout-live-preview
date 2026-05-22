@@ -5084,3 +5084,28 @@ body::after {
     width: max-content !important;
   }
 }
+
+.about-visual,
+.about-visual img {
+  box-shadow: none !important;
+}
+
+.about-visual::before {
+  background: radial-gradient(ellipse at 50% 50%, #f7fbff 0%, rgba(247, 251, 255, 0.76) 58%, rgba(247, 251, 255, 0) 76%) !important;
+}
+
+.about-visual::after {
+  background:
+    linear-gradient(90deg, #f7fbff 0%, rgba(247, 251, 255, 0) 12%, rgba(247, 251, 255, 0) 88%, #f7fbff 100%),
+    linear-gradient(180deg, #f7fbff 0%, rgba(247, 251, 255, 0) 10%, rgba(247, 251, 255, 0) 88%, #f7fbff 100%) !important;
+}
+
+@media (max-width: 900px) {
+  .about-section .about-copy {
+    order: 2;
+  }
+
+  .about-visual {
+    order: 1;
+  }
+}
