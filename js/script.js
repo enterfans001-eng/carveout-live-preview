@@ -694,9 +694,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const body = document.createElement('div');
     body.className = 'featured-liver-body';
-    body.style.height = '100%';
-    body.style.boxSizing = 'border-box';
-    body.style.position = 'relative';
 
     const category = document.createElement('span');
     category.className = 'liver-category';
@@ -704,29 +701,13 @@ document.addEventListener('DOMContentLoaded', () => {
       category.classList.add('is-bigo');
     }
     category.textContent = item.category;
-    category.style.alignSelf = 'start';
-    category.style.justifySelf = 'start';
-    category.style.position = 'static';
-    category.style.width = 'auto';
 
     const name = document.createElement('h3');
     name.className = 'liver-name';
     name.textContent = item.name;
-    name.style.position = 'absolute';
-    name.style.left = '20px';
-    name.style.right = '20px';
-    name.style.top = '88px';
-    name.style.transform = 'none';
-    name.style.margin = '0';
 
     const actions = document.createElement('div');
     actions.className = 'liver-social-links';
-    actions.style.position = 'absolute';
-    actions.style.left = '20px';
-    actions.style.bottom = 'auto';
-    actions.style.top = '166px';
-    actions.style.display = 'flex';
-    actions.style.flexDirection = 'row';
 
     const platformIcon = item.category === 'BIGOLIVE'
       ? 'https://ccarveout.jp/wp-content/themes/carveout_2/images/v2/icon_big_bigo.png'

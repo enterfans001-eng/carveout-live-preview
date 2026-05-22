@@ -4146,3 +4146,130 @@ body::after {
     backdrop-filter: none;
   }
 }
+
+/* Top LIVER cards: match the ranking card image/text balance */
+.featured-liver-carousel .featured-liver-track {
+  align-items: stretch;
+}
+
+.featured-liver-carousel .featured-liver-card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  grid-template-columns: none;
+  height: auto;
+  min-height: 0;
+  overflow: hidden;
+  padding: 12px;
+}
+
+.featured-liver-carousel .featured-liver-card > img {
+  aspect-ratio: 1 / 1;
+  border-radius: 8px;
+  height: auto;
+  min-width: 0;
+  object-fit: cover;
+  object-position: center top;
+  width: 100%;
+}
+
+.featured-liver-carousel .featured-liver-body {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  height: auto;
+  min-width: 0;
+  padding: 0;
+  position: static;
+  text-align: center;
+}
+
+.featured-liver-carousel .liver-category {
+  align-self: center;
+  justify-self: center;
+}
+
+.featured-liver-carousel .liver-name {
+  display: -webkit-box;
+  font-size: 0.88rem;
+  left: auto !important;
+  line-height: 1.45;
+  margin: 0;
+  min-height: 2.9em;
+  position: static !important;
+  right: auto !important;
+  text-align: center;
+  top: auto !important;
+  transform: none !important;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+.featured-liver-carousel .liver-social-links {
+  bottom: auto !important;
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  height: 30px;
+  justify-content: center;
+  left: auto !important;
+  margin: 0;
+  position: static !important;
+  top: auto !important;
+  width: 100%;
+}
+
+.featured-liver-carousel .liver-social-links a {
+  height: 30px;
+  width: 30px;
+}
+
+.featured-liver-carousel .liver-social-links img {
+  height: 18px;
+  width: 18px;
+}
+
+@media (min-width: 901px) {
+  .featured-liver-carousel {
+    overflow: visible;
+    scrollbar-width: none;
+  }
+
+  .featured-liver-carousel::-webkit-scrollbar {
+    display: none;
+    height: 0;
+  }
+
+  .featured-liver-carousel .featured-liver-track {
+    display: grid;
+    gap: 14px;
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+    width: 100%;
+  }
+
+  .featured-liver-carousel .featured-liver-card {
+    flex: none;
+    min-width: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  .featured-liver-carousel .featured-liver-card {
+    flex: 0 0 178px;
+  }
+}
+
+@media (max-width: 620px) {
+  .featured-liver-carousel .featured-liver-card {
+    flex: 0 0 164px;
+  }
+
+  .featured-liver-carousel .liver-category {
+    font-size: 0.66rem;
+  }
+
+  .featured-liver-carousel .liver-name {
+    font-size: 0.82rem;
+  }
+}
