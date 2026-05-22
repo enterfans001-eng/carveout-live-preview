@@ -275,11 +275,6 @@ textarea {
   line-height: 1.35;
 }
 
-.site-menu-cta {
-  color: var(--blue) !important;
-  font-weight: 600;
-}
-
 .social-links {
   align-items: center;
   display: flex;
@@ -438,8 +433,7 @@ textarea {
 
 .btn,
 .entry-button,
-.interview-more-button,
-.site-menu-cta {
+.interview-more-button {
   transition:
     box-shadow 0.22s ease,
     transform 0.22s ease,
@@ -448,8 +442,7 @@ textarea {
 
 .btn:hover,
 .entry-button:hover,
-.interview-more-button:hover,
-.site-menu-cta:hover {
+.interview-more-button:hover {
   filter: brightness(1.03);
   transform: translateY(-2px);
 }
