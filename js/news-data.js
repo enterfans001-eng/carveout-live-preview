@@ -43,6 +43,13 @@ window.carveout17LiveNews = [
     "image": "https://ccarveout.jp/wp-content/uploads/2026/03/IMG_2851-.jpeg"
   },
   {
+    "date": "2026.03.10",
+    "datetime": "2026-03-10",
+    "title": "『ちぴ🧸chipi🩷🪽』『あいぷ½』『みくぽん🐻🍙🎀』が、LDH所属SWAYの最新MVに出演いたしました！",
+    "url": "https://ccarveout.jp/news/3559/",
+    "image": "https://ccarveout.jp/wp-content/uploads/2025/11/20251031-221833-.jpg"
+  },
+  {
     "date": "2026.02.16",
     "datetime": "2026-02-16",
     "title": "17LIVEイベント Your Melody vol.3 予選2/2 にて『さくらviolin』が総合1位入賞🥇🎉",
@@ -71,11 +78,25 @@ window.carveout17LiveNews = [
     "image": "https://ccarveout.jp/wp-content/uploads/2026/02/videoframe_1176-.jpg"
   },
   {
+    "date": "2026.02.09",
+    "datetime": "2026-02-09",
+    "title": "【CARVEOUT晩餐会】が開催されました！",
+    "url": "https://ccarveout.jp/news/3397/",
+    "image": "https://ccarveout.jp/wp-content/uploads/2026/02/S__869998595-.jpg"
+  },
+  {
     "date": "2026.02.03",
     "datetime": "2026-02-03",
     "title": "17LIVEイベント Your Melody vol.3 予選1/2 にて『さくらviolin』が総合1位、楽曲争奪戦で1位入賞🥇🎉",
     "url": "https://ccarveout.jp/news/3334/",
     "image": "https://ccarveout.jp/wp-content/uploads/2026/02/さくらviolin-.jpeg"
+  },
+  {
+    "date": "2026.01.26",
+    "datetime": "2026-01-26",
+    "title": "人気女性ファッション誌『Ray』に掲載されました！",
+    "url": "https://ccarveout.jp/news/3256/",
+    "image": "https://ccarveout.jp/wp-content/uploads/2026/01/20260126-172405.jpeg"
   },
   {
     "date": "2025.12.23",
@@ -321,6 +342,13 @@ window.carveout17LiveNews = [
     "title": "17LIVEイベント らぶぃーずが17LIVEにきたよ〜にて、『せんᒼᑋªⁿ🦤🍺』が総合ランキング2位に入賞🥈",
     "url": "https://ccarveout.jp/news/2589/",
     "image": "https://ccarveout.jp/wp-content/uploads/2025/07/S__111468553-.jpg"
+  },
+  {
+    "date": "2025.07.17",
+    "datetime": "2025-07-17",
+    "title": "「Powered by TV〜元気ジャパン〜」に弊社代表中川と、所属タレント4名が出演いたしました！",
+    "url": "https://ccarveout.jp/news/2585/",
+    "image": "https://ccarveout.jp/wp-content/uploads/2025/07/IMG_0459.jpg"
   },
   {
     "date": "2025.07.16",

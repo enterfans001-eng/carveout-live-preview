@@ -8,6 +8,13 @@ window.carveoutOfficeEventNews = [
     "image": "https://ccarveout.jp/wp-content/uploads/2026/03/20260319-134533-.jpeg"
   },
   {
+    "date": "2026.02.26",
+    "datetime": "2026-02-26",
+    "title": "「和装天下~by NEXTFACE~」開催！",
+    "url": "https://ccarveout.jp/news/3481/",
+    "image": "https://ccarveout.jp/wp-content/uploads/2026/02/20260217-151124-.jpg"
+  },
+  {
     "date": "2026.01.22",
     "datetime": "2026-01-22",
     "title": "カーブアウト2月事務所イベント「人気女性ファッション誌sweet広告掲載権争奪戦」開催！",
