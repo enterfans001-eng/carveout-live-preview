@@ -18,6 +18,77 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   };
 
+  const initSiteLoader = () => {
+    const loader = document.querySelector('.site-loader');
+    const heroVideos = document.querySelectorAll('.hero-video');
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const minDuration = reduceMotion ? 120 : 1650;
+    const maxDuration = reduceMotion ? 220 : 3000;
+    const startedAt = performance.now();
+    let isDone = false;
+
+    heroVideos.forEach((video) => {
+      try {
+        video.pause();
+        video.currentTime = 0;
+      } catch (error) {
+        // Some browsers block currentTime changes until metadata is ready.
+      }
+    });
+
+    const playHeroVideos = () => {
+      heroVideos.forEach((video) => {
+        const startVideo = () => {
+          try {
+            video.currentTime = 0;
+          } catch (error) {
+            // Ignore browsers that do not allow resetting before playback.
+          }
+
+          const playback = video.play();
+
+          if (playback && typeof playback.catch === 'function') {
+            playback.catch(() => {});
+          }
+        };
+
+        if (video.readyState >= 1) {
+          startVideo();
+        } else {
+          video.addEventListener('loadedmetadata', startVideo, { once: true });
+          video.load();
+        }
+      });
+    };
+
+    const finish = () => {
+      if (isDone) {
+        return;
+      }
+
+      isDone = true;
+      document.documentElement.classList.add('is-site-loader-done');
+      playHeroVideos();
+
+      if (loader) {
+        window.setTimeout(() => loader.remove(), 900);
+      }
+    };
+
+    const finishAfterMinimum = () => {
+      const elapsed = performance.now() - startedAt;
+      window.setTimeout(finish, Math.max(0, minDuration - elapsed));
+    };
+
+    if (document.readyState === 'complete') {
+      finishAfterMinimum();
+    } else {
+      window.addEventListener('load', finishAfterMinimum, { once: true });
+    }
+
+    window.setTimeout(finish, maxDuration);
+  };
+
   const initSiteMenu = () => {
     const toggle = document.querySelector('.menu-toggle');
     const menu = document.getElementById('siteMenu');
@@ -395,6 +466,7 @@ document.addEventListener('DOMContentLoaded', () => {
   };
 
   initDeviceClass();
+  initSiteLoader();
   initSiteMenu();
   initIdleCursor();
   initCursorSparkles();
