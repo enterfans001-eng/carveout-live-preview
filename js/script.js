@@ -2,6 +2,22 @@
 // お問い合わせフォーム送信処理
 // ========================================
 document.addEventListener('DOMContentLoaded', () => {
+  const initDeviceClass = () => {
+    const touchQuery = window.matchMedia('(hover: none) and (pointer: coarse)');
+    const setClass = () => {
+      document.documentElement.classList.toggle(
+        'is-touch-device',
+        touchQuery.matches || navigator.maxTouchPoints > 0
+      );
+    };
+
+    setClass();
+
+    if (typeof touchQuery.addEventListener === 'function') {
+      touchQuery.addEventListener('change', setClass);
+    }
+  };
+
   const initSiteMenu = () => {
     const toggle = document.querySelector('.menu-toggle');
     const menu = document.getElementById('siteMenu');
@@ -378,6 +394,7 @@ document.addEventListener('DOMContentLoaded', () => {
     updateVisibility();
   };
 
+  initDeviceClass();
   initSiteMenu();
   initIdleCursor();
   initCursorSparkles();
