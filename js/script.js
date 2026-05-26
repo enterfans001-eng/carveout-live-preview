@@ -912,6 +912,90 @@ document.addEventListener('DOMContentLoaded', () => {
     renderLiverGrid();
   }
 
+  const initMobileScrollbars = () => {
+    const scrollers = [
+      document.querySelector('#event .event-feature-wrap'),
+      document.querySelector('#news .news-carousel'),
+      document.querySelector('#livers .featured-liver-carousel')
+    ].filter(Boolean);
+
+    if (!scrollers.length) {
+      return;
+    }
+
+    const setBar = (scroller) => {
+      let bar = scroller.nextElementSibling;
+
+      if (!bar || !bar.classList.contains('mobile-progressbar')) {
+        bar = document.createElement('div');
+        bar.className = 'mobile-progressbar';
+        bar.setAttribute('aria-hidden', 'true');
+
+        const thumb = document.createElement('span');
+        bar.appendChild(thumb);
+        scroller.insertAdjacentElement('afterend', bar);
+      }
+
+      return bar;
+    };
+
+    const updateScroller = (scroller) => {
+      const bar = setBar(scroller);
+      const thumb = bar.querySelector('span');
+      const maxScroll = Math.max(0, scroller.scrollWidth - scroller.clientWidth);
+
+      if (!thumb || maxScroll <= 1) {
+        bar.classList.add('is-scrollbar-hidden');
+        return;
+      }
+
+      bar.classList.remove('is-scrollbar-hidden');
+
+      const progress = Math.min(1, Math.max(0, scroller.scrollLeft / maxScroll));
+      const visibleRatio = Math.min(1, scroller.clientWidth / scroller.scrollWidth);
+      const thumbWidth = Math.max(36, Math.round(bar.clientWidth * Math.max(0.16, visibleRatio)));
+      const thumbLeft = Math.round((bar.clientWidth - thumbWidth) * progress);
+
+      thumb.style.width = `${thumbWidth}px`;
+      thumb.style.transform = `translate3d(${thumbLeft}px, 0, 0)`;
+    };
+
+    const scheduleUpdate = (scroller) => {
+      if (scroller.dataset.scrollbarTicking === 'true') {
+        return;
+      }
+
+      scroller.dataset.scrollbarTicking = 'true';
+
+      window.requestAnimationFrame(() => {
+        scroller.dataset.scrollbarTicking = 'false';
+        updateScroller(scroller);
+      });
+    };
+
+    scrollers.forEach((scroller) => {
+      setBar(scroller);
+      updateScroller(scroller);
+      scroller.addEventListener('scroll', () => scheduleUpdate(scroller), { passive: true });
+      scroller.addEventListener('touchmove', () => scheduleUpdate(scroller), { passive: true });
+    });
+
+    const updateAll = () => scrollers.forEach(updateScroller);
+    const resizeObserver = 'ResizeObserver' in window ? new ResizeObserver(updateAll) : null;
+
+    if (resizeObserver) {
+      scrollers.forEach((scroller) => resizeObserver.observe(scroller));
+    }
+
+    window.addEventListener('resize', updateAll, { passive: true });
+    window.addEventListener('orientationchange', updateAll, { passive: true });
+    window.addEventListener('load', updateAll, { once: true });
+
+    [120, 420, 900, 1600].forEach((delay) => window.setTimeout(updateAll, delay));
+  };
+
+  initMobileScrollbars();
+
   const contactForm = document.getElementById('contactForm');
 
   if (contactForm) {

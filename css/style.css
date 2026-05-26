@@ -6508,6 +6508,10 @@ html.is-touch-device .partner-merit-section .audition-card p {
   margin: 0;
 }
 
+.mobile-progressbar {
+  display: none;
+}
+
 @media (max-width: 900px) {
   #event .event-feature-wrap,
   #news .news-carousel,
@@ -6521,8 +6525,7 @@ html.is-touch-device .partner-merit-section .audition-card p {
     overscroll-behavior-x: contain;
     scroll-padding-inline: 0;
     scroll-snap-type: x mandatory;
-    scrollbar-color: rgba(37, 37, 139, 0.58) rgba(37, 37, 139, 0.12);
-    scrollbar-width: thin;
+    scrollbar-width: none !important;
     width: 100% !important;
     -webkit-overflow-scrolling: touch;
   }
@@ -6570,21 +6573,46 @@ html.is-touch-device .partner-merit-section .audition-card p {
   #event .event-feature-wrap::-webkit-scrollbar,
   #news .news-carousel::-webkit-scrollbar,
   #livers .featured-liver-carousel::-webkit-scrollbar {
-    display: block !important;
-    height: 8px !important;
+    display: none !important;
+    height: 0 !important;
+    width: 0 !important;
   }
 
   #event .event-feature-wrap::-webkit-scrollbar-track,
   #news .news-carousel::-webkit-scrollbar-track,
   #livers .featured-liver-carousel::-webkit-scrollbar-track {
-    background: rgba(37, 37, 139, 0.12) !important;
-    border-radius: 999px !important;
+    background: transparent !important;
   }
 
   #event .event-feature-wrap::-webkit-scrollbar-thumb,
   #news .news-carousel::-webkit-scrollbar-thumb,
   #livers .featured-liver-carousel::-webkit-scrollbar-thumb {
-    background: rgba(37, 37, 139, 0.66) !important;
-    border-radius: 999px !important;
+    background: transparent !important;
+  }
+
+  .mobile-progressbar {
+    background: rgba(37, 37, 139, 0.12);
+    border-radius: 999px;
+    box-shadow: inset 0 0 0 1px rgba(37, 37, 139, 0.08);
+    display: block;
+    height: 8px;
+    margin: 8px 0 0;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .mobile-progressbar span {
+    background:
+      linear-gradient(90deg, rgba(37, 37, 139, 0.58), rgba(37, 37, 139, 0.88));
+    border-radius: inherit;
+    display: block;
+    height: 100%;
+    transform: translate3d(0, 0, 0);
+    transition: transform 0.06s linear, width 0.12s ease;
+    width: 36px;
+  }
+
+  .mobile-progressbar.is-scrollbar-hidden {
+    display: none;
   }
 }
