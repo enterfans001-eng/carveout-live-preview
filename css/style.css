@@ -5781,6 +5781,7 @@ body::after {
   min-height: 0;
   overflow: hidden;
   padding: 0;
+  position: relative;
 }
 
 .audition-header::before {
@@ -6297,7 +6298,8 @@ body::after {
 
 @media (max-width: 900px) {
   .audition-header {
-    min-height: 0;
+    min-height: clamp(430px, 118vw, 560px);
+    overflow: hidden;
     padding: 0;
   }
 
@@ -6307,10 +6309,11 @@ body::after {
 
   .audition-entry-image-mobile {
     display: block;
-    height: auto;
-    object-fit: contain;
+    height: 100%;
+    inset: 0;
+    object-fit: cover;
     object-position: center top;
-    position: relative !important;
+    position: absolute !important;
     transform: none;
     width: 100%;
   }
@@ -6319,32 +6322,41 @@ body::after {
   .audition-header > h1,
   .audition-header > p,
   .audition-header > .audition-main-button {
-    left: 24px;
+    left: clamp(22px, 6vw, 34px);
     margin-left: 0;
     margin-right: 0;
-    max-width: calc(100% - 48px);
+    max-width: min(76vw, 340px);
     position: absolute;
     z-index: 2;
   }
 
   .audition-header > .eyebrow {
-    top: 13vw;
+    top: clamp(132px, 34vw, 178px);
   }
 
   .audition-header > h1 {
     color: var(--blue);
-    top: 25vw;
+    font-size: clamp(1.02rem, 4.15vw, 1.18rem);
+    max-width: calc(100% - 48px);
+    text-wrap: nowrap;
+    white-space: nowrap;
+    top: clamp(198px, 50vw, 258px);
   }
 
   .audition-header > p {
     color: rgba(20, 22, 42, 0.74);
-    top: 32vw;
+    font-size: clamp(0.92rem, 3.55vw, 1.02rem);
+    line-height: 1.7;
+    max-width: min(70vw, 310px);
+    top: clamp(244px, 61vw, 318px);
   }
 
   .audition-header > .audition-main-button {
     bottom: auto;
-    top: 47vw;
-    width: auto;
+    min-height: 56px;
+    padding-inline: 26px;
+    top: clamp(346px, 90vw, 430px);
+    width: fit-content;
   }
 
   .audition-proof-card strong {
