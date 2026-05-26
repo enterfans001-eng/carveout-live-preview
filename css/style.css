@@ -6445,6 +6445,8 @@ html.is-touch-device .partner-merit-section .audition-card p {
     overflow-x: auto !important;
     overflow-y: hidden !important;
     padding: 4px 0 14px !important;
+    overscroll-behavior-x: contain;
+    scroll-padding-inline: 0;
     scroll-snap-type: x mandatory;
     scrollbar-color: rgba(37, 37, 139, 0.58) rgba(37, 37, 139, 0.12);
     scrollbar-width: thin;
@@ -6470,17 +6472,25 @@ html.is-touch-device .partner-merit-section .audition-card p {
     flex: 0 0 clamp(206px, 62vw, 240px) !important;
     min-width: 0 !important;
     scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   #livers .featured-liver-carousel .featured-liver-card {
     flex: 0 0 clamp(156px, 46vw, 178px) !important;
     min-width: 0 !important;
     scroll-snap-align: start;
+    scroll-snap-stop: always;
   }
 
   #officeEventGrid > .news-card:nth-child(n+6),
   #latestNewsTrack > .news-card:nth-child(n+6),
   #featuredLiverTrack > .featured-liver-card:nth-child(n+7) {
     display: none !important;
+  }
+
+  #officeEventGrid > .news-card:nth-child(5),
+  #latestNewsTrack > .news-card:nth-child(5),
+  #featuredLiverTrack > .featured-liver-card:nth-child(6) {
+    scroll-snap-align: end;
   }
 }

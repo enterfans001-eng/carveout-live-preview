@@ -443,6 +443,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const newsItems = window.carveout17LiveNews || [];
   const eventItems = window.carveoutOfficeEventNews || [];
   const interviewItems = window.carveoutInterviews || [];
+  const byNewest = (a, b) => new Date(b.datetime || 0) - new Date(a.datetime || 0);
+  const sortByNewest = (items) => [...items].sort(byNewest);
 
   const getContentId = (url) => {
     const match = String(url || '').match(/\/(\d+)\/?$/);
@@ -646,7 +648,9 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (officeEventGrid) {
-    const topEventItems = eventItems.length ? eventItems : newsItems.filter((item) => /事務所(?:内)?イベント/.test(item.title));
+    const topEventItems = eventItems.length
+      ? sortByNewest(eventItems)
+      : sortByNewest(newsItems.filter((item) => /事務所(?:内)?イベント/.test(item.title)));
     const fragment = document.createDocumentFragment();
 
     topEventItems.slice(0, 5).forEach((item) => {
@@ -702,7 +706,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const latestNewsTrack = document.getElementById('latestNewsTrack');
 
   if (latestNewsTrack && Array.isArray(newsItems)) {
-    const latestItems = newsItems.slice(0, 5);
+    const latestItems = sortByNewest(newsItems).slice(0, 5);
     const fragment = document.createDocumentFragment();
 
     latestItems.forEach((item) => {
