@@ -317,8 +317,8 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.unobserve(entry.target);
       });
     }, {
-      rootMargin: '0px 0px -18% 0px',
-      threshold: 0.24
+      rootMargin: '0px 0px -8% 0px',
+      threshold: 0.08
     });
 
     headings.forEach((heading) => observer.observe(heading));
