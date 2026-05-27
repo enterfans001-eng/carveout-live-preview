@@ -6434,42 +6434,46 @@ body::after {
   .audition-header > h1,
   .audition-header > p,
   .audition-header > .audition-main-button {
-    left: clamp(22px, 6vw, 34px);
+    left: clamp(24px, 7vw, 40px);
     margin-left: 0;
     margin-right: 0;
-    max-width: min(76vw, 340px);
+    max-width: min(86vw, 360px);
     position: absolute;
     z-index: 2;
   }
 
   .audition-header > .eyebrow {
-    top: clamp(148px, 38vw, 188px);
+    font-size: clamp(4.2rem, 21vw, 7.2rem);
+    line-height: 0.86;
+    top: clamp(168px, 43vw, 212px);
   }
 
   .audition-header > h1 {
     color: var(--blue);
-    font-size: clamp(1.02rem, 4.15vw, 1.18rem);
+    font-size: clamp(1.28rem, 5.4vw, 1.65rem);
+    line-height: 1.4;
     max-width: calc(100% - 48px);
     text-wrap: nowrap;
     white-space: nowrap;
-    top: clamp(210px, 53vw, 264px);
+    top: clamp(254px, 65vw, 322px);
   }
 
   .audition-header > p {
     color: rgba(20, 22, 42, 0.74);
-    font-size: clamp(0.74rem, 3.05vw, 0.88rem);
-    line-height: 1.65;
+    font-size: clamp(0.82rem, 3.4vw, 0.96rem);
+    line-height: 1.72;
     max-width: none;
     white-space: nowrap;
-    top: clamp(282px, 72vw, 360px);
+    top: clamp(328px, 84vw, 416px);
   }
 
   .audition-header > .audition-main-button {
     bottom: auto;
-    min-height: 56px;
-    padding-inline: 26px;
-    top: clamp(380px, 98vw, 490px);
-    width: fit-content;
+    justify-content: center;
+    min-height: 58px;
+    padding-inline: 24px;
+    top: clamp(450px, 115vw, 560px);
+    width: min(82vw, 320px);
   }
 
   .mobile-br {
