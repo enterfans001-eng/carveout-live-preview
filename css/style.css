@@ -5204,7 +5204,8 @@ body::after {
 .about-section,
 .news-section,
 .ranking-section,
-.interview-section {
+.interview-section,
+.related-office-section {
   background: #f7fbff !important;
 }
 
@@ -5222,7 +5223,8 @@ body::after {
 .ranking-section,
 .featured-liver-section,
 .interview-section,
-.cta-section {
+.cta-section,
+.related-office-section {
   backdrop-filter: none !important;
 }
 
