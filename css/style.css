@@ -2660,6 +2660,10 @@ textarea {
   display: none;
 }
 
+.mobile-br {
+  display: none;
+}
+
 .audition-card-grid {
   display: grid;
   gap: 18px;
@@ -6439,7 +6443,7 @@ body::after {
   }
 
   .audition-header > .eyebrow {
-    top: clamp(116px, 29vw, 158px);
+    top: clamp(148px, 38vw, 188px);
   }
 
   .audition-header > h1 {
@@ -6448,23 +6452,27 @@ body::after {
     max-width: calc(100% - 48px);
     text-wrap: nowrap;
     white-space: nowrap;
-    top: clamp(178px, 44vw, 234px);
+    top: clamp(210px, 53vw, 264px);
   }
 
   .audition-header > p {
     color: rgba(20, 22, 42, 0.74);
-    font-size: clamp(0.92rem, 3.55vw, 1.02rem);
-    line-height: 1.7;
-    max-width: min(66vw, 300px);
-    top: clamp(220px, 55vw, 292px);
+    font-size: clamp(0.86rem, 3.25vw, 0.96rem);
+    line-height: 1.52;
+    max-width: min(76vw, 330px);
+    top: clamp(282px, 72vw, 360px);
   }
 
   .audition-header > .audition-main-button {
     bottom: auto;
     min-height: 56px;
     padding-inline: 26px;
-    top: clamp(362px, 94vw, 474px);
+    top: clamp(380px, 98vw, 490px);
     width: fit-content;
+  }
+
+  .mobile-br {
+    display: block;
   }
 
   .audition-proof-card strong {
