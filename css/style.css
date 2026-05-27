@@ -6169,9 +6169,9 @@ body::after {
 .partner-cashflow-diagram {
   align-items: center;
   display: grid;
-  gap: 14px;
-  grid-template-columns: 1fr 0.72fr 1fr 0.72fr 1fr;
-  margin-top: 22px;
+  gap: 10px;
+  grid-template-columns: minmax(100px, 1fr) minmax(86px, 0.62fr) minmax(100px, 1fr) minmax(86px, 0.62fr) minmax(100px, 1fr);
+  margin-top: 18px;
 }
 
 .flow-node {
@@ -6182,8 +6182,8 @@ body::after {
   font-weight: 900;
   justify-content: center;
   line-height: 1.35;
-  min-height: 116px;
-  padding: 18px;
+  min-height: 92px;
+  padding: 14px;
   text-align: center;
 }
 
@@ -6201,31 +6201,62 @@ body::after {
 
 .flow-arrow {
   color: var(--ink);
+  display: grid;
+  font-size: clamp(0.9rem, 1.5vw, 1.06rem);
   font-weight: 900;
-  line-height: 1.45;
-  position: relative;
+  gap: 6px;
+  line-height: 1.1;
   text-align: center;
 }
 
-.flow-arrow::before,
-.flow-arrow::after {
+.flow-arrow-row {
+  --arrow-color: #999;
+  align-items: center;
+  display: grid;
+  gap: 6px;
+  grid-template-columns: minmax(18px, 1fr) auto minmax(18px, 1fr);
+}
+
+.flow-arrow-row em {
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.flow-arrow-row i {
+  background: var(--arrow-color);
+  border-radius: 999px;
+  display: block;
+  height: 3px;
+  min-width: 18px;
+  position: relative;
+}
+
+.flow-arrow-row i:first-child::before,
+.flow-arrow-row i:last-child::after {
+  border-bottom: 5px solid transparent;
+  border-top: 5px solid transparent;
   content: "";
-  display: block;
-  height: 4px;
-  margin: 6px auto;
-  width: 68px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
-.flow-arrow::before {
-  background: linear-gradient(90deg, #9b9b9b, transparent);
+.flow-arrow-row i:first-child::before {
+  border-right: 7px solid var(--arrow-color);
+  left: -1px;
 }
 
-.flow-arrow::after {
-  background: linear-gradient(90deg, #ff7458, #f65c73);
+.flow-arrow-row i:last-child::after {
+  border-left: 7px solid var(--arrow-color);
+  right: -1px;
 }
 
-.flow-arrow b {
-  display: block;
+.flow-contract {
+  --arrow-color: #9a9a9a;
+}
+
+.flow-reward {
+  --arrow-color: #ff6f5c;
 }
 
 .partner-income-grid {
@@ -6557,28 +6588,49 @@ body::after {
     padding: 24px 18px;
   }
 
+  .partner-cashflow-card {
+    padding: 20px 14px;
+  }
+
   .partner-cashflow-diagram {
-    gap: 10px;
-    grid-template-columns: 1fr;
+    gap: 5px;
+    grid-template-columns: minmax(58px, 1fr) minmax(44px, 0.62fr) minmax(58px, 1fr) minmax(44px, 0.62fr) minmax(58px, 1fr);
+    margin-top: 16px;
   }
 
   .flow-node {
-    min-height: 76px;
+    font-size: 0.8rem;
+    min-height: 68px;
+    padding: 9px 6px;
   }
 
-  .flow-arrow::before,
-  .flow-arrow::after {
-    height: 34px;
-    margin: 4px auto;
-    width: 4px;
+  .flow-arrow {
+    font-size: 0.72rem;
+    gap: 5px;
   }
 
-  .flow-arrow::before {
-    background: linear-gradient(180deg, #9b9b9b, transparent);
+  .flow-arrow-row {
+    gap: 4px;
+    grid-template-columns: minmax(12px, 1fr) auto minmax(12px, 1fr);
   }
 
-  .flow-arrow::after {
-    background: linear-gradient(180deg, #ff7458, #f65c73);
+  .flow-arrow-row i {
+    height: 2px;
+    min-width: 12px;
+  }
+
+  .flow-arrow-row i:first-child::before,
+  .flow-arrow-row i:last-child::after {
+    border-bottom-width: 4px;
+    border-top-width: 4px;
+  }
+
+  .flow-arrow-row i:first-child::before {
+    border-right-width: 6px;
+  }
+
+  .flow-arrow-row i:last-child::after {
+    border-left-width: 6px;
   }
 
   .partner-compare-table {
