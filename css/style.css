@@ -6460,13 +6460,14 @@ body::after {
 
   .audition-header > p {
     color: rgba(20, 22, 42, 0.74);
-    font-size: clamp(0.9rem, 3.8vw, 0.98rem);
+    font-size: clamp(0.86rem, 3.55vw, 0.98rem);
     line-height: 1.85;
     left: 50%;
-    max-width: min(86vw, 360px);
-    text-align: center;
+    max-width: calc(100vw - 48px);
+    text-align: left;
     transform: translateX(-50%) !important;
     white-space: nowrap;
+    width: max-content;
     top: clamp(340px, 86vw, 430px);
   }
 
