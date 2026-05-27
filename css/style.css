@@ -6445,7 +6445,7 @@ body::after {
   .audition-header > .eyebrow {
     font-size: clamp(4.2rem, 21vw, 7.2rem);
     line-height: 0.86;
-    top: clamp(168px, 43vw, 212px);
+    top: clamp(180px, 46vw, 226px);
   }
 
   .audition-header > h1 {
@@ -6455,16 +6455,16 @@ body::after {
     max-width: calc(100% - 48px);
     text-wrap: nowrap;
     white-space: nowrap;
-    top: clamp(254px, 65vw, 322px);
+    top: clamp(268px, 68vw, 338px);
   }
 
   .audition-header > p {
     color: rgba(20, 22, 42, 0.74);
-    font-size: clamp(0.82rem, 3.4vw, 0.96rem);
-    line-height: 1.72;
+    font-size: clamp(0.9rem, 3.8vw, 0.98rem);
+    line-height: 1.85;
     max-width: none;
     white-space: nowrap;
-    top: clamp(328px, 84vw, 416px);
+    top: clamp(340px, 86vw, 430px);
   }
 
   .audition-header > .audition-main-button {
@@ -6472,7 +6472,7 @@ body::after {
     justify-content: center;
     min-height: 58px;
     padding-inline: 24px;
-    top: clamp(450px, 115vw, 560px);
+    top: clamp(420px, 107vw, 520px);
     width: min(82vw, 320px);
   }
 
