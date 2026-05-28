@@ -359,3 +359,296 @@ function carveout_theme_print_cms_data(): void
     <?php
 }
 add_action('wp_head', 'carveout_theme_print_cms_data', 20);
+
+function carveout_theme_source_imports(): array
+{
+    return [
+        'news' => [
+            'label' => 'ニュース',
+            'endpoint' => 'news',
+            'post_type' => 'carveout_news',
+        ],
+        'events' => [
+            'label' => '事務所イベント',
+            'endpoint' => 'news',
+            'post_type' => 'carveout_event',
+            'filter' => 'office_event_news',
+        ],
+        'interviews' => [
+            'label' => 'インタビュー',
+            'endpoint' => 'liver-interview',
+            'post_type' => 'carveout_interview',
+        ],
+        'livers' => [
+            'label' => '所属ライバー',
+            'endpoint' => 'liver-list',
+            'post_type' => 'carveout_liver',
+        ],
+    ];
+}
+
+function carveout_theme_source_item_image(array $item): string
+{
+    $media = $item['_embedded']['wp:featuredmedia'][0]['source_url'] ?? '';
+
+    return is_string($media) ? esc_url_raw($media) : '';
+}
+
+function carveout_theme_source_item_terms(array $item): array
+{
+    $term_groups = $item['_embedded']['wp:term'] ?? [];
+    $names = [];
+
+    if (!is_array($term_groups)) {
+        return $names;
+    }
+
+    foreach ($term_groups as $terms) {
+        if (!is_array($terms)) {
+            continue;
+        }
+
+        foreach ($terms as $term) {
+            $name = $term['name'] ?? '';
+            if (is_string($name) && $name !== '未分類') {
+                $names[] = wp_strip_all_tags($name);
+            }
+        }
+    }
+
+    return array_values(array_unique(array_filter($names)));
+}
+
+function carveout_theme_fetch_source_items(string $endpoint): array
+{
+    $items = [];
+    $page = 1;
+    $total_pages = 1;
+
+    do {
+        $url = add_query_arg([
+            'per_page' => 100,
+            'page' => $page,
+            '_embed' => 1,
+        ], 'https://ccarveout.jp/wp-json/wp/v2/' . rawurlencode($endpoint));
+
+        $response = wp_remote_get($url, [
+            'timeout' => 20,
+            'redirection' => 3,
+        ]);
+
+        if (is_wp_error($response)) {
+            return $items;
+        }
+
+        $body = json_decode(wp_remote_retrieve_body($response), true);
+        if (!is_array($body)) {
+            return $items;
+        }
+
+        $items = array_merge($items, $body);
+        $total_pages = max(1, (int) wp_remote_retrieve_header($response, 'x-wp-totalpages'));
+        $page++;
+    } while ($page <= $total_pages);
+
+    return $items;
+}
+
+function carveout_theme_find_imported_post(string $source_type, int $source_id, string $post_type): int
+{
+    $query = new WP_Query([
+        'post_type' => $post_type,
+        'post_status' => 'any',
+        'posts_per_page' => 1,
+        'fields' => 'ids',
+        'no_found_rows' => true,
+        'meta_query' => [
+            [
+                'key' => '_carveout_source_type',
+                'value' => $source_type,
+            ],
+            [
+                'key' => '_carveout_source_id',
+                'value' => (string) $source_id,
+            ],
+        ],
+    ]);
+
+    return !empty($query->posts) ? (int) $query->posts[0] : 0;
+}
+
+function carveout_theme_import_source_item(string $source_type, array $config, array $item): bool
+{
+    $source_id = (int) ($item['id'] ?? 0);
+    if (!$source_id) {
+        return false;
+    }
+
+    $post_type = $config['post_type'];
+    $existing_id = carveout_theme_find_imported_post($source_type, $source_id, $post_type);
+    $title = wp_strip_all_tags((string) ($item['title']['rendered'] ?? ''));
+    $content = (string) ($item['content']['rendered'] ?? '');
+    $excerpt = wp_strip_all_tags((string) ($item['excerpt']['rendered'] ?? ''));
+    $date = (string) ($item['date'] ?? current_time('mysql'));
+
+    $post_data = [
+        'post_type' => $post_type,
+        'post_status' => 'publish',
+        'post_title' => $title ?: '無題',
+        'post_content' => $content,
+        'post_excerpt' => $excerpt,
+        'post_date' => str_replace('T', ' ', $date),
+    ];
+
+    if ($existing_id) {
+        $post_data['ID'] = $existing_id;
+        $post_id = wp_update_post($post_data, true);
+    } else {
+        $post_id = wp_insert_post($post_data, true);
+    }
+
+    if (is_wp_error($post_id) || !$post_id) {
+        return false;
+    }
+
+    update_post_meta($post_id, '_carveout_source_type', $source_type);
+    update_post_meta($post_id, '_carveout_source_id', (string) $source_id);
+
+    $source_url = esc_url_raw((string) ($item['link'] ?? ''));
+    $image_url = carveout_theme_source_item_image($item);
+
+    if (in_array($post_type, ['carveout_news', 'carveout_event'], true)) {
+        update_post_meta($post_id, 'carveout_source_url', $source_url);
+    }
+
+    if ($image_url) {
+        update_post_meta($post_id, 'carveout_image_url', $image_url);
+    }
+
+    if ($post_type === 'carveout_liver') {
+        $terms = carveout_theme_source_item_terms($item);
+        $app = $terms[0] ?? '17LIVE';
+        update_post_meta($post_id, 'carveout_liver_app_text', $app);
+        wp_set_object_terms($post_id, $app, 'carveout_liver_app', false);
+    }
+
+    return true;
+}
+
+function carveout_theme_should_import_source_item(array $config, array $item): bool
+{
+    if (($config['filter'] ?? '') !== 'office_event_news') {
+        return true;
+    }
+
+    $title = wp_strip_all_tags((string) ($item['title']['rendered'] ?? ''));
+    $content = wp_strip_all_tags((string) ($item['content']['rendered'] ?? ''));
+    $haystack = $title . "\n" . $content;
+
+    return strpos($haystack, '事務所イベント') !== false
+        || (
+            strpos($haystack, '17LIVEにて配信している') !== false
+            && strpos($haystack, 'イベント') !== false
+        );
+}
+
+function carveout_theme_run_source_import(string $source_type): array
+{
+    if (function_exists('set_time_limit')) {
+        @set_time_limit(180);
+    }
+
+    $imports = carveout_theme_source_imports();
+    $selected = $source_type === 'all' ? $imports : array_intersect_key($imports, [$source_type => true]);
+    $result = [];
+
+    foreach ($selected as $key => $config) {
+        $items = carveout_theme_fetch_source_items($config['endpoint']);
+        $count = 0;
+
+        foreach ($items as $item) {
+            if (
+                is_array($item)
+                && carveout_theme_should_import_source_item($config, $item)
+                && carveout_theme_import_source_item($key, $config, $item)
+            ) {
+                $count++;
+            }
+        }
+
+        $result[] = $config['label'] . '：' . $count . '件';
+    }
+
+    return $result;
+}
+
+function carveout_theme_add_import_admin_page(): void
+{
+    add_management_page(
+        'CARVEOUT旧サイト取り込み',
+        'CARVEOUT旧サイト取り込み',
+        'manage_options',
+        'carveout-source-import',
+        'carveout_theme_render_import_admin_page'
+    );
+}
+add_action('admin_menu', 'carveout_theme_add_import_admin_page');
+
+function carveout_theme_render_import_admin_page(): void
+{
+    if (!current_user_can('manage_options')) {
+        return;
+    }
+
+    $imports = carveout_theme_source_imports();
+    $messages = [];
+
+    if (
+        isset($_POST['carveout_import_source'], $_POST['carveout_import_nonce'])
+        && wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['carveout_import_nonce'])), 'carveout_import_source')
+    ) {
+        $source = sanitize_key(wp_unslash($_POST['carveout_import_source']));
+        if ($source === 'all' || isset($imports[$source])) {
+            $messages = carveout_theme_run_source_import($source);
+        }
+    }
+    ?>
+    <div class="wrap">
+      <h1>CARVEOUT旧サイト取り込み</h1>
+      <p>現在のCARVEOUT公式サイトから記事をコピーし、この新サイト側の投稿として保存します。取り込み後は新サイト側で編集できます。</p>
+      <p>同じ元記事IDのデータは重複作成せず、既存投稿を更新します。</p>
+
+      <?php foreach ($messages as $message): ?>
+        <div class="notice notice-success is-dismissible"><p><?php echo esc_html($message); ?> を取り込みました。</p></div>
+      <?php endforeach; ?>
+
+      <table class="widefat striped" style="max-width: 760px;">
+        <thead><tr><th>取り込み内容</th><th>操作</th></tr></thead>
+        <tbody>
+          <?php foreach ($imports as $key => $config): ?>
+            <tr>
+              <td><?php echo esc_html($config['label']); ?></td>
+              <td>
+                <form method="post">
+                  <?php wp_nonce_field('carveout_import_source', 'carveout_import_nonce'); ?>
+                  <input type="hidden" name="carveout_import_source" value="<?php echo esc_attr($key); ?>">
+                  <button class="button button-primary" type="submit"><?php echo esc_html($config['label']); ?>を取り込む</button>
+                </form>
+              </td>
+            </tr>
+          <?php endforeach; ?>
+          <tr>
+            <td>すべて</td>
+            <td>
+              <form method="post">
+                <?php wp_nonce_field('carveout_import_source', 'carveout_import_nonce'); ?>
+                <input type="hidden" name="carveout_import_source" value="all">
+                <button class="button" type="submit">すべて取り込む</button>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <?php
+}

@@ -83,7 +83,7 @@
 
   <script src="<?php echo carveout_theme_asset('js/news-data.js?v=20260520-navy3'); ?>"></script>
   <script src="<?php echo carveout_theme_asset('js/event-data.js?v=20260520-navy3'); ?>"></script>
-  <script src="<?php echo carveout_theme_asset('js/script.js?v=20260527-related3'); ?>"></script>
+  <script src="<?php echo carveout_theme_asset('js/script.js?v=20260528-import1'); ?>"></script>
   <?php wp_footer(); ?>
 </body>
 </html>
