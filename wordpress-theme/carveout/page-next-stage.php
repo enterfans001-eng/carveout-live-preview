@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CARVEOUT所属ライバーの夢へのステップ実績ラフページです。">
+  <title>NEXT STAGE | CARVEOUT</title>
+  <link rel="stylesheet" href="<?php echo carveout_theme_asset('css/style.css?v=20260527-related3'); ?>">
+  <style>
+    .dream-rough-page {
+      background:
+        radial-gradient(circle at 18% 8%, rgba(223, 248, 255, 0.68), transparent 26%),
+        radial-gradient(circle at 84% 22%, rgba(255, 255, 255, 0.78), transparent 24%),
+        linear-gradient(180deg, #eefaff 0%, #ffffff 42%, #eef6ff 100%);
+      color: var(--blue);
+      overflow: hidden;
+    }
+
+    .dream-rough-page main {
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .dream-rough-hero {
+      display: grid;
+      gap: clamp(30px, 5vw, 72px);
+      grid-template-columns: minmax(0, 1fr) minmax(360px, 520px);
+      min-height: 82vh;
+      padding: clamp(128px, 13vw, 190px) clamp(24px, 7vw, 112px) clamp(64px, 8vw, 120px);
+      position: relative;
+      width: 100%;
+    }
+
+    .dream-rough-hero::before {
+      background: linear-gradient(90deg, #25258b, #fff 48%, #25258b);
+      content: "";
+      height: 1px;
+      left: clamp(24px, 7vw, 112px);
+      opacity: 0.42;
+      position: absolute;
+      right: clamp(24px, 7vw, 112px);
+      top: clamp(96px, 9vw, 126px);
+    }
+
+    .dream-rough-copy {
+      align-self: center;
+      min-width: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dream-rough-copy p {
+      color: rgba(37, 37, 139, 0.72);
+      font-size: clamp(1rem, 1.8vw, 1.22rem);
+      font-weight: 700;
+      line-height: 2.1;
+      max-width: 780px;
+      overflow-wrap: normal;
+    }
+
+    .dream-rough-copy p span,
+    .dream-rough-main-card strong span,
+    .dream-rough-main-card p span {
+      display: block;
+    }
+
+    .dream-rough-visual {
+      align-self: center;
+      display: grid;
+      gap: 16px;
+      min-width: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .dream-rough-main-card,
+    .dream-rough-mini-card {
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(37, 37, 139, 0.13);
+      border-radius: 8px;
+      box-shadow: 0 22px 70px rgba(37, 37, 139, 0.13);
+      overflow: hidden;
+      min-width: 0;
+    }
+
+    .dream-rough-main-card {
+      padding: clamp(26px, 4vw, 42px);
+    }
+
+    .dream-rough-label {
+      color: rgba(37, 37, 139, 0.48);
+      display: block;
+      font-family: var(--font-heading-en);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      margin-bottom: 18px;
+      overflow-wrap: anywhere;
+    }
+
+    .dream-rough-main-card strong {
+      display: block;
+      font-family: var(--font-heading-ja);
+      font-size: clamp(1.55rem, 2.45vw, 2.25rem);
+      line-height: 1.45;
+      margin-bottom: 20px;
+    }
+
+    .dream-rough-main-card p,
+    .dream-rough-mini-card p {
+      color: rgba(37, 37, 139, 0.62);
+      font-weight: 700;
+      line-height: 1.9;
+    }
+
+    .dream-rough-mini-grid {
+      display: grid;
+      gap: 16px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .dream-rough-mini-card {
+      min-height: 146px;
+      padding: 22px;
+    }
+
+    .dream-rough-section {
+      padding: clamp(54px, 8vw, 110px) clamp(24px, 7vw, 112px);
+      position: relative;
+      width: 100%;
+    }
+
+    .dream-rough-heading {
+      margin-bottom: clamp(26px, 4vw, 46px);
+    }
+
+    .dream-rough-heading .eyebrow,
+    .dream-rough-copy-heading .eyebrow {
+      color: var(--blue);
+      font-family: var(--font-heading-en);
+      font-size: clamp(3.4rem, 9vw, 8rem);
+      font-weight: 300;
+      line-height: 0.9;
+      margin-bottom: 14px;
+    }
+
+    .dream-rough-heading h2,
+    .dream-rough-copy-heading h1 {
+      color: var(--blue);
+      font-family: var(--font-heading-ja);
+      font-size: clamp(1.35rem, 2.4vw, 2.4rem);
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      line-height: 1.35;
+    }
+
+    .dream-rough-copy-heading {
+      margin-bottom: 26px;
+    }
+
+    .dream-rough-grid {
+      display: grid;
+      gap: 18px;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      max-width: 1220px;
+      width: 100%;
+    }
+
+    .dream-rough-card {
+      background: rgba(255, 255, 255, 0.86);
+      border: 1px solid rgba(37, 37, 139, 0.13);
+      border-radius: 8px;
+      box-shadow: 0 18px 54px rgba(37, 37, 139, 0.11);
+      display: grid;
+      grid-column: span 3;
+      min-height: 310px;
+      min-width: 0;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .dream-rough-card.is-wide {
+      grid-column: span 6;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+    }
+
+    .dream-rough-photo {
+      background:
+        linear-gradient(135deg, rgba(37, 37, 139, 0.12), rgba(223, 248, 255, 0.72)),
+        radial-gradient(circle at 30% 28%, rgba(255, 255, 255, 0.95), transparent 30%);
+      background-position: center;
+      background-size: cover;
+      min-height: 190px;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .dream-rough-photo::before {
+      background:
+        linear-gradient(90deg, rgba(37, 37, 139, 0.26), transparent 48%),
+        linear-gradient(135deg, rgba(37, 37, 139, 0.04), rgba(255, 255, 255, 0.08) 48%, rgba(223, 248, 255, 0.12)),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.18));
+      content: "";
+      inset: 0;
+      pointer-events: none;
+      position: absolute;
+      z-index: 1;
+    }
+
+    .dream-rough-photo::after {
+      color: #fff;
+      content: attr(data-label);
+      font-family: var(--font-heading-en);
+      font-size: clamp(2rem, 5vw, 4.2rem);
+      font-weight: 300;
+      left: 22px;
+      line-height: 1;
+      position: absolute;
+      text-shadow:
+        0 2px 8px rgba(37, 37, 139, 0.34),
+        0 18px 42px rgba(37, 37, 139, 0.36);
+      top: 22px;
+      z-index: 2;
+    }
+
+    .dream-rough-photo.is-magazine {
+      background-image: url("<?php echo carveout_theme_asset('assets/next-stage-magazine.jpg'); ?>");
+      background-position: center;
+    }
+
+    .dream-rough-photo.is-mv {
+      background-image: url("<?php echo carveout_theme_asset('assets/next-stage-mv.jpg'); ?>");
+    }
+
+    .dream-rough-photo.is-music {
+      background-image: url("<?php echo carveout_theme_asset('assets/next-stage-music.jpg'); ?>");
+    }
+
+    .dream-rough-photo.is-tv {
+      background-image: url("<?php echo carveout_theme_asset('assets/next-stage-tv.jpg'); ?>");
+    }
+
+    .dream-rough-card-body {
+      min-width: 0;
+      padding: clamp(24px, 4vw, 38px);
+    }
+
+    .dream-rough-card-body h3 {
+      font-family: var(--font-heading-ja);
+      font-size: clamp(1.3rem, 2.4vw, 2rem);
+      line-height: 1.45;
+      margin-bottom: 16px;
+    }
+
+    .dream-rough-card-body p {
+      color: rgba(37, 37, 139, 0.66);
+      font-weight: 700;
+      line-height: 1.9;
+      overflow-wrap: anywhere;
+    }
+
+    .dream-rough-card-body a {
+      align-items: center;
+      background: var(--blue);
+      border-radius: 999px;
+      color: #fff;
+      display: inline-flex;
+      font-weight: 900;
+      justify-content: center;
+      margin-top: 22px;
+      min-height: 44px;
+      padding: 0 24px;
+    }
+
+    .dream-rough-timeline {
+      display: grid;
+      gap: 18px;
+      margin-top: 44px;
+      padding-left: 0;
+    }
+
+    .dream-rough-timeline li {
+      color: rgba(37, 37, 139, 0.72);
+      font-weight: 800;
+      line-height: 1.75;
+      list-style: none;
+      padding-left: 52px;
+      position: relative;
+    }
+
+    .dream-rough-timeline li::before {
+      background: #fff;
+      border: 3px solid var(--blue);
+      border-radius: 999px;
+      content: "";
+      height: 12px;
+      left: 0;
+      position: absolute;
+      top: 0.52em;
+      width: 12px;
+    }
+
+    @media (max-width: 900px) {
+      .dream-rough-hero,
+      .dream-rough-card.is-wide {
+        grid-template-columns: 1fr;
+      }
+
+      .dream-rough-copy p,
+      .dream-rough-main-card p {
+        overflow-wrap: anywhere;
+      }
+
+      .dream-rough-copy p span {
+        white-space: normal;
+      }
+
+      .dream-rough-mini-grid,
+      .dream-rough-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dream-rough-card,
+      .dream-rough-card.is-wide {
+        grid-column: auto;
+      }
+
+      .dream-rough-copy-heading .eyebrow {
+        font-size: clamp(3.4rem, 16vw, 5.2rem);
+      }
+    }
+
+    @media (min-width: 901px) {
+      .dream-rough-timeline li {
+        font-size: clamp(1.12rem, 1.5vw, 1.42rem);
+      }
+
+      .dream-rough-copy p {
+        max-width: 980px;
+      }
+
+      .dream-rough-copy p span {
+        white-space: nowrap;
+      }
+    }
+  </style>
+  <?php wp_head(); ?>
+</head>
+<body class="dream-rough-page">
+  <header class="site-header">
+<a class="site-logo" href="<?php echo carveout_theme_page_url('index'); ?>" aria-label="CARVEOUT トップへ">
+  <img src="<?php echo carveout_theme_asset('assets/carveout-logo-horizontal-cropped.png'); ?>" alt="CARVEOUT">
+</a>
+  <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-controls="siteMenu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="menu-backdrop" data-menu-close></div>
+  <nav class="site-menu" id="siteMenu" aria-label="メインナビゲーション">
+    <a href="<?php echo carveout_theme_page_url('index'); ?>"><span class="site-menu-label">TOP</span><span class="site-menu-subtitle">トップ</span></a>
+    <a href="<?php echo carveout_theme_page_url('news'); ?>"><span class="site-menu-label">NEWS</span><span class="site-menu-subtitle">ニュース</span></a>
+    <a href="<?php echo carveout_theme_page_url('livers'); ?>"><span class="site-menu-label">LIVER</span><span class="site-menu-subtitle">所属ライバー</span></a>
+    <a href="<?php echo carveout_theme_page_url('events'); ?>"><span class="site-menu-label">EVENT</span><span class="site-menu-subtitle">事務所イベント</span></a>
+    <a href="<?php echo carveout_theme_page_url('benefit'); ?>"><span class="site-menu-label">BENEFIT</span><span class="site-menu-subtitle">所属特典</span></a>
+    <a href="<?php echo carveout_theme_page_url('message'); ?>"><span class="site-menu-label">MESSAGE</span><span class="site-menu-subtitle">代表メッセージ</span></a>
+    <a href="<?php echo carveout_theme_page_url('kabuu'); ?>"><span class="site-menu-label">CHARACTER</span><span class="site-menu-subtitle">公式キャラクター</span></a>
+    <a href="<?php echo carveout_theme_page_url('services'); ?>"><span class="site-menu-label">SUPPORT</span><span class="site-menu-subtitle">サポート</span></a>
+    <a href="<?php echo carveout_theme_page_url('privacy'); ?>"><span class="site-menu-label">PRIVACY POLICY</span><span class="site-menu-subtitle">プライバシーポリシー</span></a>
+    <a href="<?php echo carveout_theme_page_url('compliance'); ?>"><span class="site-menu-label">COMPLIANCE</span><span class="site-menu-subtitle">コンプライアンス</span></a>
+    <a href="<?php echo carveout_theme_page_url('about'); ?>"><span class="site-menu-label">COMPANY</span><span class="site-menu-subtitle">運営会社</span></a>
+    <a href="<?php echo carveout_theme_page_url('contact'); ?>"><span class="site-menu-label">CONTACT</span><span class="site-menu-subtitle">お問い合わせ</span></a>
+    <div class="site-menu-social social-links" aria-label="公式SNS">
+      <a href="https://x.com/carveout_info?s=21" target="_blank" rel="noopener" aria-label="CARVEOUT公式X"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"></path></svg></a>
+      <a href="https://www.instagram.com/carveout.official" target="_blank" rel="noopener" aria-label="CARVEOUT公式Instagram"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"></rect><circle cx="12" cy="12" r="3.4"></circle><path d="M17.4 6.7h.01"></path></svg></a>
+      <a href="https://www.tiktok.com/@carveout_official" target="_blank" rel="noopener" aria-label="CARVEOUT公式TikTok"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4v10.2a4.2 4.2 0 1 1-3.6-4.16"></path><path d="M14 4c.7 2.65 2.34 4.23 5 4.72"></path></svg></a>
+    </div>
+  </nav>
+</header>
+
+  <main>
+    <section class="dream-rough-hero">
+      <div class="dream-rough-copy">
+        <div class="dream-rough-copy-heading">
+          <p class="eyebrow">NEXT STAGE</p>
+          <h1>配信の先にある、新しいステージへ。</h1>
+        </div>
+        <p>
+          <span>雑誌掲載、MV出演、楽曲提供、TV取材。</span>
+          <span>CARVEOUTでは、ライバーとしての活動が次の夢につながるよう、</span>
+          <span>表現の場を広げる機会づくりを行っています。</span>
+        </p>
+      </div>
+      <div class="dream-rough-visual">
+        <article class="dream-rough-main-card">
+          <span class="dream-rough-label">SPECIAL OPPORTUNITY</span>
+          <strong>
+            <span>ライバーの個性を、</span>
+            <span>メディア・音楽・映像へ。</span>
+          </strong>
+          <p>
+            <span>配信だけで終わらせず、出演・掲載・制作など</span>
+            <span>次のステージへつなげる実績を紹介します。</span>
+          </p>
+        </article>
+        <div class="dream-rough-mini-grid">
+          <article class="dream-rough-mini-card">
+            <span class="dream-rough-label">MEDIA</span>
+            <p>雑誌イベント<br>TV取材</p>
+          </article>
+          <article class="dream-rough-mini-card">
+            <span class="dream-rough-label">CREATIVE</span>
+            <p>MVイベント<br>楽曲提供イベント</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="dream-rough-section">
+      <div class="dream-rough-heading">
+        <p class="eyebrow">WORKS</p>
+        <h2>これまでのメディア掲載事例</h2>
+      </div>
+
+      <div class="dream-rough-grid">
+        <article class="dream-rough-card">
+          <div class="dream-rough-photo is-magazine" data-label="MAGAZINE"></div>
+          <div class="dream-rough-card-body">
+            <span class="dream-rough-label">MAGAZINE EVENT</span>
+            <h3>雑誌掲載イベント</h3>
+            <p>過去2件の雑誌イベントを実施。配信での活躍を雑誌掲載へつなげ、ライバーの魅力を紙面という形で届けます。</p>
+            <a href="<?php echo carveout_theme_page_url('news-detail'); ?>?id=3256">詳細を見る</a>
+          </div>
+        </article>
+
+        <article class="dream-rough-card">
+          <div class="dream-rough-photo is-mv" data-label="MV"></div>
+          <div class="dream-rough-card-body">
+            <span class="dream-rough-label">MUSIC VIDEO</span>
+            <h3>MV出演イベント</h3>
+            <p>表現力を映像作品へ。配信とは違うフィールドでライバーの世界観を見せます。</p>
+            <a href="<?php echo carveout_theme_page_url('news-detail'); ?>?id=3559">詳細を見る</a>
+          </div>
+        </article>
+
+        <article class="dream-rough-card">
+          <div class="dream-rough-photo is-music" data-label="MUSIC"></div>
+          <div class="dream-rough-card-body">
+            <span class="dream-rough-label">MUSIC PRODUCE</span>
+            <h3>楽曲提供イベント</h3>
+            <p>オリジナル楽曲の制作・提供を通じて、音楽活動へのステップを応援します。</p>
+            <a href="<?php echo carveout_theme_page_url('news-detail'); ?>?id=3164">詳細を見る</a>
+          </div>
+        </article>
+
+        <article class="dream-rough-card">
+          <div class="dream-rough-photo is-tv" data-label="TV"></div>
+          <div class="dream-rough-card-body">
+            <span class="dream-rough-label">TV INTERVIEW</span>
+            <h3>TV取材</h3>
+            <p>メディア取材を通じて、活動の背景やライバー本人の魅力をより広く届けます。</p>
+            <a href="<?php echo carveout_theme_page_url('news-detail'); ?>?id=2585">詳細を見る</a>
+          </div>
+        </article>
+      </div>
+
+      <ul class="dream-rough-timeline">
+        <li>雑誌掲載や取材で、配信外の露出機会をつくる</li>
+        <li>MV・楽曲提供で、表現者としての可能性を広げる</li>
+        <li>イベント参加から次の夢につながる導線を設計する</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="footer">
+  <div>
+    <img class="footer-logo" src="<?php echo carveout_theme_asset('assets/carveout-logo-white.png'); ?>" alt="CARVEOUT">
+    <p>&copy; 2026 CARVEOUT. All Rights Reserved.</p>
+  </div>
+  <div class="footer-links">
+    <nav aria-label="フッターナビゲーション">
+      <a href="<?php echo carveout_theme_page_url('index'); ?>">トップ</a>
+      <a href="<?php echo carveout_theme_page_url('news'); ?>">ニュース</a>
+      <a href="<?php echo carveout_theme_page_url('livers'); ?>">所属ライバー</a>
+      <a href="<?php echo carveout_theme_page_url('events'); ?>">事務所イベント</a>
+      <a href="<?php echo carveout_theme_page_url('benefit'); ?>">所属特典</a>
+      <a href="<?php echo carveout_theme_page_url('message'); ?>">代表メッセージ</a>
+      <a href="<?php echo carveout_theme_page_url('kabuu'); ?>">公式キャラクター</a>
+      <a href="<?php echo carveout_theme_page_url('services'); ?>">サービス</a>
+      <a href="<?php echo carveout_theme_page_url('contact'); ?>">お問い合わせ</a>
+    </nav>
+    <nav class="footer-subnav" aria-label="フッター補助ナビゲーション">
+      <a href="<?php echo carveout_theme_page_url('privacy'); ?>">プライバシーポリシー</a>
+      <a href="<?php echo carveout_theme_page_url('compliance'); ?>">コンプライアンス</a>
+      <a class="footer-company-link" href="<?php echo carveout_theme_page_url('about'); ?>">運営会社<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4h6v6"></path><path d="M20 4 10 14"></path><path d="M20 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5"></path></svg></a>
+    </nav>
+    <nav class="footer-social social-links" aria-label="公式SNS">
+      <a href="https://x.com/carveout_info?s=21" target="_blank" rel="noopener" aria-label="CARVEOUT公式X"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"></path></svg></a>
+      <a href="https://www.instagram.com/carveout.official" target="_blank" rel="noopener" aria-label="CARVEOUT公式Instagram"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"></rect><circle cx="12" cy="12" r="3.4"></circle><path d="M17.4 6.7h.01"></path></svg></a>
+      <a href="https://www.tiktok.com/@carveout_official" target="_blank" rel="noopener" aria-label="CARVEOUT公式TikTok"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4v10.2a4.2 4.2 0 1 1-3.6-4.16"></path><path d="M14 4c.7 2.65 2.34 4.23 5 4.72"></path></svg></a>
+    </nav>
+  </div>
+</footer>
+
+  <script src="<?php echo carveout_theme_asset('js/script.js?v=20260527-related3'); ?>"></script>
+  <?php wp_footer(); ?>
+</body>
+</html>

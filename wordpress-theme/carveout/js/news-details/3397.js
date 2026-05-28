@@ -1,0 +1,1 @@
+window.carveoutCurrentDetailHtml = "<p>カーブアウトは17LIVE所属ライバーおよびリスナーの中から特別に招待された参加者を迎え、東京タワーを望む会場「The Place of Tokyo」にてリアルイベント『CARVEOUT晩餐会』を開催しました。</p>\n\n<p>ライトアップされた東京タワーを望む特別空間で行われたリアルイベントで、<br>特別に招待されたライバー・リスナーが豪華景品が当たるビンゴ大会や当日ランキングでのイベント、表彰式などで大いに盛り上がりました！<br><br>The Place of Tokyo：<a href=\"https://place-tokyo.com\">https://place-tokyo.com</a><br><br></p>";

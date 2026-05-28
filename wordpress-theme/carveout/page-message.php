@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CARVEOUT代表メッセージです。">
+  <title>代表メッセージ | CARVEOUT</title>
+  <link rel="stylesheet" href="<?php echo carveout_theme_asset('css/style.css?v=20260527-related3'); ?>">
+  <?php wp_head(); ?>
+</head>
+<body <?php body_class(); ?>>
+  <header class="site-header">
+<a class="site-logo" href="<?php echo carveout_theme_page_url('index'); ?>" aria-label="CARVEOUT トップへ">
+  <img src="<?php echo carveout_theme_asset('assets/carveout-logo-horizontal-cropped.png'); ?>" alt="CARVEOUT">
+</a>
+  <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-controls="siteMenu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="menu-backdrop" data-menu-close></div>
+  <nav class="site-menu" id="siteMenu" aria-label="メインナビゲーション">
+    <a href="<?php echo carveout_theme_page_url('index'); ?>"><span class="site-menu-label">TOP</span><span class="site-menu-subtitle">トップ</span></a>
+    <a href="<?php echo carveout_theme_page_url('news'); ?>"><span class="site-menu-label">NEWS</span><span class="site-menu-subtitle">ニュース</span></a>
+    <a href="<?php echo carveout_theme_page_url('livers'); ?>"><span class="site-menu-label">LIVER</span><span class="site-menu-subtitle">所属ライバー</span></a>
+    <a href="<?php echo carveout_theme_page_url('events'); ?>"><span class="site-menu-label">EVENT</span><span class="site-menu-subtitle">事務所イベント</span></a>
+    <a href="<?php echo carveout_theme_page_url('benefit'); ?>"><span class="site-menu-label">BENEFIT</span><span class="site-menu-subtitle">所属特典</span></a>
+    <a href="<?php echo carveout_theme_page_url('message'); ?>"><span class="site-menu-label">MESSAGE</span><span class="site-menu-subtitle">代表メッセージ</span></a>
+    <a href="<?php echo carveout_theme_page_url('kabuu'); ?>"><span class="site-menu-label">CHARACTER</span><span class="site-menu-subtitle">公式キャラクター</span></a>
+    <a href="<?php echo carveout_theme_page_url('services'); ?>"><span class="site-menu-label">SUPPORT</span><span class="site-menu-subtitle">サポート</span></a>
+    <a href="<?php echo carveout_theme_page_url('privacy'); ?>"><span class="site-menu-label">PRIVACY POLICY</span><span class="site-menu-subtitle">プライバシーポリシー</span></a>
+    <a href="<?php echo carveout_theme_page_url('compliance'); ?>"><span class="site-menu-label">COMPLIANCE</span><span class="site-menu-subtitle">コンプライアンス</span></a>
+    <a href="<?php echo carveout_theme_page_url('about'); ?>"><span class="site-menu-label">COMPANY</span><span class="site-menu-subtitle">運営会社</span></a>
+    <a href="<?php echo carveout_theme_page_url('contact'); ?>"><span class="site-menu-label">CONTACT</span><span class="site-menu-subtitle">お問い合わせ</span></a>
+    <div class="site-menu-social social-links" aria-label="公式SNS">
+      <a href="https://x.com/carveout_info?s=21" target="_blank" rel="noopener" aria-label="CARVEOUT公式X"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"></path></svg></a>
+      <a href="https://www.instagram.com/carveout.official" target="_blank" rel="noopener" aria-label="CARVEOUT公式Instagram"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"></rect><circle cx="12" cy="12" r="3.4"></circle><path d="M17.4 6.7h.01"></path></svg></a>
+      <a href="https://www.tiktok.com/@carveout_official" target="_blank" rel="noopener" aria-label="CARVEOUT公式TikTok"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4v10.2a4.2 4.2 0 1 1-3.6-4.16"></path><path d="M14 4c.7 2.65 2.34 4.23 5 4.72"></path></svg></a>
+    </div>
+  </nav>
+</header>
+
+  <main>
+    <section class="page-header message-header">
+      <p class="eyebrow">MESSAGE</p>
+      <h1>事務所代表メッセージ</h1>
+    </section>
+
+    <section class="message-section">
+      <div class="message-card">
+        <div class="message-hero">
+          <div class="message-copy">
+            <p class="message-label">代表メッセージ</p>
+            <h2>名実ともに<br>日本一のライバー<br>事務所へ</h2>
+            <p class="message-en">To become Japan's top live streaming agency in both name and substance.</p>
+            <p class="message-name">事務所代表 小野寺 聡一</p>
+          </div>
+          <div class="message-photo">
+            <img src="https://ccarveout.jp/wp-content/themes/carveout_2/images/message_1.webp" alt="CARVEOUT 事務所代表 小野寺 聡一">
+          </div>
+        </div>
+
+        <div class="message-body">
+          <p>そもそも日本一のライバー事務所とはどんな事務所の事を言うのでしょうか？所属数が日本一？売上が日本一？はもちろんのこと、知名度が日本一なのか。</p>
+          <p>私達が目指すところの日本一とは、所属数、売上、知名度、はもちろんのこと、所属や契約をしている人達の「夢や目標」を日本で一番叶えられる事務所だと考えています。</p>
+          <p>特別な才能が無くても、強い想いと、継続した努力があれば、どんな人でも輝けるよう、まず私達が毎日真剣勝負、本気で一生懸命取り組みます。</p>
+
+          <h2>誰よりも、夢を信じる<span>事務所でありたい</span></h2>
+          <p>一生懸命ってカッコいい、そう思っています。</p>
+          <p>バカにされるときもあるかもしれません。無理だと決めつけられるときもあるかもしれません。でも、私達は本気であなたの夢や目標を応援します。</p>
+          <p>大手の資本が入っている事務所に、所属人数が少ないからと言う理由で「もっとまともに真剣にやりなよ。」と、小馬鹿にされたことも有りました。言葉にしづらい悔しい思いも沢山してきました。</p>
+          <p>でも、本気で毎日コツコツ頑張ったことで、今ではライバー・クリエイターが主に所属する事務所の中では、最大手の一つと言われるところまで来ました。</p>
+          <p>所属メンバーがTV出演やAbemaTV出演をしたり、大手企業のPR案件なども多数くるようになりましたが、今でも初心を忘れず愚直に事務所運営することを心がけています。</p>
+          <p>私達カーブアウトは2019年8月に始動しました。他の事務所と同様に所属0人からのスタートで、所属人数が50人なった際に、渋谷の当時ヤギがいたカフェで共同創業者の中川と男2人、周りが女性だらけの中、蝋燭付きのケーキで涙を流しながらお祝いをしたのを今でも思い出すことがあります。</p>
+          <p>このときの想いは、いつまでも忘れないようにしたいと思っています。</p>
+
+          <h2>カーブアウトで<span>活躍したい方へのメッセージ</span></h2>
+          <p>現在、SNSを活用し、誰でも好きなように好きなことを発信できる世の中になりました。</p>
+          <p>働き方も柔軟になり、従来では考えられなかったスマホ1台で生活できる世の中にもなり、今や、自分の意志次第で自分の思い描く働き方が実現できたり、収入を増やすことが出来ます。</p>
+          <p>容姿が良い人、話すのが得意な人、歌が上手い人、演奏ができる人、ダンスができる人、などの一芸に秀でた人はもちろん、特別な才能がなくても一生懸命SNSの更新やライブ配信を継続することで、応援してくれる人が増え、自分の知名度も上げることが出来る様になっています。</p>
+          <p>稼ぎたい、有名になりたい、その他こういう夢や目標を叶えたい、など。きっかけはなんでも良いと思います。</p>
+          <p>行動した先に道が拓け、近い将来、想像だにしていなかった自分になれていると思います。</p>
+          <p>私達と一緒に一歩踏み出しましょう！</p>
+
+          <div class="message-cta">
+            <p>一緒に悩ませてください。まずは話を聞くだけでも。</p>
+            <a class="btn btn-primary" href="<?php echo carveout_theme_page_url('contact'); ?>">無料で相談する</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+  <div>
+    <img class="footer-logo" src="<?php echo carveout_theme_asset('assets/carveout-logo-white.png'); ?>" alt="CARVEOUT">
+    <p>&copy; 2026 CARVEOUT. All Rights Reserved.</p>
+  </div>
+  <div class="footer-links">
+    <nav aria-label="フッターナビゲーション">
+      <a href="<?php echo carveout_theme_page_url('index'); ?>">トップ</a>
+      <a href="<?php echo carveout_theme_page_url('news'); ?>">ニュース</a>
+      <a href="<?php echo carveout_theme_page_url('livers'); ?>">所属ライバー</a>
+      <a href="<?php echo carveout_theme_page_url('events'); ?>">事務所イベント</a>
+      <a href="<?php echo carveout_theme_page_url('benefit'); ?>">所属特典</a>
+      <a href="<?php echo carveout_theme_page_url('message'); ?>">代表メッセージ</a>
+      <a href="<?php echo carveout_theme_page_url('kabuu'); ?>">公式キャラクター</a>
+      <a href="<?php echo carveout_theme_page_url('services'); ?>">サービス</a>
+      <a href="<?php echo carveout_theme_page_url('contact'); ?>">お問い合わせ</a>
+    </nav>
+    <nav class="footer-subnav" aria-label="フッター補助ナビゲーション">
+      <a href="<?php echo carveout_theme_page_url('privacy'); ?>">プライバシーポリシー</a>
+      <a href="<?php echo carveout_theme_page_url('compliance'); ?>">コンプライアンス</a>
+      <a class="footer-company-link" href="<?php echo carveout_theme_page_url('about'); ?>">運営会社<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4h6v6"></path><path d="M20 4 10 14"></path><path d="M20 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5"></path></svg></a>
+    </nav>
+    <nav class="footer-social social-links" aria-label="公式SNS">
+      <a href="https://x.com/carveout_info?s=21" target="_blank" rel="noopener" aria-label="CARVEOUT公式X"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"></path></svg></a>
+      <a href="https://www.instagram.com/carveout.official" target="_blank" rel="noopener" aria-label="CARVEOUT公式Instagram"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"></rect><circle cx="12" cy="12" r="3.4"></circle><path d="M17.4 6.7h.01"></path></svg></a>
+      <a href="https://www.tiktok.com/@carveout_official" target="_blank" rel="noopener" aria-label="CARVEOUT公式TikTok"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4v10.2a4.2 4.2 0 1 1-3.6-4.16"></path><path d="M14 4c.7 2.65 2.34 4.23 5 4.72"></path></svg></a>
+    </nav>
+  </div>
+</footer>
+  <script src="<?php echo carveout_theme_asset('js/script.js?v=20260527-related3'); ?>"></script>
+  <?php wp_footer(); ?>
+</body>
+</html>

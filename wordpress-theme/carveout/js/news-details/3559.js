@@ -1,0 +1,1 @@
+window.carveoutCurrentDetailHtml = "<p><br><br>11月に開催された事務所イベント『LDH所属SWAY MV出演オーディション』にて選出された「ちぴ🧸chipi🩷🪽」「あいぷ½」「みくぽん🐻🍙🎀」が出演した最新MVが公開されました！<br><br>MVは下記リンクよりご視聴いただけます👀✨️<br><a href=\"https://youtu.be/6rkRw5ggYW0?si=mYyttl1MMu4nebtY\">https://youtu.be/6rkRw5ggYW0?si=mYyttl1MMu4nebtY</a><br><br></p>";

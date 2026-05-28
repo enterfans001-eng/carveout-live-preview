@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CARVEOUTのパートナー代理店募集ページです。ライブ配信事務所の運営に興味がある方を募集しています。">
+  <title>パートナー募集 | CARVEOUT</title>
+  <link rel="stylesheet" href="<?php echo carveout_theme_asset('css/style.css?v=20260527-related3'); ?>">
+  <?php wp_head(); ?>
+</head>
+<body <?php body_class(); ?>>
+  <header class="site-header">
+<a class="site-logo" href="<?php echo carveout_theme_page_url('index'); ?>" aria-label="CARVEOUT トップへ">
+  <img src="<?php echo carveout_theme_asset('assets/carveout-logo-horizontal-cropped.png'); ?>" alt="CARVEOUT">
+</a>
+  <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-controls="siteMenu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="menu-backdrop" data-menu-close></div>
+  <nav class="site-menu" id="siteMenu" aria-label="メインナビゲーション">
+    <a href="<?php echo carveout_theme_page_url('index'); ?>"><span class="site-menu-label">TOP</span><span class="site-menu-subtitle">トップ</span></a>
+    <a href="<?php echo carveout_theme_page_url('news'); ?>"><span class="site-menu-label">NEWS</span><span class="site-menu-subtitle">ニュース</span></a>
+    <a href="<?php echo carveout_theme_page_url('livers'); ?>"><span class="site-menu-label">LIVER</span><span class="site-menu-subtitle">所属ライバー</span></a>
+    <a href="<?php echo carveout_theme_page_url('events'); ?>"><span class="site-menu-label">EVENT</span><span class="site-menu-subtitle">事務所イベント</span></a>
+    <a href="<?php echo carveout_theme_page_url('benefit'); ?>"><span class="site-menu-label">BENEFIT</span><span class="site-menu-subtitle">所属特典</span></a>
+    <a href="<?php echo carveout_theme_page_url('message'); ?>"><span class="site-menu-label">MESSAGE</span><span class="site-menu-subtitle">代表メッセージ</span></a>
+    <a href="<?php echo carveout_theme_page_url('kabuu'); ?>"><span class="site-menu-label">CHARACTER</span><span class="site-menu-subtitle">公式キャラクター</span></a>
+    <a href="<?php echo carveout_theme_page_url('services'); ?>"><span class="site-menu-label">SUPPORT</span><span class="site-menu-subtitle">サポート</span></a>
+    <a href="<?php echo carveout_theme_page_url('privacy'); ?>"><span class="site-menu-label">PRIVACY POLICY</span><span class="site-menu-subtitle">プライバシーポリシー</span></a>
+    <a href="<?php echo carveout_theme_page_url('compliance'); ?>"><span class="site-menu-label">COMPLIANCE</span><span class="site-menu-subtitle">コンプライアンス</span></a>
+    <a href="<?php echo carveout_theme_page_url('about'); ?>"><span class="site-menu-label">COMPANY</span><span class="site-menu-subtitle">運営会社</span></a>
+    <a href="<?php echo carveout_theme_page_url('contact'); ?>"><span class="site-menu-label">CONTACT</span><span class="site-menu-subtitle">お問い合わせ</span></a>
+    <div class="site-menu-social social-links" aria-label="公式SNS">
+      <a href="https://x.com/carveout_info?s=21" target="_blank" rel="noopener" aria-label="CARVEOUT公式X"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"></path></svg></a>
+      <a href="https://www.instagram.com/carveout.official" target="_blank" rel="noopener" aria-label="CARVEOUT公式Instagram"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"></rect><circle cx="12" cy="12" r="3.4"></circle><path d="M17.4 6.7h.01"></path></svg></a>
+      <a href="https://www.tiktok.com/@carveout_official" target="_blank" rel="noopener" aria-label="CARVEOUT公式TikTok"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4v10.2a4.2 4.2 0 1 1-3.6-4.16"></path><path d="M14 4c.7 2.65 2.34 4.23 5 4.72"></path></svg></a>
+    </div>
+  </nav>
+</header>
+
+  <main>
+    <section class="page-header partner-header">
+      <p class="eyebrow">PARTNER</p>
+      <h1>パートナー代理店募集</h1>
+      <p>ライブ配信で活躍したい人を見つけ、活動を支えるパートナーを募集しています。加盟料・研修料は無料。未経験でも運営を始められる体制を用意しています。</p>
+      <a class="btn btn-primary audition-main-button partner-line-button" href="https://line.me/R/ti/p/%40336ltmin?utm_source=Dms2uFwUAr" target="_blank" rel="noopener">公式LINEから応募する</a>
+    </section>
+
+    <section class="section audition-intro-section">
+      <div class="audition-intro-card">
+        <h2>“好き”を仕事にする人を、あなたの手で増やす。</h2>
+        <p>ライバーとして活躍したい方をスカウトし、デビュー前の準備から活動後のサポートまで伴走するお仕事です。CARVEOUTのノウハウとサポート体制を活用しながら、あなたのペースで事務所運営に取り組めます。</p>
+      </div>
+    </section>
+
+    <section class="section partner-target-section">
+      <div class="section-heading heading-inverted">
+        <p class="eyebrow">IDEAL PARTNER</p>
+        <h2>こんな方におすすめ</h2>
+      </div>
+      <div class="partner-target-grid">
+        <article>
+          <span>01</span>
+          <h3>SNSや人脈を活かしたい</h3>
+          <p>身近なつながりやSNSを通じて、配信に興味のある人と出会う機会を作れます。</p>
+        </article>
+        <article>
+          <span>02</span>
+          <h3>人の挑戦を支えたい</h3>
+          <p>ライバー候補の不安を聞き、活動開始から継続まで寄り添う仕事です。</p>
+        </article>
+        <article>
+          <span>03</span>
+          <h3>副業・事業として育てたい</h3>
+          <p>小さく始めながら、所属ライバーの活動成果に応じて事業化を目指せます。</p>
+        </article>
+        <article>
+          <span>04</span>
+          <h3>ライブ配信業界に関わりたい</h3>
+          <p>複数アプリやイベントを活用しながら、成長市場で運営経験を積めます。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section partner-model-section">
+      <div class="section-heading heading-inverted">
+        <p class="eyebrow">REVENUE MODEL</p>
+        <h2>収益化までの流れ</h2>
+      </div>
+      <div class="partner-model-panel">
+        <ol class="partner-model-steps">
+          <li>
+            <span>01</span>
+            <h3>ライバー候補を発掘</h3>
+            <p>SNSや紹介などから、配信に興味のある方へ声をかけます。</p>
+          </li>
+          <li>
+            <span>02</span>
+            <h3>所属・活動開始をサポート</h3>
+            <p>アプリ選び、プロフィール準備、初配信までをCARVEOUTと一緒に整えます。</p>
+          </li>
+          <li>
+            <span>03</span>
+            <h3>活動成果に応じて還元</h3>
+            <p>ライバーの活動成果に応じて、パートナー報酬として還元されます。</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section partner-cashflow-section">
+      <div class="partner-cashflow-panel">
+        <div class="section-heading heading-inverted partner-cashflow-heading">
+          <p class="eyebrow">CASH FLOW</p>
+          <h2>収益の流れ</h2>
+        </div>
+        <p class="partner-cashflow-lead">スカウトして所属することになったライバーの活躍に応じて、アプリ会社から事務所へ報酬が支払われます。収益の流れはアプリにより異なり、大きく2つのパターンがあります。</p>
+        <div class="partner-cashflow-grid">
+          <article class="partner-cashflow-card">
+            <h3>セパレート型</h3>
+            <p>例）17LIVE、TikTok Liveなど</p>
+            <div class="partner-cashflow-diagram" aria-label="セパレート型の収益の流れ">
+              <span class="flow-node flow-liver">ライバー</span>
+              <span class="flow-arrow">
+                <span class="flow-arrow-row flow-contract"><i></i><em>契約</em><i></i></span>
+                <span class="flow-arrow-row flow-reward"><i></i><em>報酬</em><i></i></span>
+              </span>
+              <span class="flow-node flow-app">配信<br>アプリ</span>
+              <span class="flow-arrow">
+                <span class="flow-arrow-row flow-contract"><i></i><em>契約</em><i></i></span>
+                <span class="flow-arrow-row flow-reward"><i></i><em>報酬</em><i></i></span>
+              </span>
+              <span class="flow-node flow-office">事務所</span>
+            </div>
+          </article>
+          <article class="partner-cashflow-card">
+            <h3>バルク型</h3>
+            <p>例）IRIAM、Pocochaなど</p>
+            <div class="partner-cashflow-diagram" aria-label="バルク型の収益の流れ">
+              <span class="flow-node flow-app">配信<br>アプリ</span>
+              <span class="flow-arrow">
+                <span class="flow-arrow-row flow-contract"><i></i><em>契約</em><i></i></span>
+                <span class="flow-arrow-row flow-reward"><i></i><em>報酬</em><i></i></span>
+              </span>
+              <span class="flow-node flow-office">事務所</span>
+              <span class="flow-arrow">
+                <span class="flow-arrow-row flow-contract"><i></i><em>契約</em><i></i></span>
+                <span class="flow-arrow-row flow-reward"><i></i><em>報酬</em><i></i></span>
+              </span>
+              <span class="flow-node flow-liver">ライバー</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section partner-income-section">
+      <div class="section-heading heading-inverted">
+        <p class="eyebrow">CASE</p>
+        <h2>運営スタイルのイメージ</h2>
+      </div>
+      <div class="partner-income-grid">
+        <article>
+          <p class="partner-income-label">SIDE BUSINESS</p>
+          <h3>副業で少しずつ</h3>
+          <p>本業や学業と両立しながら、まずは数名のライバー候補を支える運営スタイル。</p>
+        </article>
+        <article>
+          <p class="partner-income-label">GROWTH</p>
+          <h3>本業化を目指す</h3>
+          <p>スカウト数やサポート体制を増やし、継続的な事業として育てていくスタイル。</p>
+        </article>
+        <article>
+          <p class="partner-income-label">TEAM</p>
+          <h3>チームで運営する</h3>
+          <p>仲間や法人で役割分担をしながら、複数ライバーの活動を支えるスタイル。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section partner-compare-section">
+      <div class="section-heading heading-inverted">
+        <p class="eyebrow">COMPARE</p>
+        <h2>他社比較</h2>
+      </div>
+      <div class="partner-compare-table partner-compare-table-featured" aria-label="CARVEOUTとA社の代理店制度比較">
+        <div class="partner-compare-row partner-compare-head">
+          <span></span>
+          <strong class="partner-compare-brand"><img src="<?php echo carveout_theme_asset('assets/carveout-mark-white.png'); ?>" alt="" class="partner-compare-brand-mark">CARVEOUT</strong>
+          <span>A社</span>
+        </div>
+        <div class="partner-compare-row">
+          <span>初期費用</span>
+          <strong><b class="compare-price">0円</b><small>完全無料</small></strong>
+          <span><b class="compare-price">10万円</b></span>
+        </div>
+        <div class="partner-compare-row">
+          <span class="partner-compare-label"><span class="pc-label">サポート体制</span><span class="sp-label">サポート<br>体制</span></span>
+          <strong><b class="compare-symbol is-good">◎</b></strong>
+          <span><b class="compare-symbol is-bad">×</b></span>
+        </div>
+        <div class="partner-compare-row">
+          <span>契約時審査</span>
+          <strong><b class="compare-symbol is-good">◎</b><small>初心者の方も徹底サポート</small></strong>
+          <span><b class="compare-symbol is-good">◎</b></span>
+        </div>
+        <div class="partner-compare-row">
+          <span class="partner-compare-label"><span class="pc-label">事務所内イベント</span><span class="sp-label">事務所内<br>イベント</span></span>
+          <strong><b class="compare-symbol is-good">◎</b><small>年間イベント費用1億円以上</small></strong>
+          <span><b class="compare-symbol is-good">◎</b></span>
+        </div>
+        <div class="partner-compare-row">
+          <span>案件</span>
+          <strong><b class="compare-symbol is-good">◎</b></strong>
+          <span><b class="compare-symbol is-bad">×</b></span>
+        </div>
+        <div class="partner-compare-row">
+          <span>報酬</span>
+          <strong><b class="compare-symbol is-good">◎</b></strong>
+          <span><b class="compare-symbol is-good">◎</b></span>
+        </div>
+        <div class="partner-compare-row">
+          <span class="partner-compare-label"><span class="pc-label">取り扱いアプリ数</span><span class="sp-label">取り扱い<br>アプリ数</span></span>
+          <strong><b class="compare-symbol is-good">◎</b><small>各配信アプリで数々の実績</small></strong>
+          <span><b class="compare-symbol is-bad">×</b></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section audition-support-section partner-work-section">
+      <div class="section-heading heading-inverted">
+        <p class="eyebrow">WORK</p>
+        <h2>代理店としてのお仕事</h2>
+      </div>
+      <div class="audition-card-grid partner-work-grid">
+        <article class="audition-card">
+          <span>STEP 01</span>
+          <h3>配信に興味のある人をスカウト</h3>
+          <p>SNSや身近なつながりから、配信に興味のある方へCARVEOUTの魅力を伝えます。スカウト方法や声かけのコツもサポートします。</p>
+        </article>
+        <article class="audition-card">
+          <span>STEP 02</span>
+          <h3>所属ライバーをマネジメント</h3>
+          <p>活動プラン作成、配信相談、イベント挑戦など、ライバーが継続して活動できるように伴走します。困った時は専属担当がフォローします。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section audition-support-section partner-merit-section">
+      <div class="section-heading heading-inverted">
+        <p class="eyebrow">MERIT</p>
+        <h2>パートナー特典</h2>
+      </div>
+      <div class="audition-card-grid">
+        <article class="audition-card">
+          <span>01</span>
+          <h3>初期費用・月額費用すべて無料</h3>
+          <p>加盟金、研修料、設備投資などの初期費用は不要。小さく始めながら事業化を目指せます。</p>
+        </article>
+        <article class="audition-card">
+          <span>02</span>
+          <h3>スカウトノウハウの共有</h3>
+          <p>反応が出やすい声かけ、SNSでの探し方、ライバー候補への説明方法などを共有します。</p>
+        </article>
+        <article class="audition-card">
+          <span>03</span>
+          <h3>研修・サポート体制</h3>
+          <p>未経験でも始められるよう、運営方法やマネジメントの基礎を丁寧にフォローします。</p>
+        </article>
+        <article class="audition-card">
+          <span>04</span>
+          <h3>成果に応じた報酬体系</h3>
+          <p>ライバーの活動成果に応じて報酬が発生します。詳細は個別にご説明します。</p>
+        </article>
+        <article class="audition-card">
+          <span>05</span>
+          <h3>多数の配信アプリに対応</h3>
+          <p>17LIVE、BIGOLIVE、ミクチャ、ふわっちなど、候補者に合うアプリ選びをサポートします。</p>
+        </article>
+        <article class="audition-card">
+          <span>06</span>
+          <h3>案件・イベントの活用支援</h3>
+          <p>所属ライバーの挑戦機会を広げるため、案件やイベント情報の活用も支援します。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section audition-flow-section">
+      <div class="section-heading heading-inverted">
+        <p class="eyebrow">PROCESS</p>
+        <h2>代理店を始める流れ</h2>
+      </div>
+      <ol class="audition-flow-list">
+        <li>
+          <span>STEP 01</span>
+          <h3>公式LINEから応募</h3>
+          <p>公式LINEより、パートナー希望の旨をお送りください。</p>
+        </li>
+        <li>
+          <span>STEP 02</span>
+          <h3>ヒアリング</h3>
+          <p>現在の状況、活動できる時間、運営イメージを確認します。</p>
+        </li>
+        <li>
+          <span>STEP 03</span>
+          <h3>オンライン面談</h3>
+          <p>事業内容、報酬体系、サポート体制について詳しくご説明します。</p>
+        </li>
+        <li>
+          <span>STEP 04</span>
+          <h3>契約・活動開始</h3>
+          <p>契約後、研修を経て代理店パートナーとして活動を開始します。</p>
+        </li>
+      </ol>
+    </section>
+
+    <section class="section audition-faq-section">
+      <div class="section-heading">
+        <p class="eyebrow">FAQ</p>
+        <h2>よくある質問</h2>
+      </div>
+      <div class="audition-faq-list">
+        <article class="audition-faq-item">
+          <button class="audition-faq-question" type="button" aria-expanded="false">
+            <span class="audition-faq-mark">Q</span>
+            <span>代理店になるのに初期費用はかかりますか？</span>
+            <span class="audition-faq-plus" aria-hidden="true"></span>
+          </button>
+          <div class="audition-faq-answer">
+            <p>加盟金、研修料などの初期費用はかかりません。無料でスタートできます。</p>
+          </div>
+        </article>
+        <article class="audition-faq-item">
+          <button class="audition-faq-question" type="button" aria-expanded="false">
+            <span class="audition-faq-mark">Q</span>
+            <span>個人でも代理店として活動できますか？</span>
+            <span class="audition-faq-plus" aria-hidden="true"></span>
+          </button>
+          <div class="audition-faq-answer">
+            <p>個人・法人どちらでもご相談可能です。副業や小規模スタートも想定しています。</p>
+          </div>
+        </article>
+        <article class="audition-faq-item">
+          <button class="audition-faq-question" type="button" aria-expanded="false">
+            <span class="audition-faq-mark">Q</span>
+            <span>未経験でも運営できますか？</span>
+            <span class="audition-faq-plus" aria-hidden="true"></span>
+          </button>
+          <div class="audition-faq-answer">
+            <p>未経験でも問題ありません。スカウト方法やマネジメントの基礎からサポートします。</p>
+          </div>
+        </article>
+        <article class="audition-faq-item">
+          <button class="audition-faq-question" type="button" aria-expanded="false">
+            <span class="audition-faq-mark">Q</span>
+            <span>ノルマや最低活動条件はありますか？</span>
+            <span class="audition-faq-plus" aria-hidden="true"></span>
+          </button>
+          <div class="audition-faq-answer">
+            <p>厳しいノルマはありません。活動内容や目標に合わせて進め方を相談できます。</p>
+          </div>
+        </article>
+        <article class="audition-faq-item">
+          <button class="audition-faq-question" type="button" aria-expanded="false">
+            <span class="audition-faq-mark">Q</span>
+            <span>具体的にどんな業務を行いますか？</span>
+            <span class="audition-faq-plus" aria-hidden="true"></span>
+          </button>
+          <div class="audition-faq-answer">
+            <p>ライバー候補の獲得、デビュー準備、活動後の相談対応、イベント挑戦のサポートなどを行います。</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="section audition-final-cta">
+      <div>
+        <p class="eyebrow">ENTRY</p>
+        <h2>まずは、話を聞くだけでも。</h2>
+        <p>代理店運営に興味がある方は、公式LINEからお気軽にご相談ください。</p>
+        <a class="entry-button audition-line-button" href="https://line.me/R/ti/p/%40336ltmin?utm_source=Dms2uFwUAr" target="_blank" rel="noopener">
+          <span>
+            公式LINEから応募する
+            <small>相談・応募は無料です</small>
+          </span>
+          <b aria-hidden="true">→</b>
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+  <div>
+    <img class="footer-logo" src="<?php echo carveout_theme_asset('assets/carveout-logo-white.png'); ?>" alt="CARVEOUT">
+    <p>&copy; 2026 CARVEOUT. All Rights Reserved.</p>
+  </div>
+  <div class="footer-links">
+    <nav aria-label="フッターナビゲーション">
+      <a href="<?php echo carveout_theme_page_url('index'); ?>">トップ</a>
+      <a href="<?php echo carveout_theme_page_url('news'); ?>">ニュース</a>
+      <a href="<?php echo carveout_theme_page_url('livers'); ?>">所属ライバー</a>
+      <a href="<?php echo carveout_theme_page_url('events'); ?>">事務所イベント</a>
+      <a href="<?php echo carveout_theme_page_url('benefit'); ?>">所属特典</a>
+      <a href="<?php echo carveout_theme_page_url('message'); ?>">代表メッセージ</a>
+      <a href="<?php echo carveout_theme_page_url('kabuu'); ?>">公式キャラクター</a>
+      <a href="<?php echo carveout_theme_page_url('services'); ?>">サービス</a>
+      <a href="<?php echo carveout_theme_page_url('contact'); ?>">お問い合わせ</a>
+    </nav>
+    <nav class="footer-subnav" aria-label="フッター補助ナビゲーション">
+      <a href="<?php echo carveout_theme_page_url('privacy'); ?>">プライバシーポリシー</a>
+      <a href="<?php echo carveout_theme_page_url('compliance'); ?>">コンプライアンス</a>
+      <a class="footer-company-link" href="<?php echo carveout_theme_page_url('about'); ?>">運営会社<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4h6v6"></path><path d="M20 4 10 14"></path><path d="M20 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5"></path></svg></a>
+    </nav>
+    <nav class="footer-social social-links" aria-label="公式SNS">
+      <a href="https://x.com/carveout_info?s=21" target="_blank" rel="noopener" aria-label="CARVEOUT公式X"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"></path></svg></a>
+      <a href="https://www.instagram.com/carveout.official" target="_blank" rel="noopener" aria-label="CARVEOUT公式Instagram"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"></rect><circle cx="12" cy="12" r="3.4"></circle><path d="M17.4 6.7h.01"></path></svg></a>
+      <a href="https://www.tiktok.com/@carveout_official" target="_blank" rel="noopener" aria-label="CARVEOUT公式TikTok"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4v10.2a4.2 4.2 0 1 1-3.6-4.16"></path><path d="M14 4c.7 2.65 2.34 4.23 5 4.72"></path></svg></a>
+    </nav>
+  </div>
+</footer>
+
+  <script src="<?php echo carveout_theme_asset('js/script.js?v=20260527-related3'); ?>"></script>
+  <?php wp_footer(); ?>
+</body>
+</html>

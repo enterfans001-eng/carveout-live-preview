@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="CARVEOUTのプライバシーポリシーです。">
+  <title>プライバシーポリシー | CARVEOUT</title>
+  <link rel="stylesheet" href="<?php echo carveout_theme_asset('css/style.css?v=20260527-related3'); ?>">
+  <?php wp_head(); ?>
+</head>
+<body <?php body_class(); ?>>
+  <header class="site-header">
+<a class="site-logo" href="<?php echo carveout_theme_page_url('index'); ?>" aria-label="CARVEOUT トップへ">
+  <img src="<?php echo carveout_theme_asset('assets/carveout-logo-horizontal-cropped.png'); ?>" alt="CARVEOUT">
+</a>
+  <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-controls="siteMenu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="menu-backdrop" data-menu-close></div>
+  <nav class="site-menu" id="siteMenu" aria-label="メインナビゲーション">
+    <a href="<?php echo carveout_theme_page_url('index'); ?>"><span class="site-menu-label">TOP</span><span class="site-menu-subtitle">トップ</span></a>
+    <a href="<?php echo carveout_theme_page_url('news'); ?>"><span class="site-menu-label">NEWS</span><span class="site-menu-subtitle">ニュース</span></a>
+    <a href="<?php echo carveout_theme_page_url('livers'); ?>"><span class="site-menu-label">LIVER</span><span class="site-menu-subtitle">所属ライバー</span></a>
+    <a href="<?php echo carveout_theme_page_url('events'); ?>"><span class="site-menu-label">EVENT</span><span class="site-menu-subtitle">事務所イベント</span></a>
+    <a href="<?php echo carveout_theme_page_url('benefit'); ?>"><span class="site-menu-label">BENEFIT</span><span class="site-menu-subtitle">所属特典</span></a>
+    <a href="<?php echo carveout_theme_page_url('message'); ?>"><span class="site-menu-label">MESSAGE</span><span class="site-menu-subtitle">代表メッセージ</span></a>
+    <a href="<?php echo carveout_theme_page_url('kabuu'); ?>"><span class="site-menu-label">CHARACTER</span><span class="site-menu-subtitle">公式キャラクター</span></a>
+    <a href="<?php echo carveout_theme_page_url('services'); ?>"><span class="site-menu-label">SUPPORT</span><span class="site-menu-subtitle">サポート</span></a>
+    <a href="<?php echo carveout_theme_page_url('privacy'); ?>"><span class="site-menu-label">PRIVACY POLICY</span><span class="site-menu-subtitle">プライバシーポリシー</span></a>
+    <a href="<?php echo carveout_theme_page_url('compliance'); ?>"><span class="site-menu-label">COMPLIANCE</span><span class="site-menu-subtitle">コンプライアンス</span></a>
+    <a href="<?php echo carveout_theme_page_url('about'); ?>"><span class="site-menu-label">COMPANY</span><span class="site-menu-subtitle">運営会社</span></a>
+    <a href="<?php echo carveout_theme_page_url('contact'); ?>"><span class="site-menu-label">CONTACT</span><span class="site-menu-subtitle">お問い合わせ</span></a>
+    <div class="site-menu-social social-links" aria-label="公式SNS">
+      <a href="https://x.com/carveout_info?s=21" target="_blank" rel="noopener" aria-label="CARVEOUT公式X"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"></path></svg></a>
+      <a href="https://www.instagram.com/carveout.official" target="_blank" rel="noopener" aria-label="CARVEOUT公式Instagram"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"></rect><circle cx="12" cy="12" r="3.4"></circle><path d="M17.4 6.7h.01"></path></svg></a>
+      <a href="https://www.tiktok.com/@carveout_official" target="_blank" rel="noopener" aria-label="CARVEOUT公式TikTok"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4v10.2a4.2 4.2 0 1 1-3.6-4.16"></path><path d="M14 4c.7 2.65 2.34 4.23 5 4.72"></path></svg></a>
+    </div>
+  </nav>
+</header>
+
+  <main>
+    <section class="page-header legal-header">
+      <p class="eyebrow">PRIVACY POLICY</p>
+      <h1>プライバシーポリシー</h1>
+      <p>CARVEOUTにおける個人情報の取り扱いについて、以下のとおり定めます。</p>
+    </section>
+
+    <section class="legal-section">
+      <div class="legal-panel">
+        <p class="legal-lead">ライバー事務所カーブアウト(以下「当事務所」)は、以下のとおり個人情報保護方針を定め、個人情報保護の仕組みを構築し、全従業員に個人情報保護の重要性の認識と取組みを徹底させることにより、個人情報の保護を推進致します。</p>
+
+        <article class="legal-item">
+          <h2>個人情報の管理</h2>
+          <p>当事務所は、お客さまの個人情報を正確かつ最新の状態に保ち、個人情報への不正アクセス・紛失・破損・改ざん・漏洩などを防止するため、セキュリティシステムの維持・管理体制の整備・社員教育の徹底等の必要な措置を講じ、安全対策を実施し個人情報の厳重な管理を行ないます。</p>
+        </article>
+
+        <article class="legal-item">
+          <h2>個人情報の利用目的</h2>
+          <p>お客様からの信頼を確保するため、お客様のご意見を尊重し、お客様のニーズにあった良質で、安全な商品・サービスの提供に努めます。</p>
+        </article>
+
+        <article class="legal-item">
+          <h2>個人情報の第三者への開示・提供の禁止</h2>
+          <p>当事務所は、お客さまよりお預かりした個人情報を適切に管理し、次のいずれかに該当する場合を除き、個人情報を第三者に開示いたしません。</p>
+          <ul>
+            <li>お客さまの同意がある場合</li>
+            <li>お客さまが希望されるサービスを行なうために当事務所が業務を委託する業者に対して開示する場合</li>
+            <li>法令に基づき開示することが必要である場合</li>
+          </ul>
+        </article>
+
+        <article class="legal-item">
+          <h2>個人情報の安全対策</h2>
+          <p>お客様からの信頼を確保するため、お客様のご意見を尊重し、お客様のニーズにあった良質で、安全な商品・サービスの提供に努めます。</p>
+        </article>
+
+        <article class="legal-item">
+          <h2>ご本人の照会</h2>
+          <p>お客さまがご本人の個人情報の照会・修正・削除などをご希望される場合には、ご本人であることを確認の上、対応させていただきます。</p>
+        </article>
+
+        <article class="legal-item">
+          <h2>法令、規範の遵守と見直し</h2>
+          <p>当事務所は、保有する個人情報に関して適用される日本の法令、その他規範を遵守するとともに、本ポリシーの内容を適宜見直し、その改善に努めます。</p>
+        </article>
+
+        <article class="legal-item legal-contact">
+          <h2>個人情報お問い合わせ窓口</h2>
+          <p>（受付24時間 土日祝祭日は除く）</p>
+          <p>ライバー事務所カーブアウト<br>個人情報ご相談窓口担当者まで</p>
+          <p>〒151-0051<br>東京都渋谷区千駄ヶ谷5-27-5<br>WeWorkリンクスクエア新宿 16F</p>
+          <p>mail: <a href="mailto:info@ccarveout.jp">info@ccarveout.jp</a></p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+  <div>
+    <img class="footer-logo" src="<?php echo carveout_theme_asset('assets/carveout-logo-white.png'); ?>" alt="CARVEOUT">
+    <p>&copy; 2026 CARVEOUT. All Rights Reserved.</p>
+  </div>
+  <div class="footer-links">
+    <nav aria-label="フッターナビゲーション">
+      <a href="<?php echo carveout_theme_page_url('index'); ?>">トップ</a>
+      <a href="<?php echo carveout_theme_page_url('news'); ?>">ニュース</a>
+      <a href="<?php echo carveout_theme_page_url('livers'); ?>">所属ライバー</a>
+      <a href="<?php echo carveout_theme_page_url('events'); ?>">事務所イベント</a>
+      <a href="<?php echo carveout_theme_page_url('benefit'); ?>">所属特典</a>
+      <a href="<?php echo carveout_theme_page_url('message'); ?>">代表メッセージ</a>
+      <a href="<?php echo carveout_theme_page_url('kabuu'); ?>">公式キャラクター</a>
+      <a href="<?php echo carveout_theme_page_url('services'); ?>">サービス</a>
+      <a href="<?php echo carveout_theme_page_url('contact'); ?>">お問い合わせ</a>
+    </nav>
+    <nav class="footer-subnav" aria-label="フッター補助ナビゲーション">
+      <a href="<?php echo carveout_theme_page_url('privacy'); ?>">プライバシーポリシー</a>
+      <a href="<?php echo carveout_theme_page_url('compliance'); ?>">コンプライアンス</a>
+      <a class="footer-company-link" href="<?php echo carveout_theme_page_url('about'); ?>">運営会社<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4h6v6"></path><path d="M20 4 10 14"></path><path d="M20 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5"></path></svg></a>
+    </nav>
+    <nav class="footer-social social-links" aria-label="公式SNS">
+      <a href="https://x.com/carveout_info?s=21" target="_blank" rel="noopener" aria-label="CARVEOUT公式X"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"></path></svg></a>
+      <a href="https://www.instagram.com/carveout.official" target="_blank" rel="noopener" aria-label="CARVEOUT公式Instagram"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"></rect><circle cx="12" cy="12" r="3.4"></circle><path d="M17.4 6.7h.01"></path></svg></a>
+      <a href="https://www.tiktok.com/@carveout_official" target="_blank" rel="noopener" aria-label="CARVEOUT公式TikTok"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4v10.2a4.2 4.2 0 1 1-3.6-4.16"></path><path d="M14 4c.7 2.65 2.34 4.23 5 4.72"></path></svg></a>
+    </nav>
+  </div>
+</footer>
+  <script src="<?php echo carveout_theme_asset('js/script.js?v=20260527-related3'); ?>"></script>
+  <?php wp_footer(); ?>
+</body>
+</html>

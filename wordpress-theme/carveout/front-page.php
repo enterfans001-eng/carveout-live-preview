@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="ライバー・クリエイターの活動を専門的にサポートするライバー事務所です。">
+  <title>CARVEOUT | ライバー事務所</title>
+  <script>
+    try {
+      if (sessionStorage.getItem('carveoutTopLoaderSeen') === '1') {
+        document.documentElement.classList.add('is-site-loader-skipped', 'is-site-loader-done');
+      }
+    } catch (error) {}
+  </script>
+  <link rel="stylesheet" href="<?php echo carveout_theme_asset('css/style.css?v=20260527-related3'); ?>">
+  <?php wp_head(); ?>
+</head>
+<body <?php body_class(); ?>>
+  <div class="site-loader" aria-hidden="true">
+    <div class="site-loader__inner">
+      <div class="site-loader__logo">
+        <img class="site-loader__mark" src="<?php echo carveout_theme_asset('assets/carveout-mark-white.png'); ?>" alt="">
+        <span>CARVEOUT</span>
+      </div>
+      <div class="site-loader__bar"><span></span></div>
+    </div>
+  </div>
+  <header class="site-header">
+<a class="site-logo" href="<?php echo carveout_theme_page_url('index'); ?>" aria-label="CARVEOUT トップへ">
+  <img src="<?php echo carveout_theme_asset('assets/carveout-logo-horizontal-cropped.png'); ?>" alt="CARVEOUT">
+</a>
+  <button class="menu-toggle" type="button" aria-label="メニューを開く" aria-controls="siteMenu" aria-expanded="false">
+    <span></span>
+    <span></span>
+    <span></span>
+  </button>
+  <div class="menu-backdrop" data-menu-close></div>
+  <nav class="site-menu" id="siteMenu" aria-label="メインナビゲーション">
+    <a href="<?php echo carveout_theme_page_url('index'); ?>"><span class="site-menu-label">TOP</span><span class="site-menu-subtitle">トップ</span></a>
+    <a href="<?php echo carveout_theme_page_url('news'); ?>"><span class="site-menu-label">NEWS</span><span class="site-menu-subtitle">ニュース</span></a>
+    <a href="<?php echo carveout_theme_page_url('livers'); ?>"><span class="site-menu-label">LIVER</span><span class="site-menu-subtitle">所属ライバー</span></a>
+    <a href="<?php echo carveout_theme_page_url('events'); ?>"><span class="site-menu-label">EVENT</span><span class="site-menu-subtitle">事務所イベント</span></a>
+    <a href="<?php echo carveout_theme_page_url('benefit'); ?>"><span class="site-menu-label">BENEFIT</span><span class="site-menu-subtitle">所属特典</span></a>
+    <a href="<?php echo carveout_theme_page_url('message'); ?>"><span class="site-menu-label">MESSAGE</span><span class="site-menu-subtitle">代表メッセージ</span></a>
+    <a href="<?php echo carveout_theme_page_url('kabuu'); ?>"><span class="site-menu-label">CHARACTER</span><span class="site-menu-subtitle">公式キャラクター</span></a>
+    <a href="<?php echo carveout_theme_page_url('services'); ?>"><span class="site-menu-label">SUPPORT</span><span class="site-menu-subtitle">サポート</span></a>
+    <a href="<?php echo carveout_theme_page_url('privacy'); ?>"><span class="site-menu-label">PRIVACY POLICY</span><span class="site-menu-subtitle">プライバシーポリシー</span></a>
+    <a href="<?php echo carveout_theme_page_url('compliance'); ?>"><span class="site-menu-label">COMPLIANCE</span><span class="site-menu-subtitle">コンプライアンス</span></a>
+    <a href="<?php echo carveout_theme_page_url('about'); ?>"><span class="site-menu-label">COMPANY</span><span class="site-menu-subtitle">運営会社</span></a>
+    <a href="<?php echo carveout_theme_page_url('contact'); ?>"><span class="site-menu-label">CONTACT</span><span class="site-menu-subtitle">お問い合わせ</span></a>
+    <div class="site-menu-social social-links" aria-label="公式SNS">
+      <a href="https://x.com/carveout_info?s=21" target="_blank" rel="noopener" aria-label="CARVEOUT公式X"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"></path></svg></a>
+      <a href="https://www.instagram.com/carveout.official" target="_blank" rel="noopener" aria-label="CARVEOUT公式Instagram"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"></rect><circle cx="12" cy="12" r="3.4"></circle><path d="M17.4 6.7h.01"></path></svg></a>
+      <a href="https://www.tiktok.com/@carveout_official" target="_blank" rel="noopener" aria-label="CARVEOUT公式TikTok"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4v10.2a4.2 4.2 0 1 1-3.6-4.16"></path><path d="M14 4c.7 2.65 2.34 4.23 5 4.72"></path></svg></a>
+    </div>
+  </nav>
+</header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">CARVEOUT LIVER AGENCY</p>
+        <h1>あなたの配信を、<br>仕事に変える。</h1>
+        <p class="hero-lead">初配信の準備からイベント戦略、ファンコミュニケーション、活動データの改善まで。継続できる活動を支えます。</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="<?php echo carveout_theme_page_url('contact'); ?>">ライバー相談をする</a>
+          <a class="btn btn-secondary" href="<?php echo carveout_theme_page_url('services'); ?>">サポート内容を見る</a>
+        </div>
+      </div>
+      <div class="hero-visual" aria-label="ライブ配信画面のイメージ">
+        <video class="hero-video hero-video-pc" autoplay muted loop playsinline preload="metadata" aria-label="CARVEOUT ヒーロー動画">
+          <source src="<?php echo carveout_theme_asset('assets/hero.mp4?v=light-20260522'); ?>" type="video/mp4">
+        </video>
+        <video class="hero-video hero-video-mobile" autoplay muted loop playsinline preload="metadata" aria-label="CARVEOUT スマホ用ヒーロー動画">
+          <source src="<?php echo carveout_theme_asset('assets/hero-mobile.mp4?v=sharp-20260522'); ?>" type="video/mp4">
+        </video>
+        <div class="phone-mockup">
+          <div class="live-badge">17 LIVE</div>
+          <div class="avatar avatar-main"></div>
+          <div class="stream-title">新人イベント挑戦中</div>
+          <div class="comment comment-1">配信テーマを一緒に設計</div>
+          <div class="comment comment-2">ギフト導線も改善</div>
+          <div class="heart-stack">+17K</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section about-section">
+      <div class="about-inner">
+        <div class="about-copy heading-inverted">
+          <p class="eyebrow">ABOUT</p>
+          <h2>カーブアウトとは？</h2>
+        </div>
+        <figure class="about-visual" aria-label="CARVEOUT所属ライバーのイメージ">
+          <img src="<?php echo carveout_theme_asset('assets/about-portrait.jpg?v=20260522-q92'); ?>" alt="CARVEOUT所属ライバーのイメージ" loading="eager" fetchpriority="high" decoding="async">
+        </figure>
+        <div class="about-text">
+          <p>ライバー事務所「カーブアウト」には、さまざまなライブ配信アプリで活躍するライバー・クリエイターが所属しており、グループ全体で20,000名以上が所属しています。</p>
+          <p>未経験から活動をスタートしたライバーから、トップクラスで活躍するクリエイターまで、一人ひとりの個性や目標に寄り添いながら、配信活動を総合的にサポート。</p>
+          <p>マネジメント・イベント支援・分析・クリエイティブ制作など、幅広い体制を通じて、ライバーとしての可能性を最大限に引き出します。</p>
+          <a class="btn btn-secondary about-more" href="<?php echo carveout_theme_page_url('about-detail'); ?>">詳細を見る</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="event" class="section event-section">
+      <div class="section-heading">
+        <p class="eyebrow">EVENT</p>
+        <h2>事務所イベント</h2>
+      </div>
+      <div class="event-feature-wrap">
+        <div class="news-grid event-grid event-feature-grid" id="officeEventGrid" aria-live="polite"></div>
+      </div>
+      <div class="news-more">
+        <a class="btn btn-secondary" href="<?php echo carveout_theme_page_url('events'); ?>">事務所イベントをもっと見る</a>
+      </div>
+    </section>
+
+    <section id="news" class="section news-section">
+      <div class="section-heading heading-inverted">
+        <p class="eyebrow">NEWS</p>
+        <h2>最新ニュース</h2>
+      </div>
+      <div class="news-carousel" aria-label="17LIVE関連の最新ニュース">
+        <div class="news-carousel-track" id="latestNewsTrack"></div>
+      </div>
+      <div class="news-more">
+        <a class="btn btn-secondary" href="<?php echo carveout_theme_page_url('news'); ?>">すべてのニュースを見る</a>
+      </div>
+    </section>
+
+    <section id="application" class="section application-section">
+      <div class="section-heading heading-inverted">
+        <p class="eyebrow">APPLICATION</p>
+        <h2>配信アプリ</h2>
+      </div>
+      <div class="application-list" aria-label="対応配信アプリ">
+        <div class="application-item">
+          <img src="https://ccarveout.jp/wp-content/themes/carveout_2/images/v2/icon_big_17.png" alt="17LIVE">
+          <span>17LIVE</span>
+        </div>
+        <div class="application-item">
+          <img src="https://ccarveout.jp/wp-content/themes/carveout_2/images/v2/icon_big_t.png" alt="TikTok">
+          <span>TikTok</span>
+        </div>
+        <div class="application-item">
+          <img src="https://ccarveout.jp/wp-content/themes/carveout_2/images/v2/icon_big_p.png" alt="Pococha">
+          <span>Pococha</span>
+        </div>
+        <div class="application-item">
+          <img src="https://ccarveout.jp/wp-content/themes/carveout_2/images/v2/icon_big_bigo.png" alt="BIGOLIVE">
+          <span>BIGOLIVE</span>
+        </div>
+        <div class="application-item">
+          <img src="https://ccarveout.jp/wp-content/themes/carveout_2/images/app_icon_mixch.png" alt="ミクチャ">
+          <span>ミクチャ</span>
+        </div>
+        <div class="application-item">
+          <img src="https://ccarveout.jp/wp-content/themes/carveout_2/images/app_icon_whowach.png" alt="ふわっち">
+          <span>ふわっち</span>
+        </div>
+        <div class="application-item">
+          <img src="<?php echo carveout_theme_asset('assets/palmu-icon.png'); ?>" alt="Palmu">
+          <span>Palmu</span>
+        </div>
+        <div class="application-item">
+          <img src="<?php echo carveout_theme_asset('assets/showroom-icon.png'); ?>" alt="SHOWROOM">
+          <span>SHOWROOM</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="ranking" class="section ranking-section">
+      <div class="section-heading heading-inverted">
+        <p class="eyebrow">RANKING</p>
+        <h2>ライバーランキング</h2>
+      </div>
+
+      <div class="ranking-tabs" role="tablist" aria-label="ランキングアプリ">
+        <button class="ranking-tab is-active" type="button" data-ranking-platform="17live">
+          <img src="https://ccarveout.jp/wp-content/themes/carveout_2/images/v2/icon_big_17.png" alt="">
+          17LIVE
+        </button>
+        <button class="ranking-tab" type="button" data-ranking-platform="bigolive">
+          <img src="https://ccarveout.jp/wp-content/themes/carveout_2/images/v2/icon_big_bigo.png" alt="">
+          BIGOLIVE
+        </button>
+      </div>
+
+      <div class="ranking-platform is-active" data-ranking-platform-panel="17live">
+        <div class="ranking-subtabs" role="tablist" aria-label="17LIVEランキング種別">
+          <button class="ranking-subtab is-active" type="button" data-ranking-list="17live-total">総合</button>
+          <button class="ranking-subtab" type="button" data-ranking-list="17live-newcomer">新人</button>
+        </div>
+
+        <div class="ranking-block is-active" data-ranking-list-panel="17live-total">
+          <h4>総合ランキング</h4>
+          <div class="ranking-list">
+            <a class="ranking-card" href="https://17.live/s/u/43e81b67-a175-4fd4-9bf2-4a08bfd81c98?pid=17.live">
+              <span>1</span>
+              <img src="https://ccarveout.jp/wp-content/uploads/2026/02/潤🐬🎬JunChannel-.jpeg" alt="潤🐬🎬JunChannel">
+              <p>潤🐬🎬JunChannel</p>
+            </a>
+            <a class="ranking-card" href="https://17.live/s/u/03b9f644-320b-413e-8d49-29bdaaf764f8?pid=17.live">
+              <span>2</span>
+              <img src="https://ccarveout.jp/wp-content/uploads/2025/07/20260513-171611.jpeg" alt="りの🥕🐰🌟">
+              <p>りの🥕🐰🌟</p>
+            </a>
+            <a class="ranking-card" href="https://17.live/s/u/8d9e879e-9b52-444d-85a0-dc10aa87ef08?pid=17.live">
+              <span>3</span>
+              <img src="https://ccarveout.jp/wp-content/uploads/2025/04/20260105-103504.jpeg" alt="möco🪴🐈‍⬛">
+              <p>möco🪴🐈‍⬛</p>
+            </a>
+            <a class="ranking-card" href="https://17.live/s/u/2947ced1-e524-4b87-8002-a10d742701d4?pid=17.live">
+              <span>4</span>
+              <img src="https://ccarveout.jp/wp-content/uploads/2025/07/20260513-171717.jpeg" alt="はるの🐰trombone🪊🌸">
+              <p>はるの🐰trombone🪊🌸</p>
+            </a>
+            <a class="ranking-card" href="https://17.live/s/u/66d840a0-5949-4ac9-9a88-75c72ff00b52?pid=17.live">
+              <span>5</span>
+              <img src="https://ccarveout.jp/wp-content/uploads/2025/07/20251205-161614.jpeg" alt="·̩͙꒰ঌ眞白真優🤍ྀི💍">
+              <p>·̩͙꒰ঌ眞白真優🤍ྀི💍</p>
+            </a>
+          </div>
+        </div>
+
+        <div class="ranking-block" data-ranking-list-panel="17live-newcomer">
+          <h4>新人ランキング</h4>
+          <div class="ranking-list">
+            <a class="ranking-card" href="https://17.live/s/u/39de9aab-9536-4aa5-965f-936e1529eec4?pid=17.live">
+              <span>1</span>
+              <img src="https://ccarveout.jp/wp-content/uploads/2025/07/20260513-171855.jpeg" alt="yuzu_8yy（SSP所属）">
+              <p>yuzu_8yy（SSP所属）</p>
+            </a>
+            <a class="ranking-card" href="https://17.live/s/u/82d0cd4f-d1d0-4d0b-97ab-fb10ae61b232?pid=17.live">
+              <span>2</span>
+              <img src="https://ccarveout.jp/wp-content/uploads/2025/07/20260407-114125.jpeg" alt="mizuha_lily">
+              <p>mizuha_lily</p>
+            </a>
+            <a class="ranking-card" href="https://17.live/s/u/7d649fe7-6a60-4dd5-8d57-f857601b77b7?pid=17.live">
+              <span>3</span>
+              <img src="https://ccarveout.jp/wp-content/uploads/2025/07/20260513-171936.jpeg" alt="めいめい_0223">
+              <p>めいめい_0223</p>
+            </a>
+            <a class="ranking-card" href="https://17.live/s/u/6a61974c-a636-4e16-a9c7-1dca72185748?pid=17.live">
+              <span>4</span>
+              <img src="https://ccarveout.jp/wp-content/uploads/2025/07/20260513-172038.jpeg" alt="ななna_tan2026">
+              <p>ななna_tan2026</p>
+            </a>
+            <a class="ranking-card" href="https://17.live/s/u/d6752c6f-6f04-43d1-8a03-276494abb79c?pid=17.live">
+              <span>5</span>
+              <img src="https://ccarveout.jp/wp-content/uploads/2025/07/20260513-172109.jpeg" alt="なつ_natsu72">
+              <p>なつ_natsu72</p>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ranking-platform" data-ranking-platform-panel="bigolive">
+        <div class="ranking-block is-active" data-ranking-list-panel="bigolive-total">
+          <h4>総合ランキング</h4>
+          <div class="ranking-list ranking-list-small">
+            <a class="ranking-card" href="https://www.bigo.tv/ja/user/902194547">
+              <span>1</span>
+              <img src="https://ccarveout.jp/wp-content/uploads/2025/07/20260407-115330.jpeg" alt="ちゃんまんにゃんᥬ👽ᩤ">
+              <p>ちゃんまんにゃんᥬ👽ᩤ</p>
+            </a>
+            <a class="ranking-card" href="https://www.bigo.tv/ja/user/1096118859">
+              <span>2</span>
+              <img src="https://ccarveout.jp/wp-content/uploads/2025/07/20260407-115434.jpg" alt="🌙LUNA🐶">
+              <p>🌙LUNA🐶</p>
+            </a>
+            <a class="ranking-card" href="https://www.bigo.tv/user/1073186957">
+              <span>3</span>
+              <img src="https://ccarveout.jp/wp-content/uploads/2025/07/20260513-170654.jpeg" alt="優香👗🌹Yuuka">
+              <p>優香👗🌹Yuuka</p>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="livers" class="section featured-liver-section">
+      <div class="section-heading heading-inverted">
+        <p class="eyebrow">LIVER</p>
+        <h2>所属ライバー紹介</h2>
+      </div>
+      <div class="featured-liver-carousel" aria-label="所属ライバー紹介">
+        <div class="featured-liver-track" id="featuredLiverTrack" aria-live="polite"></div>
+      </div>
+      <div class="news-more">
+        <a class="btn btn-secondary" href="<?php echo carveout_theme_page_url('livers'); ?>">所属ライバーをもっと見る</a>
+      </div>
+    </section>
+
+    <section id="interview" class="section interview-section">
+      <div class="section-heading heading-inverted interview-heading">
+        <p class="eyebrow">INTERVIEW</p>
+        <h2>インタビュー</h2>
+      </div>
+      <div class="interview-panel">
+        <div class="interview-list">
+          <a class="interview-list-card" href="<?php echo carveout_theme_page_url('interview-detail'); ?>?id=3611">
+            <img src="https://ccarveout.jp/wp-content/uploads/2024/01/20260402-185721.jpeg" alt="夢を追い続ける素晴らしさを発信していきたい">
+            <div>
+              <time datetime="2026-04-03">2026.04.03</time>
+              <h3>夢を追い続ける素晴らしさを発信していきたい</h3>
+            </div>
+          </a>
+          <a class="interview-list-card" href="<?php echo carveout_theme_page_url('interview-detail'); ?>?id=3521">
+            <img src="https://ccarveout.jp/wp-content/uploads/2026/03/20260305-172905.jpeg" alt="みんなに幸せを届けられるようなライバーに">
+            <div>
+              <time datetime="2026-03-05">2026.03.05</time>
+              <h3>みんなに幸せを届けられるようなライバーに</h3>
+            </div>
+          </a>
+          <a class="interview-list-card" href="<?php echo carveout_theme_page_url('interview-detail'); ?>?id=3441">
+            <img src="https://ccarveout.jp/wp-content/uploads/2026/02/20260217-143136.jpeg" alt="配信は、パン屋開業への第一歩だった">
+            <div>
+              <time datetime="2026-02-17">2026.02.17</time>
+              <h3>配信は、パン屋開業への第一歩だった</h3>
+            </div>
+          </a>
+        </div>
+      </div>
+      <div class="interview-more">
+        <a class="interview-more-button" href="<?php echo carveout_theme_page_url('interview'); ?>">
+          <span>
+            インタビューをみる
+            <small>INTERVIEW LIST</small>
+          </span>
+          <b aria-hidden="true">→</b>
+        </a>
+      </div>
+    </section>
+
+    <section class="cta-section">
+      <div class="section-heading">
+        <p class="eyebrow">ENTRY</p>
+        <h2>ライバー・クリエイター<br>はじめる。はじまる。</h2>
+      </div>
+      <div class="entry-card-grid">
+        <article class="entry-card">
+          <h3>一緒に悩ませてください。<br>まずは話を聞くだけでも。</h3>
+          <a class="entry-button" href="<?php echo carveout_theme_page_url('audition'); ?>">
+            <span>
+              ライバーになる
+              <small>もちろん無料で相談随時募集中！</small>
+            </span>
+            <b aria-hidden="true">→</b>
+          </a>
+        </article>
+        <article class="entry-card">
+          <h3>あなたの身近にも<br>原石が埋もれていませんか？<br>サポートの仕方から教えます。</h3>
+          <a class="entry-button" href="<?php echo carveout_theme_page_url('partner'); ?>">
+            <span>
+              事務所を運営する
+              <small>加盟料・研修料など完全無料！</small>
+            </span>
+            <b aria-hidden="true">→</b>
+          </a>
+        </article>
+      </div>
+    </section>
+
+    <section id="related-offices" class="section related-office-section">
+      <div class="section-heading heading-inverted">
+        <p class="eyebrow">PARTNERS</p>
+        <h2>関連事務所</h2>
+      </div>
+      <div class="related-office-grid" aria-label="関連事務所">
+        <article class="related-office-card">
+          <p>TikTokでの配信をご希望の方</p>
+          <div class="related-office-logo related-office-logo-dark">
+            <img src="<?php echo carveout_theme_asset('assets/partner-unitrus.png'); ?>" alt="UniTrus" loading="lazy" decoding="async">
+          </div>
+        </article>
+        <article class="related-office-card">
+          <p>Pocochaでの配信をご希望の方</p>
+          <div class="related-office-logo">
+            <img src="<?php echo carveout_theme_asset('assets/partner-sesang.png'); ?>" alt="Sesang" loading="lazy" decoding="async">
+          </div>
+        </article>
+        <article class="related-office-card">
+          <p>歌配信をご希望の方</p>
+          <a class="related-office-logo" href="https://interline-music.jp" target="_blank" rel="noopener">
+            <img src="<?php echo carveout_theme_asset('assets/partner-music.png'); ?>" alt="歌配信関連事務所" loading="lazy" decoding="async">
+          </a>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+  <div>
+    <img class="footer-logo" src="<?php echo carveout_theme_asset('assets/carveout-logo-white.png'); ?>" alt="CARVEOUT">
+    <p>&copy; 2026 CARVEOUT. All Rights Reserved.</p>
+  </div>
+  <div class="footer-links">
+    <nav aria-label="フッターナビゲーション">
+      <a href="<?php echo carveout_theme_page_url('index'); ?>">トップ</a>
+      <a href="<?php echo carveout_theme_page_url('news'); ?>">ニュース</a>
+      <a href="<?php echo carveout_theme_page_url('livers'); ?>">所属ライバー</a>
+      <a href="<?php echo carveout_theme_page_url('events'); ?>">事務所イベント</a>
+      <a href="<?php echo carveout_theme_page_url('benefit'); ?>">所属特典</a>
+      <a href="<?php echo carveout_theme_page_url('message'); ?>">代表メッセージ</a>
+      <a href="<?php echo carveout_theme_page_url('kabuu'); ?>">公式キャラクター</a>
+      <a href="<?php echo carveout_theme_page_url('services'); ?>">サービス</a>
+      <a href="<?php echo carveout_theme_page_url('contact'); ?>">お問い合わせ</a>
+    </nav>
+    <nav class="footer-subnav" aria-label="フッター補助ナビゲーション">
+      <a href="<?php echo carveout_theme_page_url('privacy'); ?>">プライバシーポリシー</a>
+      <a href="<?php echo carveout_theme_page_url('compliance'); ?>">コンプライアンス</a>
+      <a class="footer-company-link" href="<?php echo carveout_theme_page_url('about'); ?>">運営会社<svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4h6v6"></path><path d="M20 4 10 14"></path><path d="M20 14v5a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1h5"></path></svg></a>
+    </nav>
+    <nav class="footer-social social-links" aria-label="公式SNS">
+      <a href="https://x.com/carveout_info?s=21" target="_blank" rel="noopener" aria-label="CARVEOUT公式X"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 4l16 16M20 4 4 20"></path></svg></a>
+      <a href="https://www.instagram.com/carveout.official" target="_blank" rel="noopener" aria-label="CARVEOUT公式Instagram"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="5"></rect><circle cx="12" cy="12" r="3.4"></circle><path d="M17.4 6.7h.01"></path></svg></a>
+      <a href="https://www.tiktok.com/@carveout_official" target="_blank" rel="noopener" aria-label="CARVEOUT公式TikTok"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M14 4v10.2a4.2 4.2 0 1 1-3.6-4.16"></path><path d="M14 4c.7 2.65 2.34 4.23 5 4.72"></path></svg></a>
+    </nav>
+  </div>
+</footer>
+
+  <script src="<?php echo carveout_theme_asset('js/news-data.js?v=20260520-rankname1'); ?>"></script>
+  <script src="<?php echo carveout_theme_asset('js/event-data.js?v=20260520-rankname1'); ?>"></script>
+  <script src="<?php echo carveout_theme_asset('js/liver-data.js?v=20260522-liversall1'); ?>"></script>
+  <script src="<?php echo carveout_theme_asset('js/script.js?v=20260527-related3'); ?>"></script>
+  <?php wp_footer(); ?>
+</body>
+</html>
