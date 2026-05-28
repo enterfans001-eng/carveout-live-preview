@@ -565,9 +565,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  const newsItems = window.carveout17LiveNews || [];
-  const eventItems = window.carveoutOfficeEventNews || [];
-  const interviewItems = window.carveoutInterviews || [];
+  const cmsItems = window.carveoutWpCms || {};
+  const preferCmsItems = (cmsList, fallbackList) => (
+    Array.isArray(cmsList) && cmsList.length ? cmsList : (fallbackList || [])
+  );
+  const newsItems = preferCmsItems(cmsItems.news, window.carveout17LiveNews);
+  const eventItems = preferCmsItems(cmsItems.events, window.carveoutOfficeEventNews);
+  const interviewItems = preferCmsItems(cmsItems.interviews, window.carveoutInterviews);
+  const rankingItems = Array.isArray(cmsItems.rankings) ? cmsItems.rankings : [];
   const byNewest = (a, b) => new Date(b.datetime || 0) - new Date(a.datetime || 0);
   const sortByNewest = (items) => [...items].sort(byNewest);
 
@@ -576,8 +581,74 @@ document.addEventListener('DOMContentLoaded', () => {
     return match ? match[1] : '';
   };
 
-  const getNewsDetailUrl = (item) => wpPageUrl(`news-detail.html?id=${getContentId(item.url)}`);
-  const getInterviewDetailUrl = (item) => wpPageUrl(`interview-detail.html?id=${item.id}`);
+  const getItemId = (item) => String(item?.id || getContentId(item?.url));
+  const getNewsDetailUrl = (item) => item.detailUrl || wpPageUrl(`news-detail.html?id=${getItemId(item)}`);
+  const getInterviewDetailUrl = (item) => item.detailUrl || wpPageUrl(`interview-detail.html?id=${getItemId(item)}`);
+  const createRankingCard = (item) => {
+    const card = document.createElement('a');
+    card.className = 'ranking-card';
+    card.href = item.url || '#';
+    if (item.url) {
+      card.target = '_blank';
+      card.rel = 'noopener';
+    }
+
+    const rank = document.createElement('span');
+    rank.textContent = item.rank || '';
+
+    const image = document.createElement('img');
+    image.src = item.image || '';
+    image.alt = item.name || '';
+    image.loading = 'lazy';
+    image.decoding = 'async';
+
+    const name = document.createElement('p');
+    name.textContent = item.name || '';
+
+    card.append(rank, image, name);
+    return card;
+  };
+  const renderCmsRankings = () => {
+    if (!rankingItems.length) {
+      return;
+    }
+
+    const panels = [
+      {
+        selector: '[data-ranking-list-panel="17live-total"] .ranking-list',
+        filter: (item) => item.category === '17LIVE' && item.type !== '新人'
+      },
+      {
+        selector: '[data-ranking-list-panel="17live-newcomer"] .ranking-list',
+        filter: (item) => item.category === '17LIVE' && item.type === '新人'
+      },
+      {
+        selector: '[data-ranking-list-panel="bigolive-total"] .ranking-list',
+        filter: (item) => item.category === 'BIGOLIVE'
+      }
+    ];
+
+    panels.forEach(({ selector, filter }) => {
+      const list = document.querySelector(selector);
+      if (!list) {
+        return;
+      }
+
+      const items = rankingItems
+        .filter(filter)
+        .sort((a, b) => Number(a.rank || 999) - Number(b.rank || 999))
+        .slice(0, 5);
+
+      if (!items.length) {
+        return;
+      }
+
+      const fragment = document.createDocumentFragment();
+      items.forEach((item) => fragment.appendChild(createRankingCard(item)));
+      list.replaceChildren(fragment);
+    });
+  };
+  renderCmsRankings();
   const loadDetailHtml = (src) => new Promise((resolve) => {
     if (!src) {
       resolve('');
@@ -845,8 +916,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (newsDetail) {
     const id = new URLSearchParams(window.location.search).get('id');
-    const item = [...newsItems, ...eventItems].find((contentItem) => getContentId(contentItem.url) === id);
-    const isEventDetail = eventItems.some((contentItem) => getContentId(contentItem.url) === id);
+    const item = [...newsItems, ...eventItems].find((contentItem) => getItemId(contentItem) === id);
+    const isEventDetail = eventItems.some((contentItem) => getItemId(contentItem) === id);
     const detailPageEyebrow = document.getElementById('detailPageEyebrow');
     const detailPageTitle = document.getElementById('detailPageTitle');
 
@@ -862,12 +933,13 @@ document.addEventListener('DOMContentLoaded', () => {
       document.title = 'イベント詳細 | CARVEOUT';
     }
 
-    loadDetailHtml(isEventDetail ? `js/event-details/${id}.js` : `js/news-details/${id}.js`).then((detailHtml) => {
+    const staticDetailPath = item && item.detailHtml ? '' : (isEventDetail ? `js/event-details/${id}.js` : `js/news-details/${id}.js`);
+    loadDetailHtml(staticDetailPath).then((detailHtml) => {
       newsDetail.appendChild(createDetailMarkup(
         item,
         wpPageUrl(isEventDetail ? 'events.html' : 'news.html'),
         isEventDetail ? 'イベント一覧へ戻る' : 'ニュース一覧へ戻る',
-        detailHtml
+        item?.detailHtml || detailHtml
       ));
     });
   }
@@ -888,9 +960,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (interviewDetail) {
     const id = new URLSearchParams(window.location.search).get('id');
-    const item = interviewItems.find((interviewItem) => interviewItem.id === id);
-    loadDetailHtml(`js/interview-details/${id}.js`).then((detailHtml) => {
-      interviewDetail.appendChild(createDetailMarkup(item, wpPageUrl('interview.html'), 'インタビュー一覧へ戻る', detailHtml));
+    const item = interviewItems.find((interviewItem) => getItemId(interviewItem) === id);
+    const staticDetailPath = item && item.detailHtml ? '' : `js/interview-details/${id}.js`;
+    loadDetailHtml(staticDetailPath).then((detailHtml) => {
+      interviewDetail.appendChild(createDetailMarkup(item, wpPageUrl('interview.html'), 'インタビュー一覧へ戻る', item?.detailHtml || detailHtml));
     });
   }
 
@@ -980,7 +1053,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const liverTrack = document.getElementById('featuredLiverTrack');
   const liverGrid = document.getElementById('allLiverGrid');
   const liverCategoryTabs = document.getElementById('liverCategoryTabs');
-  const liverItems = window.carveout17LiveLivers || [];
+  const liverItems = preferCmsItems(cmsItems.livers, window.carveout17LiveLivers);
 
   if (liverTrack && Array.isArray(liverItems)) {
     const featuredItems = liverItems.slice(0, 6);
