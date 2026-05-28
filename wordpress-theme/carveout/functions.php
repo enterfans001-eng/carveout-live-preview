@@ -121,6 +121,40 @@ function carveout_theme_register_liver_taxonomy(): void
 }
 add_action('init', 'carveout_theme_register_liver_taxonomy');
 
+function carveout_theme_default_ranking_categories(): array
+{
+    return [
+        ['name' => '17LIVE 総合', 'slug' => '17live-total'],
+        ['name' => '17LIVE 新人', 'slug' => '17live-newcomer'],
+        ['name' => 'BIGOLIVE 総合', 'slug' => 'bigolive-total'],
+    ];
+}
+
+function carveout_theme_register_ranking_taxonomy(): void
+{
+    register_taxonomy('carveout_ranking_category', ['carveout_ranking'], [
+        'labels' => [
+            'name' => 'ランキングカテゴリ',
+            'singular_name' => 'ランキングカテゴリ',
+            'add_new_item' => 'ランキングカテゴリを追加',
+            'edit_item' => 'ランキングカテゴリを編集',
+        ],
+        'public' => true,
+        'show_ui' => true,
+        'show_admin_column' => true,
+        'show_in_rest' => true,
+        'hierarchical' => true,
+        'rewrite' => ['slug' => 'ranking-category'],
+    ]);
+
+    foreach (carveout_theme_default_ranking_categories() as $term) {
+        if (!get_term_by('slug', $term['slug'], 'carveout_ranking_category')) {
+            wp_insert_term($term['name'], 'carveout_ranking_category', ['slug' => $term['slug']]);
+        }
+    }
+}
+add_action('init', 'carveout_theme_register_ranking_taxonomy');
+
 function carveout_theme_meta_fields(): array
 {
     return [
@@ -359,10 +393,14 @@ function carveout_theme_get_rankings(): array
     $items = [];
 
     foreach ($query->posts as $post) {
+        $term_meta = carveout_theme_infer_ranking_term_meta($post->ID);
+        $category = trim((string) get_post_meta($post->ID, 'carveout_liver_app_text', true));
+        $type = trim((string) get_post_meta($post->ID, 'carveout_ranking_type', true));
+
         $items[] = [
             'name' => get_the_title($post),
-            'category' => (string) get_post_meta($post->ID, 'carveout_liver_app_text', true),
-            'type' => (string) get_post_meta($post->ID, 'carveout_ranking_type', true),
+            'category' => $category ?: $term_meta['category'],
+            'type' => $type ?: $term_meta['type'],
             'rank' => (int) get_post_meta($post->ID, 'carveout_rank_number', true),
             'url' => (string) get_post_meta($post->ID, 'carveout_profile_url', true),
             'image' => carveout_theme_post_image_url($post->ID),
@@ -372,6 +410,41 @@ function carveout_theme_get_rankings(): array
     wp_reset_postdata();
 
     return $items;
+}
+
+function carveout_theme_infer_ranking_term_meta(int $post_id): array
+{
+    $meta = [
+        'category' => '',
+        'type' => '',
+    ];
+
+    $terms = wp_get_post_terms($post_id, 'carveout_ranking_category');
+    if (is_wp_error($terms) || empty($terms)) {
+        return $meta;
+    }
+
+    foreach ($terms as $term) {
+        $key = strtolower($term->slug . ' ' . $term->name);
+
+        if (!$meta['category']) {
+            if (strpos($key, 'bigolive') !== false || strpos($key, 'bigo') !== false) {
+                $meta['category'] = 'BIGOLIVE';
+            } elseif (strpos($key, '17live') !== false || strpos($key, '17') !== false) {
+                $meta['category'] = '17LIVE';
+            }
+        }
+
+        if (!$meta['type']) {
+            if (strpos($key, 'newcomer') !== false || strpos($key, '新人') !== false) {
+                $meta['type'] = '新人';
+            } elseif (strpos($key, 'total') !== false || strpos($key, '総合') !== false) {
+                $meta['type'] = '総合';
+            }
+        }
+    }
+
+    return $meta;
 }
 
 function carveout_theme_print_cms_data(): void
