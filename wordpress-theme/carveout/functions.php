@@ -57,6 +57,154 @@ function carveout_theme_first_post_meta(int $post_id, array $keys): string
     return '';
 }
 
+function carveout_theme_normalize_lookup_text(string $value): string
+{
+    $value = trim(wp_strip_all_tags($value));
+    if (function_exists('mb_convert_kana')) {
+        $value = mb_convert_kana($value, 'asKV', 'UTF-8');
+    }
+
+    $value = preg_replace('/\s+/u', '', $value);
+    $value = is_string($value) ? $value : '';
+
+    return function_exists('mb_strtolower') ? mb_strtolower($value, 'UTF-8') : strtolower($value);
+}
+
+function carveout_theme_extract_window_array(string $path, string $var_name): array
+{
+    if (!is_readable($path)) {
+        return [];
+    }
+
+    $contents = file_get_contents($path);
+    if (!is_string($contents)) {
+        return [];
+    }
+
+    $pattern = '/window\.' . preg_quote($var_name, '/') . '\s*=\s*(\[.*?\]);/s';
+    if (!preg_match($pattern, $contents, $matches)) {
+        return [];
+    }
+
+    $decoded = json_decode($matches[1], true);
+
+    return is_array($decoded) ? $decoded : [];
+}
+
+function carveout_theme_static_liver_map(): array
+{
+    static $map = null;
+    if ($map !== null) {
+        return $map;
+    }
+
+    $map = [];
+    $items = carveout_theme_extract_window_array(get_template_directory() . '/js/liver-data.js', 'carveout17LiveLivers');
+
+    foreach ($items as $item) {
+        if (!is_array($item) || empty($item['name'])) {
+            continue;
+        }
+
+        $name = sanitize_text_field((string) $item['name']);
+        $key = carveout_theme_normalize_lookup_text($name);
+        if ($key === '') {
+            continue;
+        }
+
+        $map[$key] = [
+            'name' => $name,
+            'category' => isset($item['category']) ? sanitize_text_field((string) $item['category']) : '',
+            'url' => isset($item['url']) ? esc_url_raw((string) $item['url']) : '',
+            'instagramUrl' => isset($item['instagramUrl']) ? esc_url_raw((string) $item['instagramUrl']) : '',
+            'image' => isset($item['image']) ? esc_url_raw((string) $item['image']) : '',
+        ];
+    }
+
+    return $map;
+}
+
+function carveout_theme_static_ranking_seed(): array
+{
+    return [
+        '17LIVE' => [
+            'total' => [
+                [
+                    'name' => '潤🐬🎬JunChannel',
+                    'image' => 'https://ccarveout.jp/wp-content/uploads/2026/02/潤🐬🎬JunChannel-.jpeg',
+                    'url' => 'https://17.live/s/u/43e81b67-a175-4fd4-9bf2-4a08bfd81c98?pid=17.live',
+                ],
+                [
+                    'name' => 'りの🥕🐰🌟',
+                    'image' => 'https://ccarveout.jp/wp-content/uploads/2025/07/20260513-171611.jpeg',
+                    'url' => 'https://17.live/s/u/03b9f644-320b-413e-8d49-29bdaaf764f8?pid=17.live',
+                ],
+                [
+                    'name' => 'möco🪴🐈‍⬛',
+                    'image' => 'https://ccarveout.jp/wp-content/uploads/2025/04/20260105-103504.jpeg',
+                    'url' => 'https://17.live/s/u/8d9e879e-9b52-444d-85a0-dc10aa87ef08?pid=17.live',
+                ],
+                [
+                    'name' => 'はるの🐰trombone🪊🌸',
+                    'image' => 'https://ccarveout.jp/wp-content/uploads/2025/07/20260513-171717.jpeg',
+                    'url' => 'https://17.live/s/u/2947ced1-e524-4b87-8002-a10d742701d4?pid=17.live',
+                ],
+                [
+                    'name' => '·̩͙꒰ঌ眞白真優🤍ྀི💍',
+                    'image' => 'https://ccarveout.jp/wp-content/uploads/2025/07/20251205-161614.jpeg',
+                    'url' => 'https://17.live/s/u/66d840a0-5949-4ac9-9a88-75c72ff00b52?pid=17.live',
+                ],
+            ],
+            'newcomer' => [
+                [
+                    'name' => 'yuzu_8yy（SSP所属）',
+                    'image' => 'https://ccarveout.jp/wp-content/uploads/2025/07/20260513-171855.jpeg',
+                    'url' => 'https://17.live/s/u/39de9aab-9536-4aa5-965f-936e1529eec4?pid=17.live',
+                ],
+                [
+                    'name' => 'mizuha_lily',
+                    'image' => 'https://ccarveout.jp/wp-content/uploads/2025/07/20260407-114125.jpeg',
+                    'url' => 'https://17.live/s/u/82d0cd4f-d1d0-4d0b-97ab-fb10ae61b232?pid=17.live',
+                ],
+                [
+                    'name' => 'めいめい_0223',
+                    'image' => 'https://ccarveout.jp/wp-content/uploads/2025/07/20260513-171936.jpeg',
+                    'url' => 'https://17.live/s/u/7d649fe7-6a60-4dd5-8d57-f857601b77b7?pid=17.live',
+                ],
+                [
+                    'name' => 'ななna_tan2026',
+                    'image' => 'https://ccarveout.jp/wp-content/uploads/2025/07/20260513-172038.jpeg',
+                    'url' => 'https://17.live/s/u/6a61974c-a636-4e16-a9c7-1dca72185748?pid=17.live',
+                ],
+                [
+                    'name' => 'なつ_natsu72',
+                    'image' => 'https://ccarveout.jp/wp-content/uploads/2025/07/20260513-172109.jpeg',
+                    'url' => 'https://17.live/s/u/d6752c6f-6f04-43d1-8a03-276494abb79c?pid=17.live',
+                ],
+            ],
+        ],
+        'BIGOLIVE' => [
+            'total' => [
+                [
+                    'name' => 'ちゃんまんにゃんᥬ👽ᩤ',
+                    'image' => 'https://ccarveout.jp/wp-content/uploads/2025/07/20260407-115330.jpeg',
+                    'url' => 'https://www.bigo.tv/ja/user/902194547',
+                ],
+                [
+                    'name' => '🌙LUNA🐶',
+                    'image' => 'https://ccarveout.jp/wp-content/uploads/2025/07/20260407-115434.jpg',
+                    'url' => 'https://www.bigo.tv/ja/user/1096118859',
+                ],
+                [
+                    'name' => '優香👗🌹Yuuka',
+                    'image' => 'https://ccarveout.jp/wp-content/uploads/2025/07/20260513-170654.jpeg',
+                    'url' => 'https://www.bigo.tv/user/1073186957',
+                ],
+            ],
+        ],
+    ];
+}
+
 function carveout_theme_static_page_templates(): array
 {
     return [
@@ -199,12 +347,14 @@ function carveout_theme_register_content_types(): void
             'singular_name' => '所属ライバー',
             'menu_icon' => 'dashicons-groups',
             'rewrite' => 'cms-livers',
+            'taxonomies' => ['carveout_liver_app'],
         ],
         'carveout_ranking' => [
             'name' => 'ランキング',
             'singular_name' => 'ランキング',
             'menu_icon' => 'dashicons-awards',
             'rewrite' => 'cms-ranking',
+            'taxonomies' => ['carveout_ranking_category'],
         ],
     ];
 
@@ -225,6 +375,7 @@ function carveout_theme_register_content_types(): void
             'supports' => ['title', 'editor', 'thumbnail', 'excerpt', 'page-attributes'],
             'has_archive' => false,
             'rewrite' => ['slug' => $config['rewrite']],
+            'taxonomies' => $config['taxonomies'] ?? [],
         ]);
     }
 }
@@ -642,7 +793,11 @@ function carveout_theme_get_cms_posts(string $post_type, int $limit = -1): array
         }
 
         $date = carveout_theme_format_date($post->ID);
-        $source_url = (string) get_post_meta($post->ID, 'carveout_source_url', true);
+        $source_id = (string) get_post_meta($post->ID, '_carveout_source_id', true);
+        $source_url = carveout_theme_first_post_meta($post->ID, [
+            'carveout_source_url',
+            '_carveout_source_url',
+        ]);
         $detail_page = $detail_pages[$post_type] ?? '';
         $detail_url = $detail_page
             ? add_query_arg('id', $post->ID, carveout_theme_page_url($detail_page))
@@ -650,6 +805,8 @@ function carveout_theme_get_cms_posts(string $post_type, int $limit = -1): array
 
         $items[] = [
             'id' => (string) $post->ID,
+            'sourceId' => $source_id,
+            'sourceUrl' => $source_url,
             'date' => $date['date'],
             'datetime' => $date['datetime'],
             'title' => $post_title,
@@ -800,28 +957,165 @@ function carveout_theme_infer_ranking_term_meta(int $post_id): array
         return $meta;
     }
 
+    $keys = [];
     foreach ($terms as $term) {
-        $key = strtolower($term->slug . ' ' . $term->name);
+        $keys[] = strtolower($term->slug . ' ' . $term->name);
+    }
 
-        if (!$meta['category']) {
-            if (strpos($key, 'bigolive') !== false || strpos($key, 'bigo') !== false) {
-                $meta['category'] = 'BIGOLIVE';
-            } elseif (strpos($key, '17live') !== false || strpos($key, '17') !== false) {
+    foreach ($keys as $key) {
+        if (strpos($key, 'bigolive') !== false || strpos($key, 'bigo') !== false) {
+            $meta['category'] = 'BIGOLIVE';
+            break;
+        }
+    }
+
+    if (!$meta['category']) {
+        foreach ($keys as $key) {
+            if (strpos($key, '17live') !== false || strpos($key, '17') !== false) {
                 $meta['category'] = '17LIVE';
+                break;
             }
         }
+    }
 
-        if (!$meta['type']) {
-            if (strpos($key, 'newcomer') !== false || strpos($key, '新人') !== false) {
-                $meta['type'] = '新人';
-            } elseif (strpos($key, 'total') !== false || strpos($key, '総合') !== false) {
+    foreach ($keys as $key) {
+        if (strpos($key, 'newcomer') !== false || strpos($key, '新人') !== false) {
+            $meta['type'] = '新人';
+            break;
+        }
+    }
+
+    if (!$meta['type']) {
+        foreach ($keys as $key) {
+            if (strpos($key, 'total') !== false || strpos($key, '総合') !== false) {
                 $meta['type'] = '総合';
+                break;
             }
         }
     }
 
     return $meta;
 }
+
+function carveout_theme_should_seed_meta(string $value): bool
+{
+    $value = trim($value);
+
+    return $value === '' || in_array($value, ['テスト', 'test', 'TEST'], true);
+}
+
+function carveout_theme_backfill_liver_meta(): void
+{
+    if (!is_admin() || !current_user_can('edit_posts')) {
+        return;
+    }
+
+    $map = carveout_theme_static_liver_map();
+    if (!$map) {
+        return;
+    }
+
+    $post_ids = get_posts([
+        'post_type' => 'carveout_liver',
+        'post_status' => ['publish', 'draft', 'pending', 'private'],
+        'posts_per_page' => -1,
+        'fields' => 'ids',
+        'no_found_rows' => true,
+        'suppress_filters' => true,
+    ]);
+
+    foreach ($post_ids as $post_id) {
+        $item = $map[carveout_theme_normalize_lookup_text(get_the_title($post_id))] ?? null;
+        if (!$item) {
+            continue;
+        }
+
+        if ($item['url'] && carveout_theme_first_post_meta((int) $post_id, [
+            'carveout_profile_url',
+            'profile_url',
+            'liver_profile_url',
+            'carveout_liver_profile_url',
+            '_profile_url',
+        ]) === '') {
+            update_post_meta((int) $post_id, 'carveout_profile_url', $item['url']);
+        }
+
+        if ($item['instagramUrl'] && carveout_theme_first_post_meta((int) $post_id, [
+            'carveout_instagram_url',
+            'instagram_url',
+            'liver_instagram_url',
+            'carveout_liver_instagram_url',
+            '_instagram_url',
+        ]) === '') {
+            update_post_meta((int) $post_id, 'carveout_instagram_url', $item['instagramUrl']);
+        }
+
+        if ($item['image'] && carveout_theme_first_post_meta((int) $post_id, [
+            'carveout_image_url',
+            'image_url',
+            'liver_image_url',
+            '_image_url',
+        ]) === '' && !has_post_thumbnail((int) $post_id)) {
+            update_post_meta((int) $post_id, 'carveout_image_url', $item['image']);
+        }
+
+        if ($item['category'] && trim((string) get_post_meta((int) $post_id, 'carveout_liver_app_text', true)) === '') {
+            update_post_meta((int) $post_id, 'carveout_liver_app_text', $item['category']);
+        }
+
+        if ($item['category']) {
+            $terms = wp_get_object_terms((int) $post_id, 'carveout_liver_app', ['fields' => 'ids']);
+            if (!is_wp_error($terms) && !$terms) {
+                wp_set_object_terms((int) $post_id, $item['category'], 'carveout_liver_app', false);
+            }
+        }
+    }
+}
+add_action('admin_init', 'carveout_theme_backfill_liver_meta');
+
+function carveout_theme_backfill_ranking_meta(): void
+{
+    if (!is_admin() || !current_user_can('edit_posts')) {
+        return;
+    }
+
+    $seed = carveout_theme_static_ranking_seed();
+    $post_ids = get_posts([
+        'post_type' => 'carveout_ranking',
+        'post_status' => ['publish', 'draft', 'pending', 'private'],
+        'posts_per_page' => -1,
+        'fields' => 'ids',
+        'no_found_rows' => true,
+        'suppress_filters' => true,
+    ]);
+
+    foreach ($post_ids as $post_id) {
+        $term_meta = carveout_theme_infer_ranking_term_meta((int) $post_id);
+        $category = $term_meta['category'] ?: '';
+        if (!$category || empty($seed[$category])) {
+            continue;
+        }
+
+        foreach ($seed[$category] as $group => $items) {
+            foreach ($items as $index => $item) {
+                $rank = $index + 1;
+                foreach (['name', 'image', 'url'] as $field) {
+                    $key = carveout_theme_ranking_meta_key((string) $group, $rank, $field);
+                    $current = trim((string) get_post_meta((int) $post_id, $key, true));
+                    if (!carveout_theme_should_seed_meta($current) || empty($item[$field])) {
+                        continue;
+                    }
+
+                    $value = $field === 'name'
+                        ? sanitize_text_field((string) $item[$field])
+                        : esc_url_raw((string) $item[$field]);
+                    update_post_meta((int) $post_id, $key, $value);
+                }
+            }
+        }
+    }
+}
+add_action('admin_init', 'carveout_theme_backfill_ranking_meta');
 
 function carveout_theme_print_cms_data(): void
 {

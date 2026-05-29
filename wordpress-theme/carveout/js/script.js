@@ -608,7 +608,24 @@ document.addEventListener('DOMContentLoaded', () => {
     return match ? match[1] : '';
   };
 
-  const getItemId = (item) => String(item?.id || getContentId(item?.url));
+  const getItemIds = (item) => {
+    if (!item) {
+      return [];
+    }
+
+    return [
+      item.id,
+      item.sourceId,
+      item.originalId,
+      getContentId(item.url),
+      getContentId(item.sourceUrl),
+      getContentId(item.detailUrl)
+    ]
+      .filter((value) => value !== undefined && value !== null && String(value).trim() !== '')
+      .map((value) => String(value));
+  };
+  const getItemId = (item) => getItemIds(item)[0] || '';
+  const itemMatchesId = (item, id) => getItemIds(item).includes(String(id || ''));
   const getInternalDetailUrl = (page, item) => {
     const id = getItemId(item);
     return id ? wpPageUrl(`${page}.html?id=${id}`) : (item?.detailUrl || wpPageUrl(`${page}.html`));
@@ -947,8 +964,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (newsDetail) {
     const id = new URLSearchParams(window.location.search).get('id');
-    const item = [...newsItems, ...eventItems].find((contentItem) => getItemId(contentItem) === id);
-    const isEventDetail = eventItems.some((contentItem) => getItemId(contentItem) === id);
+    const item = [...newsItems, ...eventItems].find((contentItem) => itemMatchesId(contentItem, id));
+    const isEventDetail = eventItems.some((contentItem) => itemMatchesId(contentItem, id));
     const detailPageEyebrow = document.getElementById('detailPageEyebrow');
     const detailPageTitle = document.getElementById('detailPageTitle');
 
@@ -991,7 +1008,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   if (interviewDetail) {
     const id = new URLSearchParams(window.location.search).get('id');
-    const item = interviewItems.find((interviewItem) => getItemId(interviewItem) === id);
+    const item = interviewItems.find((interviewItem) => itemMatchesId(interviewItem, id));
     const staticDetailPath = item && item.detailHtml ? '' : `js/interview-details/${id}.js`;
     loadDetailHtml(staticDetailPath).then((detailHtml) => {
       interviewDetail.appendChild(createDetailMarkup(item, wpPageUrl('interview.html'), 'インタビュー一覧へ戻る', item?.detailHtml || detailHtml));
@@ -1025,6 +1042,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const createLiverCard = (item) => {
     const platform = getLiverPlatform(item.category);
+    const profileUrl = String(item.url || '').trim();
+    const instagramUrl = String(item.instagramUrl || '').trim();
     const card = document.createElement('article');
     card.className = `featured-liver-card ${platform.className}`;
 
@@ -1049,10 +1068,14 @@ document.addEventListener('DOMContentLoaded', () => {
     actions.className = 'liver-social-links';
 
     const liveLink = document.createElement('a');
-    liveLink.href = item.url;
+    liveLink.href = profileUrl || '#';
     liveLink.target = '_blank';
     liveLink.rel = 'noopener';
     liveLink.setAttribute('aria-label', `${item.name}の${platform.label}プロフィール`);
+    if (!profileUrl) {
+      liveLink.setAttribute('aria-disabled', 'true');
+      liveLink.tabIndex = -1;
+    }
 
     const liveIcon = document.createElement('img');
     liveIcon.src = platform.icon;
@@ -1061,20 +1084,24 @@ document.addEventListener('DOMContentLoaded', () => {
     liveIcon.decoding = 'async';
     liveLink.appendChild(liveIcon);
 
-    const instagramLink = document.createElement('a');
-    instagramLink.href = item.instagramUrl || 'https://www.instagram.com/carveout.official';
-    instagramLink.target = '_blank';
-    instagramLink.rel = 'noopener';
-    instagramLink.setAttribute('aria-label', `${item.name}のInstagram`);
+    actions.appendChild(liveLink);
 
-    const instagramIcon = document.createElement('img');
-    instagramIcon.src = 'https://ccarveout.jp/wp-content/themes/carveout_2/images/insta_black.png';
-    instagramIcon.alt = 'Instagram';
-    instagramIcon.loading = 'lazy';
-    instagramIcon.decoding = 'async';
-    instagramLink.appendChild(instagramIcon);
+    if (instagramUrl) {
+      const instagramLink = document.createElement('a');
+      instagramLink.href = instagramUrl;
+      instagramLink.target = '_blank';
+      instagramLink.rel = 'noopener';
+      instagramLink.setAttribute('aria-label', `${item.name}のInstagram`);
 
-    actions.append(liveLink, instagramLink);
+      const instagramIcon = document.createElement('img');
+      instagramIcon.src = 'https://ccarveout.jp/wp-content/themes/carveout_2/images/insta_black.png';
+      instagramIcon.alt = 'Instagram';
+      instagramIcon.loading = 'lazy';
+      instagramIcon.decoding = 'async';
+      instagramLink.appendChild(instagramIcon);
+      actions.appendChild(instagramLink);
+    }
+
     body.append(category, name, actions);
     card.append(image, body);
 
