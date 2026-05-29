@@ -35,6 +35,69 @@ function carveout_theme_asset(string $path): string
     return esc_url(get_template_directory_uri() . '/' . ltrim($path, '/'));
 }
 
+function carveout_theme_official_partner_defaults(): array
+{
+    return [
+        [
+            'name' => 'TikTokでの配信をご希望の方',
+            'image' => get_template_directory_uri() . '/assets/partner-unitrus.png',
+            'url' => '',
+            'class' => 'related-office-logo-dark',
+        ],
+        [
+            'name' => 'Pocochaでの配信をご希望の方',
+            'image' => get_template_directory_uri() . '/assets/partner-sesang.png',
+            'url' => '',
+            'class' => '',
+        ],
+        [
+            'name' => '歌配信をご希望の方',
+            'image' => get_template_directory_uri() . '/assets/partner-music.png',
+            'url' => 'https://interline-music.jp',
+            'class' => '',
+        ],
+    ];
+}
+
+function carveout_theme_official_partner_meta_key(int $index, string $field): string
+{
+    return sprintf('carveout_official_partner_%d_%s', $index, $field);
+}
+
+function carveout_theme_get_official_partner_page_id(): int
+{
+    $page = get_page_by_path('officialpartner');
+
+    return $page instanceof WP_Post ? (int) $page->ID : 0;
+}
+
+function carveout_theme_get_official_partners(): array
+{
+    $defaults = carveout_theme_official_partner_defaults();
+    $page_id = carveout_theme_get_official_partner_page_id();
+
+    if (!$page_id) {
+        return $defaults;
+    }
+
+    $items = [];
+    foreach ($defaults as $index => $default) {
+        $position = $index + 1;
+        $name = trim((string) get_post_meta($page_id, carveout_theme_official_partner_meta_key($position, 'name'), true));
+        $image = trim((string) get_post_meta($page_id, carveout_theme_official_partner_meta_key($position, 'image'), true));
+        $url = trim((string) get_post_meta($page_id, carveout_theme_official_partner_meta_key($position, 'url'), true));
+
+        $items[] = [
+            'name' => $name !== '' ? $name : $default['name'],
+            'image' => $image !== '' ? $image : $default['image'],
+            'url' => $url !== '' ? $url : $default['url'],
+            'class' => $default['class'] ?? '',
+        ];
+    }
+
+    return $items;
+}
+
 function carveout_theme_page_url(string $slug = ''): string
 {
     $slug = trim($slug, '/');
@@ -509,6 +572,15 @@ function carveout_theme_add_meta_boxes(): void
         'normal',
         'high'
     );
+
+    add_meta_box(
+        'carveout_official_partner_settings',
+        '関連事務所',
+        'carveout_theme_render_official_partner_meta_box',
+        'page',
+        'normal',
+        'high'
+    );
 }
 add_action('add_meta_boxes', 'carveout_theme_add_meta_boxes');
 
@@ -681,10 +753,116 @@ function carveout_theme_save_ranking_meta(int $post_id): void
     }
 }
 
+function carveout_theme_render_official_partner_meta_box(WP_Post $post): void
+{
+    wp_nonce_field('carveout_theme_save_official_partner_meta', 'carveout_theme_official_partner_nonce');
+
+    if ($post->post_name !== 'officialpartner') {
+        echo '<p>このメタボックスは、スラッグが <code>officialpartner</code> の固定ページで使用します。</p>';
+        return;
+    }
+
+    ?>
+    <style>
+      .carveout-official-partner-item {
+        border: 1px solid #dcdcde;
+        margin: 0 0 18px;
+        padding: 14px;
+      }
+      .carveout-official-partner-item h3 {
+        margin: 0 0 12px;
+      }
+      .carveout-media-preview img {
+        display: block;
+        height: auto;
+        margin-top: 10px;
+        max-width: 260px;
+      }
+    </style>
+    <p>トップページ下部の「関連事務所」に表示されます。</p>
+    <?php
+    foreach (carveout_theme_official_partner_defaults() as $index => $default) {
+        $position = $index + 1;
+        $name_key = carveout_theme_official_partner_meta_key($position, 'name');
+        $image_key = carveout_theme_official_partner_meta_key($position, 'image');
+        $url_key = carveout_theme_official_partner_meta_key($position, 'url');
+        $name = get_post_meta($post->ID, $name_key, true) ?: $default['name'];
+        $image = get_post_meta($post->ID, $image_key, true) ?: $default['image'];
+        $url = get_post_meta($post->ID, $url_key, true) ?: $default['url'];
+
+        echo '<div class="carveout-official-partner-item">';
+        printf('<h3>%d件目</h3>', $position);
+        echo '<table class="form-table"><tbody>';
+        printf(
+            '<tr><th><label for="%1$s">事務所名</label></th><td><input class="regular-text" id="%1$s" name="%1$s" type="text" value="%2$s"></td></tr>',
+            esc_attr($name_key),
+            esc_attr($name)
+        );
+        printf(
+            '<tr><th><label for="%1$s">画像アップロード</label></th><td><input class="regular-text carveout-media-image-input" id="%1$s" name="%1$s" type="url" value="%2$s"> <button type="button" class="button carveout-media-image-button">画像を選択</button><div class="carveout-media-preview">%3$s</div></td></tr>',
+            esc_attr($image_key),
+            esc_attr($image),
+            $image ? '<img src="' . esc_url($image) . '" alt="">' : ''
+        );
+        printf(
+            '<tr><th><label for="%1$s">URL</label></th><td><input class="regular-text" id="%1$s" name="%1$s" type="url" value="%2$s"></td></tr>',
+            esc_attr($url_key),
+            esc_attr($url)
+        );
+        echo '</tbody></table>';
+        echo '</div>';
+    }
+}
+
+function carveout_theme_save_official_partner_meta(int $post_id): void
+{
+    if (
+        !isset($_POST['carveout_theme_official_partner_nonce'])
+        || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['carveout_theme_official_partner_nonce'])), 'carveout_theme_save_official_partner_meta')
+        || (defined('DOING_AUTOSAVE') && DOING_AUTOSAVE)
+        || !current_user_can('edit_post', $post_id)
+    ) {
+        return;
+    }
+
+    $post = get_post($post_id);
+    if (!$post instanceof WP_Post || $post->post_name !== 'officialpartner') {
+        return;
+    }
+
+    foreach (carveout_theme_official_partner_defaults() as $index => $default) {
+        $position = $index + 1;
+        foreach (['name', 'image', 'url'] as $field) {
+            $key = carveout_theme_official_partner_meta_key($position, $field);
+            $value = wp_unslash($_POST[$key] ?? '');
+            $value = $field === 'name' ? sanitize_text_field($value) : esc_url_raw($value);
+
+            if ($value === '') {
+                delete_post_meta($post_id, $key);
+            } else {
+                update_post_meta($post_id, $key, $value);
+            }
+        }
+    }
+}
+add_action('save_post_page', 'carveout_theme_save_official_partner_meta');
+
 function carveout_theme_admin_assets(): void
 {
     $screen = function_exists('get_current_screen') ? get_current_screen() : null;
-    if (!$screen || $screen->post_type !== 'carveout_ranking') {
+    if (!$screen || !in_array($screen->post_type, ['carveout_ranking', 'page'], true)) {
+        return;
+    }
+
+    if ($screen->post_type === 'page') {
+        $post_id = isset($_GET['post']) ? absint($_GET['post']) : 0;
+        $post = $post_id ? get_post($post_id) : null;
+        if (!$post instanceof WP_Post || $post->post_name !== 'officialpartner') {
+            return;
+        }
+    }
+
+    if ($screen->post_type !== 'carveout_ranking' && $screen->post_type !== 'page') {
         return;
     }
 
@@ -692,14 +870,14 @@ function carveout_theme_admin_assets(): void
     wp_enqueue_script('jquery');
     wp_add_inline_script('jquery', <<<'JS'
 jQuery(function ($) {
-  $(document).on('click', '.carveout-ranking-image-button', function (event) {
+  $(document).on('click', '.carveout-ranking-image-button, .carveout-media-image-button', function (event) {
     event.preventDefault();
 
     const button = $(this);
-    const input = button.siblings('.carveout-ranking-image-input');
-    const preview = button.siblings('.carveout-ranking-preview');
+    const input = button.siblings('.carveout-ranking-image-input, .carveout-media-image-input').first();
+    const preview = button.siblings('.carveout-ranking-preview, .carveout-media-preview').first();
     const frame = wp.media({
-      title: 'ランキング画像を選択',
+      title: '画像を選択',
       button: { text: 'この画像を使用' },
       multiple: false
     });
@@ -1116,6 +1294,39 @@ function carveout_theme_backfill_ranking_meta(): void
     }
 }
 add_action('admin_init', 'carveout_theme_backfill_ranking_meta');
+
+function carveout_theme_backfill_official_partner_meta(): void
+{
+    if (!is_admin() || !current_user_can('edit_pages')) {
+        return;
+    }
+
+    $page_id = carveout_theme_get_official_partner_page_id();
+    if (!$page_id) {
+        return;
+    }
+
+    foreach (carveout_theme_official_partner_defaults() as $index => $default) {
+        $position = $index + 1;
+        foreach (['name', 'image', 'url'] as $field) {
+            if (!array_key_exists($field, $default) || $default[$field] === '') {
+                continue;
+            }
+
+            $key = carveout_theme_official_partner_meta_key($position, $field);
+            $current = trim((string) get_post_meta($page_id, $key, true));
+            if ($current !== '') {
+                continue;
+            }
+
+            $value = $field === 'name'
+                ? sanitize_text_field((string) $default[$field])
+                : esc_url_raw((string) $default[$field]);
+            update_post_meta($page_id, $key, $value);
+        }
+    }
+}
+add_action('admin_init', 'carveout_theme_backfill_official_partner_meta');
 
 function carveout_theme_print_cms_data(): void
 {

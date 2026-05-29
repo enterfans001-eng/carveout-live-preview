@@ -369,24 +369,26 @@
         <h2>関連事務所</h2>
       </div>
       <div class="related-office-grid" aria-label="関連事務所">
-        <article class="related-office-card">
-          <p>TikTokでの配信をご希望の方</p>
-          <div class="related-office-logo related-office-logo-dark">
-            <img src="<?php echo carveout_theme_asset('assets/partner-unitrus.png'); ?>" alt="UniTrus" loading="lazy" decoding="async">
-          </div>
-        </article>
-        <article class="related-office-card">
-          <p>Pocochaでの配信をご希望の方</p>
-          <div class="related-office-logo">
-            <img src="<?php echo carveout_theme_asset('assets/partner-sesang.png'); ?>" alt="Sesang" loading="lazy" decoding="async">
-          </div>
-        </article>
-        <article class="related-office-card">
-          <p>歌配信をご希望の方</p>
-          <a class="related-office-logo" href="https://interline-music.jp" target="_blank" rel="noopener">
-            <img src="<?php echo carveout_theme_asset('assets/partner-music.png'); ?>" alt="歌配信関連事務所" loading="lazy" decoding="async">
-          </a>
-        </article>
+        <?php foreach (carveout_theme_get_official_partners() as $partner) : ?>
+          <?php
+            $partner_name = (string) ($partner['name'] ?? '');
+            $partner_image = (string) ($partner['image'] ?? '');
+            $partner_url = (string) ($partner['url'] ?? '');
+            $partner_class = trim('related-office-logo ' . (string) ($partner['class'] ?? ''));
+          ?>
+          <article class="related-office-card">
+            <p><?php echo esc_html($partner_name); ?></p>
+            <?php if ($partner_url !== '') : ?>
+              <a class="<?php echo esc_attr($partner_class); ?>" href="<?php echo esc_url($partner_url); ?>" target="_blank" rel="noopener" aria-label="<?php echo esc_attr($partner_name); ?>">
+                <img src="<?php echo esc_url($partner_image); ?>" alt="<?php echo esc_attr($partner_name); ?>" loading="lazy" decoding="async">
+              </a>
+            <?php else : ?>
+              <div class="<?php echo esc_attr($partner_class); ?>" aria-label="<?php echo esc_attr($partner_name); ?>">
+                <img src="<?php echo esc_url($partner_image); ?>" alt="<?php echo esc_attr($partner_name); ?>" loading="lazy" decoding="async">
+              </div>
+            <?php endif; ?>
+          </article>
+        <?php endforeach; ?>
       </div>
     </section>
 
